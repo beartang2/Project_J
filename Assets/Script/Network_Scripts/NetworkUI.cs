@@ -6,16 +6,18 @@ using UnityEngine;
 
 public class NetworkUI : MonoBehaviour
 {
-    [SerializeField] private Button Server_Button;
+    //[SerializeField] private Button Server_Button;
     [SerializeField] private Button Host_Button;
     [SerializeField] private Button Client_Button;
 
     private void Awake()
     {
+        /*
         //Lamda expression / Delegate
         Server_Button.onClick.AddListener(() => {
             NetworkManager.Singleton.StartServer();
         });
+        */
 
         //Lamda expression / Delegate
         Host_Button.onClick.AddListener(() => {

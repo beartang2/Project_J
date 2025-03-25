@@ -4,7 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 
-public class Player2Movement : NetworkTransform
+public class PlayerMovement : MonoBehaviour
 {
     //private Rigidbody rb;
     private float horizontal;
@@ -16,18 +16,15 @@ public class Player2Movement : NetworkTransform
     private void Start()
     {
         //rb = GetComponent<Rigidbody>();
-
+    }
+    private void Update()
+    {
+        GetKey();
     }
 
     private void FixedUpdate()
     {
-    }
-
-    private void Update()
-    {
-        if (!IsOwner) return;
         Movement();
-        GetKey();
     }
 
     //  Å° ÀÔ·Â

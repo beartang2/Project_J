@@ -17,10 +17,8 @@ GameObject:
   - component: {fileID: 5642761832087551926}
   - component: {fileID: 2365843456517274855}
   - component: {fileID: -2505992575457304715}
-  - component: {fileID: 7104986820533020501}
-  - component: {fileID: 5763216040373591125}
   m_Layer: 0
-  m_Name: Player_Cube
+  m_Name: Player2_Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d254f7c4338442c4eb16c80605d0e117, type: 2}
+  - {fileID: 2100000, guid: fc00373a76c451d469a8619085b74860, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -163,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3705113697
-  InScenePlacedSourceGlobalObjectIdHash: 3705113697
+  GlobalObjectIdHash: 209589729
+  InScenePlacedSourceGlobalObjectIdHash: 209589729
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -215,32 +213,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7104986820533020501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129235150811717185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dcece7794b28e443a14276bff5d1b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnRange: 5
---- !u!114 &5763216040373591125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129235150811717185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a92f373001b560d4abdb747bd4b2840a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 3098434624983117087}
-  colors:
-  - {r: 1, g: 0.9215687, b: 0.44705886, a: 1}
-  - {r: 0.49411768, g: 0.85098046, b: 1, a: 1}
