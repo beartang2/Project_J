@@ -315,8 +315,8 @@ MonoBehaviour:
   m_AxisToPressThreshold: 0.1
   m_RotateAnchorLeft: 16
   m_RotateAnchorRight: 17
-  m_MoveObjectIn: 14
-  m_MoveObjectOut: 15
+  m_MoveObjectIn: 0
+  m_MoveObjectOut: 0
   m_DirectionalAnchorRotation: 1
   m_PoseProvider: {fileID: 0}
 --- !u!114 &7944300619589554267
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LineWidth: 0.005
   m_OverrideInteractorLineLength: 1
-  m_LineLength: 10
+  m_LineLength: 0.1
   m_AutoAdjustLineLength: 0
   m_MinLineLength: 0.5
   m_UseDistanceToHitAsMaxLineLength: 1
@@ -631,8 +631,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   m_InvalidColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0, b: 0, a: 1}
+    key0: {r: 0, g: 0.37680292, b: 1, a: 1}
+    key1: {r: 0.99607843, g: 0.1497324, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -655,8 +655,8 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
+    m_Mode: 1
+    m_ColorSpace: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   m_BlockedColorGradient:
@@ -886,8 +886,8 @@ MonoBehaviour:
   m_AxisToPressThreshold: 0.1
   m_RotateAnchorLeft: 16
   m_RotateAnchorRight: 17
-  m_MoveObjectIn: 14
-  m_MoveObjectOut: 15
+  m_MoveObjectIn: 0
+  m_MoveObjectOut: 0
   m_DirectionalAnchorRotation: 1
   m_PoseProvider: {fileID: 0}
 --- !u!114 &7562574124709757662
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LineWidth: 0.005
   m_OverrideInteractorLineLength: 1
-  m_LineLength: 10
+  m_LineLength: 0.1
   m_AutoAdjustLineLength: 0
   m_MinLineLength: 0.5
   m_UseDistanceToHitAsMaxLineLength: 1
@@ -1202,8 +1202,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   m_InvalidColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0, b: 0, a: 1}
+    key0: {r: 0, g: 0.47127342, b: 1, a: 1}
+    key1: {r: 0, g: 0.47127342, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1226,8 +1226,8 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
+    m_Mode: 1
+    m_ColorSpace: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   m_BlockedColorGradient:
@@ -1297,12 +1297,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7960402105236720250}
   - component: {fileID: 3665042433116754046}
-  - component: {fileID: 161970962317478947}
   - component: {fileID: 6167751520221229648}
   - component: {fileID: 5642761832087551926}
   - component: {fileID: 2365843456517274855}
   - component: {fileID: 7104986820533020501}
   - component: {fileID: 5763216040373591125}
+  - component: {fileID: 647648630712323038}
   m_Layer: 0
   m_Name: Player(XR Origin)
   m_TagString: Untagged
@@ -1318,7 +1318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9129235150811717185}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1341,29 +1341,8 @@ MonoBehaviour:
   m_Camera: {fileID: 5548932583242667406}
   m_OriginBaseGameObject: {fileID: 9129235150811717185}
   m_CameraFloorOffsetObject: {fileID: 0}
-  m_RequestedTrackingOriginMode: 0
+  m_RequestedTrackingOriginMode: 1
   m_CameraYOffset: 0
---- !u!65 &161970962317478947
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129235150811717185}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 1, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6167751520221229648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1388,7 +1367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 422590862
+  GlobalObjectIdHash: 3823007543
   InScenePlacedSourceGlobalObjectIdHash: 3705113697
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1457,3 +1436,29 @@ MonoBehaviour:
   colors:
   - {r: 1, g: 0.9215687, b: 0.44705886, a: 1}
   - {r: 0.49411768, g: 0.85098046, b: 1, a: 1}
+--- !u!143 &647648630712323038
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129235150811717185}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.6
+  m_Radius: 0.25
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: -0.25, z: 0}

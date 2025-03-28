@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7223192322436918301}
   - component: {fileID: 6975538140716266518}
   - component: {fileID: 2980102737146784788}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HandCube_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
