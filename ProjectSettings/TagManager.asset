@@ -11,6 +11,8 @@ TagManager:
   - Teleporter_B
   - Wall
   - commonObjects
+  - Key
+  - Door
   layers:
   - Default
   - TransparentFX

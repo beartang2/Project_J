@@ -5,20 +5,34 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour
 {
     // A -> B, B -> A
-    [SerializeField] private GameObject OtherTeleportObj;
     private GameObject objects;
     //private Queue<GameObject> teleportObjects;
     Collider boxCol;
     private bool isTeleported = false;
     float delayTime = 0;
     float yOffset = 0.5f;
+    public bool isPlayerPortal = false; // 플레이어 발판인가?
+    public bool canPort = false;        // 플레이어가 이동 가능한 상태인가?
 
     // 도착지점 포지션
     [SerializeField] private GameObject arrivePosObj;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!isTeleported && other.gameObject.tag == "keyObjects")
+        // 플레이어 포탈이고 충돌체가 플레이어라면
+        if (isPlayerPortal && other.CompareTag("Player"))
+        {
+            // 이동 가능한 상태라면
+            if(canPort)
+            {
+                Vector3 newPos = arrivePosObj.transform.position;
+                newPos.y += yOffset; // Y축 오프셋 추가
+                                     // 도착지점으로 이동
+                other.gameObject.transform.position = newPos;
+                canPort = false;    // 이동 가능 상태 해제
+            }
+        }
+        if(!isTeleported && other.gameObject.CompareTag("keyObjects"))
         {
             Vector3 newPos = arrivePosObj.transform.position;
             newPos.y += yOffset; // Y축 오프셋 추가
