@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Button
+  - 1
+  - keyObjects
+  - Teleporter_A
+  - Teleporter_B
+  - Wall
+  - commonObjects
   layers:
   - Default
   - TransparentFX
