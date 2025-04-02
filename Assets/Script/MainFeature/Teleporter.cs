@@ -29,15 +29,29 @@ public class Teleporter : MonoBehaviour
                 newPos.y += yOffset; // Y축 오프셋 추가
                                      // 도착지점으로 이동
                 other.gameObject.transform.position = newPos;
-                canPort = false;    // 이동 가능 상태 해제
+
+                SetAllTeleportersFalse();
             }
         }
-        if(!isTeleported && other.gameObject.CompareTag("keyObjects"))
+        if(!isTeleported && other.gameObject.tag.Contains("keyObject"))
         {
             Vector3 newPos = arrivePosObj.transform.position;
             newPos.y += yOffset; // Y축 오프셋 추가
             // 도착지점으로 이동
             other.gameObject.transform.position = newPos;
+
+            // 전체 Teleporter의 canPort를 false로 설정
+            SetAllTeleportersFalse();
+        }
+    }
+
+    // 모든 Teleporter의 canPort를 false로 변경하는 함수
+    public void SetAllTeleportersFalse()
+    {
+        Teleporter[] teleporters = FindObjectsOfType<Teleporter>(); // 모든 Teleporter 찾기
+        foreach (Teleporter tele in teleporters)
+        {
+            tele.canPort = false;
         }
     }
 

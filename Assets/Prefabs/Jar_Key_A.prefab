@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6546402750963562895}
   - component: {fileID: 5358143438897430821}
   - component: {fileID: 4228589056138293068}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Jar_Key_A
-  m_TagString: keyObjects
+  m_TagString: jar_keyObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

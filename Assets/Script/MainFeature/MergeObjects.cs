@@ -5,50 +5,47 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class MergeObjects : MonoBehaviour
+public class MergeObjects : CheckHandTransform
 {
-    [SerializeField] XRControllerInput xr_input;
-    [SerializeField] Transform leftHand;
-    [SerializeField] Transform rightHand;
+    private List<GameObject> keyObjectsA = new List<GameObject>(); // A키 오브젝트 리스트
+    private List<GameObject> keyObjectsB = new List<GameObject>(); // B키 오브젝트 리스트
 
-    [SerializeField] private GameObject[] keyObjects; // 키 오브젝트
     public GameObject mergedPrefab; // 병합될 새로운 프리팹
-    private bool isMerged = false;
 
     private Vector3 betweenObjectPos;
 
     private void Start()
     {
-        isMerged = false;
+        // 씬에서 모든 A/B 키 오브젝트 찾기
+        GameObject[] allKeyObjects = GameObject.FindGameObjectsWithTag("keyObjects");
+
+        foreach (GameObject obj in allKeyObjects)
+        {
+            if (obj.name.Contains("Merge_Key_A")) // A 오브젝트 찾기 (이름으로 구분)
+                keyObjectsA.Add(obj);
+            else if (obj.name.Contains("Merge_Key_B")) // B 오브젝트 찾기
+                keyObjectsB.Add(obj);
+        }
     }
 
     private void Update()
     {
-        // 왼손 오른손 거리 계산
-        float distance = Vector3.Distance(leftHand.position, rightHand.position);
-        // 오브젝트 사이 위치 계산
-        betweenObjectPos = GetSpawnPosition(keyObjects[0], keyObjects[1]);
+        MergeObject();
+    }
 
-        // 거리가 가까우면 & 오른쪽, 왼쪽 트리거가 동시에 눌린 상태일 때
-        if (distance < 0.15f && (xr_input.isLPressed && xr_input.isRPressed))
+    private void MergeObject()
+    {
+        // 오브젝트 쌍 찾기
+        foreach (GameObject objA in keyObjectsA)
         {
-            if(!isMerged)
+            foreach (GameObject objB in keyObjectsB)
             {
-                Instantiate(mergedPrefab, betweenObjectPos, Quaternion.identity);
-                isMerged = true;
-
-                Debug.Log("트리거 동시에 눌림");
-
-                for(int i=0; i<keyObjects.Length; i++)
+                // 두 오브젝트가 존재하고 활성화 상태인지 확인
+                if (objA.activeSelf && objB.activeSelf)
                 {
-                    keyObjects[i].SetActive(false);
+                    CheckDistanceNCreate(objA, objB, mergedPrefab);
                 }
             }
         }
-    }
-
-    Vector3 GetSpawnPosition(GameObject obj1, GameObject obj2)
-    {
-        return (obj1.transform.position + obj2.transform.position) / 2f;
     }
 }

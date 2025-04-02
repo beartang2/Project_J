@@ -28,7 +28,7 @@ public class XRControllerInput : MonoBehaviour
         if (leftTriggerValue > 0.3f)
         {
             isLPressed = true;
-            Debug.Log("Ltrigger pressed");
+            //Debug.Log("Ltrigger pressed");
         }
         else if (leftTriggerValue < 0.2f)
         {
@@ -38,7 +38,7 @@ public class XRControllerInput : MonoBehaviour
         if (rightTriggerValue > 0.3f)
         {
             isRPressed = true;
-            Debug.Log("Rtrigger pressed");
+            //Debug.Log("Rtrigger pressed");
         }
         else if(rightTriggerValue < 0.2f)
         {

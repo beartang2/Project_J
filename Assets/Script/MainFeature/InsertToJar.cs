@@ -5,16 +5,19 @@ using UnityEngine;
 public class InsertToJar : MonoBehaviour
 {
     private GameObject unknownObj;
-    private List<GameObject> objects;
-    [SerializeField] private GameObject resultObj;
-    private bool isInit = false;
-    private int cnt = 0;
+    private List<GameObject> objects1;
+    private List<GameObject> objects2;
+    [SerializeField] private GameObject resultObj1;     // 첫 번째 머리
+    [SerializeField] private GameObject resultObj2;     // 두 번째 머리
+    private bool is1Init = false;
+    private bool is2Init = false;
+    private int cnt1 = 0;
+    private int cnt2 = 0;
 
     private void Start()
     {
-        isInit = false;
-        cnt = 0;
-        objects = new List<GameObject>();
+        objects1 = new List<GameObject>();
+        objects2 = new List<GameObject>();
     }
 
     private void Update()
@@ -24,25 +27,46 @@ public class InsertToJar : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {        
-        if(other.tag == "keyObjects")
+        if(other.tag == "jar_keyObject")
         {
             Debug.Log("키 오브젝트 들어옴");
-            cnt++;
-
             // 리스트에 담기
-            objects.Add(other.gameObject);
 
-            if(cnt == 2 && !isInit)
+            if (other.name.Contains("Jar_Key_A"))
+            {
+                objects1.Add(other.gameObject);
+                cnt1++;
+            }
+            else if(other.name.Contains("Jar_Key_C"))
+            {
+                objects2.Add(other.gameObject);
+                cnt2++;
+            }
+
+            if(cnt1 == 2 && !is1Init)
             {
                 // 키 오브젝트 생성
-                Instantiate(resultObj, gameObject.transform.position, Quaternion.identity);
-                isInit = true;
+                Instantiate(resultObj1, gameObject.transform.position, Quaternion.identity);
+                is1Init = true;
 
-                Debug.Log(objects.Count);
-                for (int i = 0; i < cnt; i++)
+                Debug.Log(objects1.Count);
+                for (int i = 0; i < cnt1; i++)
                 {
                     // 오브젝트 개수만큼 비활성화
-                    objects[i].gameObject.SetActive(false);
+                    objects1[i].gameObject.SetActive(false);
+                }
+            }
+            else if(cnt2 == 2 && !is2Init)
+            {
+                // 키 오브젝트 생성
+                Instantiate(resultObj2, gameObject.transform.position, Quaternion.identity);
+                is2Init = true;
+
+                Debug.Log(objects2.Count);
+                for (int i = 0; i < cnt2; i++)
+                {
+                    // 오브젝트 개수만큼 비활성화
+                    objects2[i].gameObject.SetActive(false);
                 }
             }
         }
