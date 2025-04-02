@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2387975938028382555}
   - component: {fileID: 4481359614163205796}
   - component: {fileID: 1039247210457860381}
-  - component: {fileID: -3608813566513963722}
+  - component: {fileID: 1840636212667146274}
   m_Layer: 11
-  m_Name: Jar_Key2
+  m_Name: Jar_HeadKey2
   m_TagString: jar_keyObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &-3608813566513963722
+--- !u!114 &1840636212667146274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,10 +296,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2247833872140412977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7b545312b048a4fb519997e96e2fe8, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xr_input: {fileID: 5398642289907976236, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-  leftHand: {fileID: 6959153222227695236, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
-  rightHand: {fileID: 8819891288801806279, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
-  chessman: {fileID: 6579089462133454320, guid: 75a9a066ae6c9fc428f95b87796618f3, type: 3}
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1

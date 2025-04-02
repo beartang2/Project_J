@@ -16,18 +16,6 @@ public class CheckHovering : CheckHandTransform
     public bool isEnd = false;
     private float timer = 0f;
 
-    private void Awake()
-    {
-        CheckHandTransform parentScript = GetComponent<CheckHandTransform>();
-
-        if (parentScript != null)
-        {
-            xr_input = parentScript.xr_input;
-            leftHand = parentScript.leftHand;
-            rightHand = parentScript.rightHand;
-        }
-    }
-
     private void Update()
     {
         if(networkBehaviour != null)

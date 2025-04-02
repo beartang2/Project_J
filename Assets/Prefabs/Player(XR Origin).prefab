@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 5797977505763894437}
   - component: {fileID: 8893097729222628250}
   - component: {fileID: 8941360604258823947}
-  - component: {fileID: -412855198553340183}
+  - component: {fileID: 845921181850066190}
   m_Layer: 6
   m_Name: Player(XR Origin)
   m_TagString: Player
@@ -410,8 +410,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9129235150811717185}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.640001, y: 0, z: -0.324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12, y: 0, z: -17.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1241490585
+  GlobalObjectIdHash: 1371068763
   InScenePlacedSourceGlobalObjectIdHash: 1371068763
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -638,7 +638,7 @@ MonoBehaviour:
   - {fileID: 2005291576165607185}
   m_DeadzoneMin: 0.125
   m_DeadzoneMax: 0.925
---- !u!114 &-412855198553340183
+--- !u!114 &845921181850066190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -650,8 +650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a143596084a37d640b782ea503eb31e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverStartPos: {fileID: 0}
-  clientStartPos: {fileID: 0}
+  lobbyPos: {fileID: 1932251796858538963, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
+  p1StartPos: {fileID: 6324973202407380683, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
+  p2StartPos: {fileID: 6982176360914738849, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
 --- !u!1001 &69401776259328588
 PrefabInstance:
   m_ObjectHideFlags: 0

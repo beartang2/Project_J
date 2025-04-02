@@ -15,6 +15,9 @@ TagManager:
   - Door
   - jar_keyObject
   - merged_key
+  - chessKey1
+  - chessKey2
+  - Chess
   layers:
   - Default
   - TransparentFX
