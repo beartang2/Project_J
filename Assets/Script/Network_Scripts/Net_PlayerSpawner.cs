@@ -21,8 +21,9 @@ public class Net_PlayerSpawner : NetworkBehaviour
         }
         else
         {
-            // 클라이언트 플레이어는 P2 위치
-            gameObject.transform.position = lobbyPos.position;
+            // 클라이언트 플레이어는 P2 위치 + 오프셋
+            Vector3 offset = new Vector3(1.5f, 0f, 0f);
+            gameObject.transform.position = lobbyPos.position + offset;
             gameObject.name = "Player2";
             Debug.Log("플레이어2 위치: " + transform.position);
         }
