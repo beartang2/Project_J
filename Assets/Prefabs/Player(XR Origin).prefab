@@ -388,7 +388,6 @@ GameObject:
   - component: {fileID: 7720847783268838453}
   - component: {fileID: 4030371157936044278}
   - component: {fileID: 5412082097210902975}
-  - component: {fileID: 8786135448347663904}
   - component: {fileID: 3174442706209729294}
   - component: {fileID: 5398642289907976236}
   - component: {fileID: -6313375289253044462}
@@ -397,6 +396,7 @@ GameObject:
   - component: {fileID: 8893097729222628250}
   - component: {fileID: 8941360604258823947}
   - component: {fileID: 845921181850066190}
+  - component: {fileID: 9119929790185546539}
   m_Layer: 6
   m_Name: Player(XR Origin)
   m_TagString: Player
@@ -489,18 +489,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &8786135448347663904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129235150811717185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dcece7794b28e443a14276bff5d1b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3174442706209729294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +642,18 @@ MonoBehaviour:
   lobbyPos: {fileID: 1932251796858538963, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
   p1StartPos: {fileID: 6324973202407380683, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
   p2StartPos: {fileID: 6982176360914738849, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
+--- !u!114 &9119929790185546539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129235150811717185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad509cc5ff3d654eb9f7e0d6f2851ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &69401776259328588
 PrefabInstance:
   m_ObjectHideFlags: 0
