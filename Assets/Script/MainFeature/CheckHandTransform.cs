@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class CheckHandTransform : MonoBehaviour
+public class CheckHandTransform : NetworkBehaviour
 {
     public XRControllerInput xr_input;
     public Transform leftHand;

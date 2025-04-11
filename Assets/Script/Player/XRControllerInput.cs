@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using Unity.Netcode;
 
-public class XRControllerInput : MonoBehaviour
+public class XRControllerInput : NetworkBehaviour
 {
     [SerializeField] XRController left;
     [SerializeField] XRController right;
@@ -21,6 +23,11 @@ public class XRControllerInput : MonoBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         left.inputDevice.TryGetFeatureValue(CommonUsages.grip, out float leftTriggerValue);
         right.inputDevice.TryGetFeatureValue(CommonUsages.grip, out float rightTriggerValue);
 

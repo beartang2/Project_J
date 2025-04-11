@@ -17,24 +17,17 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     private void DisableXRForOtherPlayer()
     {
         // 카메라 루트 비활성화
-        XROrigin xrOrigin = GetComponentInChildren<XROrigin>();
-        if (xrOrigin != null)
+        Camera camera = GetComponentInChildren<Camera>();
+        if (camera != null)
         {
-            xrOrigin.gameObject.SetActive(false);
+            camera.enabled = false;
         }
 
-        // 이동 시스템 비활성화
-        LocomotionSystem locomotionSystem = GetComponentInChildren<LocomotionSystem>();
-        if (locomotionSystem != null)
+        // AudioListener도 같이 비활성화
+        AudioListener audioListener = camera.GetComponent<AudioListener>();
+        if (audioListener != null)
         {
-            locomotionSystem.enabled = false;
+            audioListener.enabled = false;
         }
-
-        // 추가적으로, 양손 컨트롤러 입력도 막고 싶으면
-        var leftRay = GetComponentInChildren<ActionBasedController>(true);  // true면 비활성화된 것도 포함
-        if (leftRay != null) leftRay.enableInputActions = false;
-
-        var rightRay = GetComponentInChildren<ActionBasedController>(true);
-        if (rightRay != null) rightRay.enableInputActions = false;
     }
 }

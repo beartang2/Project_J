@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 7960402105236720250}
   - component: {fileID: 7720847783268838453}
   - component: {fileID: 4030371157936044278}
-  - component: {fileID: 5412082097210902975}
+  - component: {fileID: 5985107673868647219}
   - component: {fileID: 3174442706209729294}
   - component: {fileID: 5398642289907976236}
   - component: {fileID: -6313375289253044462}
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3865000918
+  GlobalObjectIdHash: 2778537040
   InScenePlacedSourceGlobalObjectIdHash: 1371068763
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -458,7 +458,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &5412082097210902975
+--- !u!114 &5985107673868647219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9129235150811717185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 405ed07ae7c26a141bac0d303d0a347a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0

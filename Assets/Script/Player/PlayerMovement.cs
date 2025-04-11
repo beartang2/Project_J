@@ -4,7 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     //private Rigidbody rb;
     private float horizontal;
@@ -19,11 +19,19 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        if(!IsOwner)
+        {
+            return;
+        }
         GetKey();
     }
 
     private void FixedUpdate()
     {
+        if(!IsOwner)
+        {
+            return;
+        }    
         Movement();
     }
 

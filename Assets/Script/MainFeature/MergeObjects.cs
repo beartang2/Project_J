@@ -16,6 +16,10 @@ public class MergeObjects : CheckHandTransform
 
     private void Start()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         // 씬에서 모든 A/B 키 오브젝트 찾기
         GameObject[] allKeyObjects = GameObject.FindGameObjectsWithTag("keyObjects");
 
@@ -30,6 +34,10 @@ public class MergeObjects : CheckHandTransform
 
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         MergeObject();
     }
 
