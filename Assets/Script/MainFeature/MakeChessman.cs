@@ -10,11 +10,6 @@ public class MakeChessman : CheckHandTransform
 
     private void Update()
     {
-        if (!IsOwner)
-        {
-            return;
-        }
-
         GameObject[] mergedKeys = GameObject.FindGameObjectsWithTag("merged_key");
         GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
 

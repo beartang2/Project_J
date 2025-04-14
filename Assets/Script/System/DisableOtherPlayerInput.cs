@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisableOtherPlayerInput : NetworkBehaviour

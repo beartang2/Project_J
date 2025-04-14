@@ -19,19 +19,11 @@ public class PlayerMovement : NetworkBehaviour
     }
     private void Update()
     {
-        if(!IsOwner)
-        {
-            return;
-        }
         GetKey();
     }
 
     private void FixedUpdate()
     {
-        if(!IsOwner)
-        {
-            return;
-        }    
         Movement();
     }
 

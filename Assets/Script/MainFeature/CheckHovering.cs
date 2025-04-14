@@ -33,6 +33,10 @@ public class CheckHovering : CheckHandTransform
 
             if(leftHand != null && rightHand != null)
             {
+                if(!IsOwner)
+                {
+                    return;
+                }
                 // 키 오브젝트와 손의 사이 위치 계산
                 float distance_L = Vector3.Distance(leftHand.transform.position, hoveringKeyObj.transform.position);
                 float distance_R = Vector3.Distance(rightHand.transform.position, hoveringKeyObj.transform.position);
