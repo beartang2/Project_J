@@ -10125,10 +10125,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3174442706209729294, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-      propertyPath: moveSpeed
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4030371157936044278, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2778537040
@@ -10145,25 +10141,9 @@ PrefabInstance:
       propertyPath: hoveringKeyObj_P2
       value: 
       objectReference: {fileID: 1426778877}
-    - target: {fileID: 6433291905431715802, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3125797501
-      objectReference: {fileID: 0}
     - target: {fileID: 6510377136011556660, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 539946668
-      objectReference: {fileID: 0}
-    - target: {fileID: 6510377136011556660, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 1371068763
-      objectReference: {fileID: 0}
-    - target: {fileID: 6534028409794081867, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 426134028
-      objectReference: {fileID: 0}
-    - target: {fileID: 6534028409794081867, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 1371068763
       objectReference: {fileID: 0}
     - target: {fileID: 7960402105236720250, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10208,10 +10188,6 @@ PrefabInstance:
     - target: {fileID: 8006442372542649751, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1678616086
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207535637966001137, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 4005051168
       objectReference: {fileID: 0}
     - target: {fileID: 8828709368218746421, guid: a10ebffc6724f7f4f8d5f47ce5ed557e, type: 3}
       propertyPath: GlobalObjectIdHash

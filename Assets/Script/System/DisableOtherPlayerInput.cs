@@ -6,8 +6,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisableOtherPlayerInput : NetworkBehaviour
 {
+
+
     public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
+
         // 내가 소유하지 않은 오브젝트라면 XR 관련 기능 비활성화
         if (!IsOwner)
         {
@@ -34,7 +38,15 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         TrackedPoseDriver trackDriver = GetComponentInChildren<TrackedPoseDriver>();
         if (trackDriver != null)
         {
-            trackDriver.enabled = false;
+            Destroy(trackDriver);
+        }
+
+        // XR Controller 비활성화 (좌우 손 각각 찾아서 비활성화)
+        var deviceControllers = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRController>();
+        foreach (var controller in deviceControllers)
+        {
+            controller.enableInputActions = false; // 이게 없어도 무방하지만 있으면 안전
+            controller.enabled = false;
         }
 
         // XR Ray Interactors 비활성화 (선택/터치 등 Ray 기반 인터랙션 방지)
