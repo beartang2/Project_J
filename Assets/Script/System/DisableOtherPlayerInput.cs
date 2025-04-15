@@ -31,6 +31,12 @@ public class DisableOtherPlayerInput : NetworkBehaviour
             audioListener.enabled = false;
         }
 
+        TrackedPoseDriver trackDriver = GetComponentInChildren<TrackedPoseDriver>();
+        if (trackDriver != null)
+        {
+            trackDriver.enabled = false;
+        }
+
         // XR Ray Interactors 비활성화 (선택/터치 등 Ray 기반 인터랙션 방지)
         var rayInteractors = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRRayInteractor>();
         foreach (var ray in rayInteractors)
