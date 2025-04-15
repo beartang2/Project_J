@@ -25,6 +25,7 @@ public class CheckHandTransform : NetworkBehaviour
         if (distance < 0.15f && handDis < 0.15f && xr_input.isLPressed && xr_input.isRPressed)
         {
             GameObject newObject = Instantiate(newObj, spawnPos, Quaternion.identity);
+            newObject.GetComponent<NetworkObject>().Spawn();
 
             // 태그 및 이름 설정
             if (newObject.tag != "merged_key")

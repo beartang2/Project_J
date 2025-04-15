@@ -30,5 +30,33 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         {
             audioListener.enabled = false;
         }
+
+        // XR Ray Interactors 비활성화 (선택/터치 등 Ray 기반 인터랙션 방지)
+        var rayInteractors = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRRayInteractor>();
+        foreach (var ray in rayInteractors)
+        {
+            ray.enabled = false;
+        }
+
+        // XR Direct Interactors 비활성화 (손으로 직접 집는 상호작용 방지)
+        var directInteractors = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRDirectInteractor>();
+        foreach (var direct in directInteractors)
+        {
+            direct.enabled = false;
+        }
+
+        // Locomotion 시스템 비활성화 (이동 관련)
+        var moveProviders = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.LocomotionProvider>();
+        foreach (var provider in moveProviders)
+        {
+            provider.enabled = false;
+        }
+
+        // Turn Provider (스냅 회전, 연속 회전 등) 비활성화
+        var turnProviders = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.SnapTurnProviderBase>();
+        foreach (var turn in turnProviders)
+        {
+            turn.enabled = false;
+        }
     }
 }
