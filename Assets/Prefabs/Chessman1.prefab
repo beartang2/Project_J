@@ -226,7 +226,8 @@ GameObject:
   - component: {fileID: -8128723516870989160}
   - component: {fileID: 7005595575649179059}
   - component: {fileID: 5687994226452662848}
-  - component: {fileID: -1957986404004669700}
+  - component: {fileID: -1401294965026750658}
+  - component: {fileID: -2657666857444958308}
   m_Layer: 11
   m_Name: Chessman1
   m_TagString: chessKey1
@@ -442,7 +443,7 @@ MonoBehaviour:
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
-  m_TrackScale: 1
+  m_TrackScale: 0
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
   m_TightenScale: 0.1
@@ -471,7 +472,7 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &-1957986404004669700
+--- !u!114 &-1401294965026750658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,7 +481,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6579089462133454320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405ed07ae7c26a141bac0d303d0a347a, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
@@ -502,3 +503,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-2657666857444958308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6579089462133454320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc583ac12467e614da42778bd73fb859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

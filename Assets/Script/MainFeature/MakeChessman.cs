@@ -18,7 +18,7 @@ public class MakeChessman : CheckHandTransform
         // jarObjects 리스트에 Jar_HeadKey1 또는 Jar_HeadKey2 추가
         foreach (GameObject jar in jarKeys)
         {
-            if (jar.name.Contains("Jar_HeadKey") || jar.name.Contains("Jar_HeadKey2"))
+            if (jar.name.Contains("Jar_HeadKey") || jar.name.Contains("Jar_HeadKey_Two"))
             {
                 jarObjects.Add(jar);
             }
@@ -35,7 +35,7 @@ public class MakeChessman : CheckHandTransform
                     {
                         CheckDistanceNCreate(jar, merged, chessman1);
                     }
-                    else if (jar.name == "Jar_HeadKey2")
+                    else if (jar.name == "Jar_HeadKey_Two")
                     {
                         CheckDistanceNCreate(jar, merged, chessman2);
                     }

@@ -9,6 +9,8 @@ public class PlayerSetting : NetworkBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshRenderer meshRenderer_p2;
     //private GameObject player2Obj;
+    [SerializeField] private GameObject leftHandModelPrefab;
+    [SerializeField] private GameObject rightHandModelPrefab;
 
     public List<Color> colors = new List<Color>();
 
@@ -25,6 +27,12 @@ public class PlayerSetting : NetworkBehaviour
         {
             // 서버 플레이어는 노란색 (colors[0])
             meshRenderer.material.color = colors[0];
+            
+            // 본인이 아닌 플레이어(=다른 클라이언트)일 경우에만 손 모델 붙이기
+            if (!IsOwner)
+            {
+                AttachHandModels();
+            }
         }
         if (OwnerClientId > 0)
         {
@@ -40,5 +48,22 @@ public class PlayerSetting : NetworkBehaviour
             // Player2에게 하늘색을 부여
             meshRenderer_p2.material.color = colors[1];
         }*/
+    }
+
+    private void AttachHandModels()
+    {
+        // 경로 찾기
+        Transform leftModelParent = transform.parent.Find("Left Controller/[Left Controller] Model Parent");
+        Transform rightModelParent = transform.parent.Find("Right Controller/[Right Controller] Model Parent");
+
+        if (leftModelParent != null && rightModelParent != null)
+        {
+            Instantiate(leftHandModelPrefab, leftModelParent);
+            Instantiate(rightHandModelPrefab, rightModelParent);
+        }
+        else
+        {
+            Debug.LogWarning("손 모델 부착 대상 트랜스폼을 찾을 수 없습니다!");
+        }
     }
 }

@@ -9,38 +9,31 @@ public class CheckHandTransform : NetworkBehaviour
     public Transform leftHand;
     public Transform rightHand;
 
+    public virtual void RequestSpawnMergedObject(Vector3 spawnPos)
+    {
+        // 자식 클래스에서 override해서 RPC 호출
+        Debug.LogWarning("RequestSpawnMergedObject는 자식 클래스에서 오버라이드되어야 합니다.");
+    }
+
     public void CheckDistanceNCreate(GameObject obj, GameObject obj2, GameObject newObj)
     {
         // 오브젝트 거리 계산
         float distance = Vector3.Distance(obj.transform.position, obj2.transform.position);
         Vector3 spawnPos = GetSpawnPosition(obj, obj2);
-
-        if (!IsOwner)
-        {
-            return;
-        }
         float handDis = Vector3.Distance(leftHand.position, rightHand.position);
 
         // 두 오브젝트가 가까워지고, 트리거 버튼이 동시에 눌린 경우
         if (distance < 0.15f && handDis < 0.15f && xr_input.isLPressed && xr_input.isRPressed)
-        {
-            GameObject newObject = Instantiate(newObj, spawnPos, Quaternion.identity);
-            newObject.GetComponent<NetworkObject>().Spawn();
-
-            // 태그 및 이름 설정
-            if (newObject.tag != "merged_key")
+        {            
+            if (IsOwner)
             {
-                newObject.tag = "merged_key"; // 원래 태그 유지
+                RequestSpawnMergedObject(spawnPos); // 서버에서 생성
+                obj.SetActive(false);
+                obj2.SetActive(false);
+                SetAllTeleportersTrue();
             }
-            newObject.name = newObj.name; // (Clone) 제거
-
-            // 기존 오브젝트 비활성화
-            obj.SetActive(false);
-            obj2.SetActive(false);
 
             SetAllTeleportersTrue();
-
-            Debug.Log("새로운 오브젝트 생성: " + newObject.name);
         }
     }
 

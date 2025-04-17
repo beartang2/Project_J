@@ -121,6 +121,8 @@ MonoBehaviour:
   spawnRange: 5
   meshRenderer: {fileID: 5149349093050634323}
   meshRenderer_p2: {fileID: 0}
+  leftHandModelPrefab: {fileID: 4421274793052156908, guid: aea3e4aa50254344aa51df2a83b8bdca, type: 3}
+  rightHandModelPrefab: {fileID: 1630848532566000597, guid: 3f92507206310e74b93f693439b22604, type: 3}
   colors:
   - {r: 1, g: 0.9215687, b: 0.44705886, a: 1}
   - {r: 0.49411768, g: 0.85098046, b: 1, a: 1}
@@ -283,7 +285,6 @@ GameObject:
   - component: {fileID: 3252810969913228757}
   - component: {fileID: 3626844064486061379}
   - component: {fileID: 8697940787039622297}
-  - component: {fileID: 6510377136011556660}
   - component: {fileID: 6708015597263831394}
   m_Layer: 6
   m_Name: Head
@@ -378,27 +379,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6510377136011556660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6267176523962426349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3865000918
-  InScenePlacedSourceGlobalObjectIdHash: 1371068763
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &6708015597263831394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,16 +426,15 @@ GameObject:
   - component: {fileID: 5398642289907976236}
   - component: {fileID: -6313375289253044462}
   - component: {fileID: 7057196161697155646}
+  - component: {fileID: 2361120427687534857}
   - component: {fileID: 5797977505763894437}
   - component: {fileID: 8893097729222628250}
   - component: {fileID: 8941360604258823947}
   - component: {fileID: 845921181850066190}
   - component: {fileID: 9119929790185546539}
-  - component: {fileID: 2361120427687534857}
   - component: {fileID: 7571109383050809924}
   - component: {fileID: 5441251150496266857}
   - component: {fileID: 4695612137786318031}
-  - component: {fileID: 2844783894790099325}
   m_Layer: 6
   m_Name: Player(XR Origin)
   m_TagString: Player
@@ -508,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3865000918
+  GlobalObjectIdHash: 1371068763
   InScenePlacedSourceGlobalObjectIdHash: 1371068763
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -627,6 +606,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &2361120427687534857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129235150811717185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80ea2bb799ffbd479d845b869021d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xr_input: {fileID: 5398642289907976236}
+  leftHand: {fileID: 6946081627580824776}
+  rightHand: {fileID: 5423035248304403365}
 --- !u!114 &5797977505763894437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,21 +708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad509cc5ff3d654eb9f7e0d6f2851ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2361120427687534857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129235150811717185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a80ea2bb799ffbd479d845b869021d95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xr_input: {fileID: 5398642289907976236}
-  leftHand: {fileID: 6946081627580824776}
-  rightHand: {fileID: 5423035248304403365}
 --- !u!114 &7571109383050809924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,18 +760,6 @@ MonoBehaviour:
   hoveringKeyObj_P1: {fileID: 0}
   hoveringKeyObj_P2: {fileID: 0}
   isEnd: 0
---- !u!114 &2844783894790099325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129235150811717185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &69401776259328588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -801,18 +768,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3335388068350922359}
     m_Modifications:
-    - target: {fileID: 4596118527707277166, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
-      propertyPath: SyncScaleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4596118527707277166, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
-      propertyPath: SyncScaleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4596118527707277166, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
-      propertyPath: SyncScaleZ
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4970677047867608552, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
       propertyPath: m_Name
       value: Left Controller
@@ -857,10 +812,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8064267320274304987, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3865000918
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -893,10 +844,6 @@ PrefabInstance:
     - target: {fileID: 1305575221390338013, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
       propertyPath: m_Name
       value: Right Controller
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449656617816836695, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3865000918
       objectReference: {fileID: 0}
     - target: {fileID: 8819891288801806279, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
       propertyPath: m_LocalPosition.x

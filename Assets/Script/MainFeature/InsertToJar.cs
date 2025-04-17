@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class InsertToJar : MonoBehaviour
@@ -46,7 +47,8 @@ public class InsertToJar : MonoBehaviour
             if(cnt1 == 2 && !is1Init)
             {
                 // 키 오브젝트 생성
-                Instantiate(resultObj1, gameObject.transform.position, Quaternion.identity);
+                GameObject newObject = Instantiate(resultObj1, gameObject.transform.position, Quaternion.identity);
+                newObject.GetComponent<NetworkObject>().Spawn();
                 is1Init = true;
 
                 Debug.Log(objects1.Count);
@@ -59,7 +61,8 @@ public class InsertToJar : MonoBehaviour
             else if(cnt2 == 2 && !is2Init)
             {
                 // 키 오브젝트 생성
-                Instantiate(resultObj2, gameObject.transform.position, Quaternion.identity);
+                GameObject newObject = Instantiate(resultObj2, gameObject.transform.position, Quaternion.identity);
+                newObject.GetComponent<NetworkObject>().Spawn();
                 is2Init = true;
 
                 Debug.Log(objects2.Count);

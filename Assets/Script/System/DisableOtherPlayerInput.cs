@@ -6,17 +6,23 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisableOtherPlayerInput : NetworkBehaviour
 {
-
+    private void CheckAndDisableIfNotOwner()
+    {
+        if (IsSpawned && !IsOwner)
+        {
+            DisableXRForOtherPlayer();
+        }
+    }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        CheckAndDisableIfNotOwner();
+    }
 
-        // 내가 소유하지 않은 오브젝트라면 XR 관련 기능 비활성화
-        if (!IsOwner)
-        {
-            DisableXRForOtherPlayer();
-        }
+    private void Start()
+    {
+        CheckAndDisableIfNotOwner();
     }
 
     private void DisableXRForOtherPlayer()
@@ -35,10 +41,10 @@ public class DisableOtherPlayerInput : NetworkBehaviour
             audioListener.enabled = false;
         }
 
-        TrackedPoseDriver trackDriver = GetComponentInChildren<TrackedPoseDriver>();
-        if (trackDriver != null)
+        PlayerMovement playerMovement = gameObject.GetComponent<PlayerMovement>();
+        if (playerMovement != null)
         {
-            Destroy(trackDriver);
+            playerMovement.enabled = false;
         }
 
         // XR Controller 비활성화 (좌우 손 각각 찾아서 비활성화)

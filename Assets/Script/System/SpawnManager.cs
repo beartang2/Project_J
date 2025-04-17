@@ -8,11 +8,17 @@ public class SpawnManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        if (!IsServer)
+        { return; }
+
         for (int i = 0; i < objectPrefabs.Length && i < spawnPoints.Length; i++)
         {
-            var obj = Instantiate(objectPrefabs[i], spawnPoints[i].position, spawnPoints[i].rotation);
-            obj.GetComponent<NetworkObject>().Spawn();
+            var obj = Instantiate(objectPrefabs[i], spawnPoints[i].position, Quaternion.identity);
+            var netObj = obj.GetComponent<NetworkObject>();
+            netObj.Spawn(true);
+
             Debug.Log("오브젝트 소환됨");
         }
+
     }
 }

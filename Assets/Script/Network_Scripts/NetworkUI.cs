@@ -12,6 +12,7 @@ public class NetworkUI : MonoBehaviour
 
     private void Awake()
     {
+        // 서버 접속
         Server_Button.onClick.AddListener(async () => {
             await RelayManager.StartRelayServer();
             JoinCodeDisplay.text = $"Join Code {RelayManager.JoinCode}";

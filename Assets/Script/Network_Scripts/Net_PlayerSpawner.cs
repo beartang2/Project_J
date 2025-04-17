@@ -11,21 +11,23 @@ public class Net_PlayerSpawner : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // 처음에 로비로 이동
         if (OwnerClientId == 0)
         {
             // 서버 플레이어는 로비 위치
             gameObject.transform.position = lobbyPos.position;
-            gameObject.name = "Player1";
-            Debug.Log("플레이어1 위치: " + transform.position);
+            gameObject.name = "Player"+ OwnerClientId;
+            Debug.Log("플레이어" + OwnerClientId + " 위치: " + transform.position);
+            var netObj = gameObject.GetComponent<NetworkObject>();
+            netObj.Spawn(true);
         }
-        else
+        else if(OwnerClientId > 0)
         {
             // 클라이언트 플레이어는 P2 위치 + 오프셋
             Vector3 offset = new Vector3(1.5f, 0f, 0f);
             gameObject.transform.position = lobbyPos.position + offset;
-            gameObject.name = "Player2";
-            Debug.Log("플레이어2 위치: " + transform.position);
+            gameObject.name = "Player"+ OwnerClientId;
+            Debug.Log("플레이어"+ OwnerClientId+" 위치: " + transform.position);
+            var netObj = gameObject.GetComponent<NetworkObject>();
         }
     }
 
