@@ -1594,7 +1594,7 @@ GameObject:
   - component: {fileID: 350724798}
   m_Layer: 0
   m_Name: Teleporter_Last_P2
-  m_TagString: Teleporter_A
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2267,7 +2267,7 @@ GameObject:
   - component: {fileID: 457845684}
   m_Layer: 0
   m_Name: Collider_P2
-  m_TagString: Untagged
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2577,7 +2577,7 @@ GameObject:
   - component: {fileID: 529414926}
   m_Layer: 0
   m_Name: Teleporter_C
-  m_TagString: Teleporter_A
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2821,7 +2821,7 @@ GameObject:
   - component: {fileID: 544103284}
   m_Layer: 0
   m_Name: Collider_P1
-  m_TagString: Untagged
+  m_TagString: Teleporter_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3835,7 +3835,7 @@ GameObject:
   - component: {fileID: 917157828}
   m_Layer: 0
   m_Name: Collider_P2
-  m_TagString: Untagged
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4126,7 +4126,7 @@ GameObject:
   - component: {fileID: 1017022696}
   m_Layer: 0
   m_Name: Teleporter_SecondRoom_P2
-  m_TagString: Teleporter_A
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4231,7 +4231,7 @@ GameObject:
   - component: {fileID: 1019637561}
   m_Layer: 0
   m_Name: Collider_P1
-  m_TagString: Untagged
+  m_TagString: Teleporter_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8407,7 +8407,7 @@ GameObject:
   - component: {fileID: 1821179780}
   m_Layer: 0
   m_Name: Collider_P2
-  m_TagString: Untagged
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9042,7 +9042,7 @@ GameObject:
   - component: {fileID: 1992472717}
   m_Layer: 0
   m_Name: Teleporter_D
-  m_TagString: Teleporter_B
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9437,7 +9437,7 @@ GameObject:
   - component: {fileID: 2017298385}
   m_Layer: 0
   m_Name: Teleporter_FirstRoom_P2
-  m_TagString: Teleporter_A
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

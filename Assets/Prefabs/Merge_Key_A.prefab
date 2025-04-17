@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3941098544267775082}
   - component: {fileID: 5528460946065098519}
   - component: {fileID: 9199115403543945446}
-  - component: {fileID: 2862496307546528140}
   - component: {fileID: -3473170409979697454}
+  - component: {fileID: 5477600925879590062}
   m_Layer: 11
   m_Name: Merge_Key_A
   m_TagString: keyObjects
@@ -312,7 +312,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &2862496307546528140
+--- !u!114 &-3473170409979697454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,7 +321,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1689056408960372034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: bc583ac12467e614da42778bd73fb859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5477600925879590062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689056408960372034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405ed07ae7c26a141bac0d303d0a347a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
@@ -343,15 +355,3 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-3473170409979697454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1689056408960372034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc583ac12467e614da42778bd73fb859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

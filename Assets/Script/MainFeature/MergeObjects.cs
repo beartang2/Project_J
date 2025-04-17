@@ -17,7 +17,10 @@ public class MergeObjects : CheckHandTransform
 
     private void Update()
     {
-        MergeObject();
+        if (IsServer && xr_input.isLPressed && xr_input.isRPressed)
+        {
+            MergeObject();
+        }
     }
 
     public override void OnNetworkSpawn()

@@ -55,7 +55,11 @@ public class InsertToJar : MonoBehaviour
                 for (int i = 0; i < cnt1; i++)
                 {
                     // 오브젝트 개수만큼 비활성화
-                    objects1[i].gameObject.SetActive(false);
+                    NetworkObject netObj = objects1[i].GetComponent<NetworkObject>();
+                    if (netObj.IsSpawned)
+                    {
+                        netObj.Despawn();
+                    }
                 }
             }
             else if(cnt2 == 2 && !is2Init)
@@ -69,7 +73,11 @@ public class InsertToJar : MonoBehaviour
                 for (int i = 0; i < cnt2; i++)
                 {
                     // 오브젝트 개수만큼 비활성화
-                    objects2[i].gameObject.SetActive(false);
+                    NetworkObject netObj = objects2[i].GetComponent<NetworkObject>();
+                    if (netObj.IsSpawned)
+                    {
+                        netObj.Despawn();
+                    }
                 }
             }
         }

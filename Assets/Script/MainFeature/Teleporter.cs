@@ -49,12 +49,12 @@ public class Teleporter : MonoBehaviour
     public void SetAllTeleportersFalse()
     {
         Teleporter[] teleporters = FindObjectsOfType<Teleporter>(); // 모든 Teleporter 찾기
+
         foreach (Teleporter tele in teleporters)
         {
             tele.canPort = false;
         }
     }
-
 
     // 콜라이더에 들어온지 2초가 되고 Exit하지 않으면, A->B, B->A 로 좌표 이동
     // 콜라이더 내 좌표값 구하기
