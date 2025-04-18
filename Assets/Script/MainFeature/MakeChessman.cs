@@ -19,7 +19,7 @@ public class MakeChessman : CheckHandTransform
         // jarObjects 리스트에 Jar_HeadKey1 또는 Jar_HeadKey2 추가
         foreach (GameObject jar in jarKeys)
         {
-            if (jar.name.Contains("Jar_HeadKey") || jar.name.Contains("Jar_HeadKey_Two"))
+            if (jar.name.Contains("Jar_FirstHeadKey") || jar.name.Contains("Jar_SecondHeadKey_Two"))
             {
                 jarObjects.Add(jar);
             }
@@ -32,11 +32,11 @@ public class MakeChessman : CheckHandTransform
                 foreach (GameObject merged in mergedKeys)
                 {
                     // 어떤 chessman을 생성할지 결정해서 병합
-                    if (jar.name.Contains("Jar_HeadKey_Two"))
+                    if (jar.name.Contains("Jar_SecondHeadKey_Two"))
                     {
                         CheckDistanceNCreate(jar, merged, chessman2);
                     }
-                    else if (jar.name.Contains("Jar_HeadKey"))
+                    else if (jar.name.Contains("Jar_FirstHeadKey"))
                     {
                         CheckDistanceNCreate(jar, merged, chessman1);
                     }
@@ -62,13 +62,13 @@ public class MakeChessman : CheckHandTransform
 
         foreach (GameObject jar in jarKeys)
         {
-            if (jar.name.Contains("Jar_HeadKey_Two"))
-            {
-                objToSpawn = chessman2;
-            }
-            else if (jar.name.Contains("Jar_HeadKey"))
+            if (jar.name.Contains("Jar_FirstHead"))
             {
                 objToSpawn = chessman1;
+            }
+            else if (jar.name.Contains("Jar_SecondHead"))
+            {
+                objToSpawn = chessman2;
             }
 
             if (objToSpawn != null)

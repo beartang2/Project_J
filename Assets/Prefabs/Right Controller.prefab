@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8238863916991268939}
   - component: {fileID: 1760805884801834825}
   - component: {fileID: 8854770980095391202}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}

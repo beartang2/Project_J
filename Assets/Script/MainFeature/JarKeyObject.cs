@@ -21,8 +21,14 @@ public class JarKeyObject : NetworkBehaviour
                 jar.InsertKeyServerRpc(NetworkObjectId, name);  // 자기 정보 전달
             }
 
-            // 자기 자신 비활성화 (필요에 따라 처리 방식 다르게 가능)
-            gameObject.SetActive(false);
+            DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
+            gameObject.SetActive(false); // 서버에서도 비활성화
         }
+    }
+
+    [ClientRpc]
+    private void DisableSelfClientRpc()
+    {
+        gameObject.SetActive(false);
     }
 }

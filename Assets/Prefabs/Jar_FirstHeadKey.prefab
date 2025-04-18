@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3849343738721401506}
   - component: {fileID: 2166897019602470312}
   m_Layer: 11
-  m_Name: Jar_HeadKey
+  m_Name: Jar_FirstHeadKey
   m_TagString: jar_keyObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
