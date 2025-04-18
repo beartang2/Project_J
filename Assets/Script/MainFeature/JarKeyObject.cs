@@ -10,7 +10,7 @@ public class JarKeyObject : NetworkBehaviour
     {
         if (hasInserted || !IsServer) return;
 
-        if (other.CompareTag("jar"))
+        if (other.tag == "Jar")
         {
             hasInserted = true;
 

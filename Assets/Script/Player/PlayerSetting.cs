@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerSetting : NetworkBehaviour
 {
-    [SerializeField] private float spawnRange = 5f;
+    //[SerializeField] private float spawnRange = 5f;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshRenderer meshRenderer_p2;
     //private GameObject player2Obj;

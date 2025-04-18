@@ -9,7 +9,7 @@ public class Teleporter : MonoBehaviour
     //private Queue<GameObject> teleportObjects;
     Collider boxCol;
     private bool isTeleported = false;
-    float delayTime = 0;
+    //float delayTime = 0;
     float yOffset = 0.5f;
     public bool isPlayerPortal = false; // 플레이어 발판인가?
     public bool canPort = false;        // 플레이어가 이동 가능한 상태인가?
