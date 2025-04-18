@@ -6,12 +6,14 @@ public class CheckChessPuzzle : MonoBehaviour
 {
     [SerializeField] private GameObject chessman1;
     [SerializeField] private GameObject chessman2;
+    private bool doOnce = false;
 
     private void Update()
     {
-        if(chessman1.activeInHierarchy == true && chessman2.activeInHierarchy == true)
+        if(!doOnce && chessman1.activeInHierarchy == true && chessman2.activeInHierarchy == true)
         {
             SetAllTeleportersTrue();
+            doOnce = true;
         }
     }
 
@@ -22,6 +24,7 @@ public class CheckChessPuzzle : MonoBehaviour
         foreach (Teleporter tele in teleporters)
         {
             tele.canPort = true;
+            Debug.Log("chess canPort = true");
         }
     }
 }

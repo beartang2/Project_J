@@ -1,6 +1,8 @@
+using Meta.XR.ImmersiveDebugger.UserInterface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OpeningDoor : MonoBehaviour
 {
@@ -27,7 +29,15 @@ public class OpeningDoor : MonoBehaviour
                     if (distance < 0.2f)
                     {
                         key.SetActive(false);
-                        SetAllTeleportersTrue();
+
+                        if(gameObject.tag.Contains("P1"))
+                        {
+                            SetTeleporterCanPortByTag("Teleporter_A", true); // P1용
+                        }
+                        else
+                        {
+                            SetTeleporterCanPortByTag("Teleporter_B", true); // P2용
+                        }
                     }
                 }
             }
@@ -35,17 +45,23 @@ public class OpeningDoor : MonoBehaviour
 
         if(jar_key != null && merged_key != null)
         {
-            SetAllTeleportersTrue();
+            SetTeleporterCanPortByTag("", true);
         }
     }
 
-    // 모든 Teleporter의 canPort를 true로 변경하는 함수
-    public void SetAllTeleportersTrue()
+    // 텔레포트 활성화
+    public void SetTeleporterCanPortByTag(string tag, bool value)
     {
-        Teleporter[] teleporters = FindObjectsOfType<Teleporter>(); // 모든 Teleporter 찾기
-        foreach (Teleporter tele in teleporters)
+        GameObject[] teleporters = GameObject.FindGameObjectsWithTag(tag);
+
+        foreach (GameObject tp in teleporters)
         {
-            tele.canPort = true;
+            Debug.Log(tp);
+            if (tp.GetComponent<Teleporter>() != null)
+            {
+                tp.GetComponent<Teleporter>().canPort = value;
+                Debug.Log(tag + " Tag, " + tp + " Object canPort = true");
+            }
         }
     }
 }

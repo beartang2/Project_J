@@ -45,7 +45,22 @@ public class NetworkGrabbing : NetworkBehaviour
 
     public void OnGrab(SelectEnterEventArgs args)
     {
-        if (!IsOwner)
+        NetworkObject netObj = GetComponent<NetworkObject>();
+
+        if (netObj == null)
+            return;
+
+        // 현재 내가 서버라면 직접 가져오기
+        if (IsServer)
+        {
+            if (!netObj.IsOwnedByServer)
+            {
+                netObj.ChangeOwnership(NetworkManager.ServerClientId);
+                Debug.Log("서버가 소유권 다시 가져옴");
+            }
+        }
+        // 클라이언트라면 요청 보내기
+        else if (!IsOwner)
         {
             RequestOwnershipServerRpc(NetworkManager.LocalClientId);
         }
@@ -53,13 +68,15 @@ public class NetworkGrabbing : NetworkBehaviour
         Debug.Log("오브젝트 잡음");
     }
 
+
     [ServerRpc(RequireOwnership = false)]
     void RequestOwnershipServerRpc(ulong clientId)
     {
         NetworkObject netObj = GetComponent<NetworkObject>();
-        if (netObj != null)
+        if (netObj != null && netObj.OwnerClientId != clientId)
         {
             netObj.ChangeOwnership(clientId);
+            Debug.Log($"소유권을 클라이언트 {clientId}에게 넘김");
         }
     }
 

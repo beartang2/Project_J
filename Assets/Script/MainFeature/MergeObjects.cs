@@ -14,10 +14,11 @@ public class MergeObjects : CheckHandTransform
     public GameObject mergedPrefab; // 병합될 새로운 프리팹
 
     private Vector3 betweenObjectPos;
+    private bool isMerged = false; // 병합 완료 플래그
 
     private void Update()
     {
-        if (IsServer && xr_input.isLPressed && xr_input.isRPressed)
+        if (IsOwner && xr_input.isLPressed && xr_input.isRPressed)
         {
             MergeObject();
         }
@@ -27,7 +28,7 @@ public class MergeObjects : CheckHandTransform
     {
         FindObjects();
     }
-    private void FindObjects()
+    public void FindObjects()
     {
         // 씬에서 모든 A/B 키 오브젝트 찾기
         allKeyObjects = GameObject.FindGameObjectsWithTag("keyObjects");
@@ -44,6 +45,8 @@ public class MergeObjects : CheckHandTransform
 
     private void MergeObject()
     {
+        if (isMerged) return; // 병합이 이미 되었으면 더 이상 시도 안 함
+
         // 오브젝트 쌍 찾기
         foreach (GameObject objA in keyObjectsA)
         {
@@ -52,7 +55,11 @@ public class MergeObjects : CheckHandTransform
                 // 두 오브젝트가 존재하고 활성화 상태인지 확인
                 if (objA.activeSelf && objB.activeSelf)
                 {
-                    CheckDistanceNCreate(objA, objB, mergedPrefab);
+                    if (CheckDistanceNCreate(objA, objB, mergedPrefab))
+                    {
+                        isMerged = true; // 병합 완료
+                        return;
+                    }
                 }
             }
         }
@@ -60,26 +67,27 @@ public class MergeObjects : CheckHandTransform
 
     public override void RequestSpawnMergedObject(Vector3 spawnPos)
     {
-        if (IsOwner && !IsServer)
+        if (IsOwner)
         {
-            SpawnMergedObjectServerRpc(spawnPos);
-        }
-        else if (IsServer)
-        {
-            // 서버 자체에서 호출한 경우
-            SpawnMergedObjectServerRpc(spawnPos);
+            Debug.Log($"[Client] 병합 요청: {spawnPos}");
+            RequestSpawnMergedObjectServerRpc(spawnPos);
         }
     }
 
-    [ServerRpc]
-    void SpawnMergedObjectServerRpc(Vector3 spawnPos, ServerRpcParams rpcParams = default)
+    [ServerRpc(RequireOwnership = false)]
+    void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos, ServerRpcParams rpcParams = default)
     {
+        Debug.Log($"[Server] 병합 실행: {spawnPos}");
+
         GameObject newObject = Instantiate(mergedPrefab, spawnPos, Quaternion.identity);
-        newObject.GetComponent<NetworkObject>().SpawnWithOwnership(rpcParams.Receive.SenderClientId);
+        
+        var netObj = newObject.GetComponent<NetworkObject>();
+        if (netObj != null)
+        {
+            netObj.Spawn(); // 소유권 부여하지 않음
+        }
 
         newObject.tag = "merged_key";
         newObject.name = mergedPrefab.name;
-
-        Debug.Log("새로운 오브젝트 생성: " + newObject.name);
     }
 }

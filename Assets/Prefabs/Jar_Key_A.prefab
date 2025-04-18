@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3541651973773983407}
   - component: {fileID: -7385835821396213111}
   - component: {fileID: 4421689686397250485}
+  - component: {fileID: -8075194342089728490}
   m_Layer: 11
   m_Name: Jar_Key_A
   m_TagString: jar_keyObject
@@ -353,3 +354,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-8075194342089728490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9206933584472817984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684ac700c4fb8c5459ec6c9ec5d7155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -23,19 +23,30 @@ public class CheckHandTransform : NetworkBehaviour
 
         if (distance < 0.15f && handDis < 0.15f && xr_input.isLPressed && xr_input.isRPressed)
         {
+            Debug.Log("충분히 가까움");
+
+            obj.SetActive(false);
+            obj2.SetActive(false);
+
             if (IsServer)
             {
-                RequestSpawnMergedObject(spawnPos);
+                // 오브젝트 스폰
+                GameObject spawned = Instantiate(newObj, spawnPos, Quaternion.identity);
+                spawned.GetComponent<NetworkObject>().Spawn();
 
-                obj.GetComponent<NetworkObject>().Despawn(true);
-                obj2.GetComponent<NetworkObject>().Despawn(true);
+                DisableMergedObjectsClientRpc(obj, obj2); // 비활성화는 클라이언트에도 적용해야 함
+
                 SetTeleporterCanPortByTag("Teleporter_A", true); // P1용
             }
-            else if(IsClient && !IsServer)
-{
+            else
+            {
+                Debug.Log("오브젝트 스폰 요청!");
+                RequestSpawnMergedObject(spawnPos);
+
+                DisableMergedObjectsClientRpc(obj, obj2); // 클라이언트에서도 비활성화
+
                 SetTeleporterCanPortByTag("Teleporter_B", true); // P2용
             }
-            
 
             return true; // 병합 성공
         }
@@ -43,8 +54,7 @@ public class CheckHandTransform : NetworkBehaviour
         return false;
     }
 
-
-    Vector3 GetSpawnPosition(GameObject obj1, GameObject obj2)
+    public Vector3 GetSpawnPosition(GameObject obj1, GameObject obj2)
     {
         return (obj1.transform.position + obj2.transform.position) / 2f;
     }
@@ -56,9 +66,19 @@ public class CheckHandTransform : NetworkBehaviour
 
         foreach (GameObject tp in teleporters)
         {
-            Debug.Log(tp);
-
-            tp.GetComponent<Teleporter>().canPort = value;
+            if (tp.GetComponent<Teleporter>() != null)
+            {
+                tp.GetComponent<Teleporter>().canPort = value;
+            }
         }
+    }
+
+    [ClientRpc]
+    void DisableMergedObjectsClientRpc(NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
+    {
+        if (obj1Ref.TryGet(out NetworkObject obj1))
+            obj1.gameObject.SetActive(false);
+        if (obj2Ref.TryGet(out NetworkObject obj2))
+            obj2.gameObject.SetActive(false);
     }
 }

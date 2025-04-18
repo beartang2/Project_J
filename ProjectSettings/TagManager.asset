@@ -18,6 +18,9 @@ TagManager:
   - chessKey1
   - chessKey2
   - Chess
+  - Door_P1
+  - Door_P2
+  - Jar
   layers:
   - Default
   - TransparentFX

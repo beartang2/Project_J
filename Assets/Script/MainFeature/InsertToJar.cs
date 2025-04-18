@@ -21,65 +21,35 @@ public class InsertToJar : MonoBehaviour
         objects2 = new List<GameObject>();
     }
 
-    private void Update()
+    [ServerRpc(RequireOwnership = false)]
+    public void InsertKeyServerRpc(ulong netId, string name)
     {
-        
-    }
+        NetworkObject netObj = NetworkManager.Singleton.SpawnManager.SpawnedObjects[netId];
+        GameObject obj = netObj.gameObject;
 
-    private void OnTriggerEnter(Collider other)
-    {        
-        if(other.tag == "jar_keyObject")
+        if (name.Contains("Jar_Key_A"))
         {
-            Debug.Log("키 오브젝트 들어옴");
-            // 리스트에 담기
+            objects1.Add(obj);
+            cnt1++;
+        }
+        else if (name.Contains("Jar_Key_C"))
+        {
+            objects2.Add(obj);
+            cnt2++;
+        }
 
-            if (other.name.Contains("Jar_Key_A"))
-            {
-                objects1.Add(other.gameObject);
-                cnt1++;
-            }
-            else if(other.name.Contains("Jar_Key_C"))
-            {
-                objects2.Add(other.gameObject);
-                cnt2++;
-            }
-
-            if(cnt1 == 2 && !is1Init)
-            {
-                // 키 오브젝트 생성
-                GameObject newObject = Instantiate(resultObj1, gameObject.transform.position, Quaternion.identity);
-                newObject.GetComponent<NetworkObject>().Spawn();
-                is1Init = true;
-
-                Debug.Log(objects1.Count);
-                for (int i = 0; i < cnt1; i++)
-                {
-                    // 오브젝트 개수만큼 비활성화
-                    NetworkObject netObj = objects1[i].GetComponent<NetworkObject>();
-                    if (netObj.IsSpawned)
-                    {
-                        netObj.Despawn();
-                    }
-                }
-            }
-            else if(cnt2 == 2 && !is2Init)
-            {
-                // 키 오브젝트 생성
-                GameObject newObject = Instantiate(resultObj2, gameObject.transform.position, Quaternion.identity);
-                newObject.GetComponent<NetworkObject>().Spawn();
-                is2Init = true;
-
-                Debug.Log(objects2.Count);
-                for (int i = 0; i < cnt2; i++)
-                {
-                    // 오브젝트 개수만큼 비활성화
-                    NetworkObject netObj = objects2[i].GetComponent<NetworkObject>();
-                    if (netObj.IsSpawned)
-                    {
-                        netObj.Despawn();
-                    }
-                }
-            }
+        if (cnt1 == 2 && !is1Init)
+        {
+            is1Init = true;
+            var newObj = Instantiate(resultObj1, transform.position, Quaternion.identity);
+            newObj.GetComponent<NetworkObject>().Spawn();
+        }
+        else if (cnt2 == 2 && !is2Init)
+        {
+            is2Init = true;
+            var newObj = Instantiate(resultObj2, transform.position, Quaternion.identity);
+            newObj.GetComponent<NetworkObject>().Spawn();
         }
     }
+
 }

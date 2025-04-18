@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class MakeChessman : CheckHandTransform
 {
@@ -30,17 +31,53 @@ public class MakeChessman : CheckHandTransform
             {
                 foreach (GameObject merged in mergedKeys)
                 {
-                    // CheckDistanceNCreate()에 맞게 어떤 chessman을 생성할지 결정
-                    if (jar.name == "Jar_HeadKey")
-                    {
-                        CheckDistanceNCreate(jar, merged, chessman1);
-                    }
-                    else if (jar.name == "Jar_HeadKey_Two")
+                    // 어떤 chessman을 생성할지 결정해서 병합
+                    if (jar.name.Contains("Jar_HeadKey_Two"))
                     {
                         CheckDistanceNCreate(jar, merged, chessman2);
+                    }
+                    else if (jar.name.Contains("Jar_HeadKey"))
+                    {
+                        CheckDistanceNCreate(jar, merged, chessman1);
                     }
                 }
             }
         }
     }
+
+    public override void RequestSpawnMergedObject(Vector3 spawnPos)
+    {
+        Debug.Log("클라이언트에서 서버에게 생성 요청");
+        RequestSpawnMergedObjectServerRpc(spawnPos);
+    }
+
+    [ServerRpc]
+    void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos)
+    {
+        GameObject objToSpawn = null;
+
+        // 서버에서도 jarObjects를 확인해야 하므로 구조를 바꾸거나
+        // 아래처럼 임시로 jar 찾기
+        GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
+
+        foreach (GameObject jar in jarKeys)
+        {
+            if (jar.name.Contains("Jar_HeadKey_Two"))
+            {
+                objToSpawn = chessman2;
+            }
+            else if (jar.name.Contains("Jar_HeadKey"))
+            {
+                objToSpawn = chessman1;
+            }
+
+            if (objToSpawn != null)
+            {
+                GameObject spawned = Instantiate(objToSpawn, spawnPos, Quaternion.identity);
+                spawned.GetComponent<NetworkObject>().Spawn();
+                break;
+            }
+        }
+    }
+
 }
