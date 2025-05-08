@@ -6,28 +6,39 @@ using UnityEngine;
 public class PlayerSetting : NetworkBehaviour
 {
     //[SerializeField] private float spawnRange = 5f;
-    [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private MeshRenderer meshRenderer_p2;
+    [SerializeField] private SkinnedMeshRenderer meshRenderer;
+    [SerializeField] private SkinnedMeshRenderer meshRenderer_p2;
     //private GameObject player2Obj;
     [SerializeField] private GameObject leftHandModelPrefab;
     [SerializeField] private GameObject rightHandModelPrefab;
 
-    public List<Color> colors = new List<Color>();
+    public List<Mesh> otherPlayerMesh = new List<Mesh>();   // 교체할 메시
+    public List<Material> colors = new List<Material>();
 
     private void Awake()
     {
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer = gameObject.GetComponent<SkinnedMeshRenderer>();
+
         // 만약 "Player2"라는 이름을 가진 오브젝트가 존재한다면
         //player2Obj = GameObject.Find("Player2");
     }
 
     public override void OnNetworkSpawn()
     {
+        // 현재 머티리얼 배열을 복사
+        Material[] mats = meshRenderer.materials;
+        
         if (IsServer)
         {
             // 서버 플레이어는 노란색 (colors[0])
-            meshRenderer.material.color = colors[0];
+            meshRenderer.sharedMesh = otherPlayerMesh[0]; // 서버 플레이어는 첫 번째 메시 사용
             
+            // 머리 제외하고 나머지만 변경
+            mats[1] = colors[0];
+            mats[2] = colors[2];
+            // 적용
+            meshRenderer.materials = mats;
+
             // 본인이 아닌 플레이어(=다른 클라이언트)일 경우에만 손 모델 붙이기
             if (!IsOwner)
             {
@@ -36,9 +47,16 @@ public class PlayerSetting : NetworkBehaviour
         }
         if (OwnerClientId > 0)
         {
-            // 클라이언트 번호에 따라 Color 리스트에서 순서대로 색상 부여
-            meshRenderer.material.color = colors[1];
+            // 클라이언트 색상 부여
+            meshRenderer.sharedMesh = otherPlayerMesh[1]; // 클라이언트 플레이어는 두 번째 메시 사용
+            
+            // 머리 제외하고 나머지만 변경
+            mats[1] = colors[1];
+            mats[2] = colors[3];
+            // 적용
+            meshRenderer.materials = mats;
         }
+
         /*
         if (player2Obj != null)
         {

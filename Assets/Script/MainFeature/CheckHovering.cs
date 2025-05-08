@@ -16,6 +16,11 @@ public class CheckHovering : CheckHandTransform
     public bool isEnd = false;
     private float timer = 0f;
 
+    private void Awake()
+    {
+        networkBehaviour = GetComponent<NetworkBehaviour>();
+    }
+
     private void Update()
     {
         if(networkBehaviour != null)

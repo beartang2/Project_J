@@ -9,7 +9,7 @@ public class PlayerMovement : NetworkBehaviour
     //private Rigidbody rb;
     private float horizontal;
     private float vertical;
-    public float moveSpeed = 8.0f;
+    public float moveSpeed = 3.5f;
 
     private Vector3 moveVec3;
 
