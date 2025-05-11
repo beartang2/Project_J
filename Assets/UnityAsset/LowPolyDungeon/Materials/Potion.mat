@@ -32,7 +32,7 @@ Material:
     - _SpecularHighlights: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8396226, g: 0.6559502, b: 0.4396137, a: 0.7882353}
+    - _Color: {r: 0.8301887, g: 0.6746249, b: 0.5521537, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3422778107105423275
 MonoBehaviour:
