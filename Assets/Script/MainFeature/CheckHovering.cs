@@ -1,65 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
 
-public class CheckHovering : CheckHandTransform
+public class CheckHoveringPlayer : CheckHandTransform
 {
-    private NetworkBehaviour networkBehaviour;
+    private float hoverTimer = 0f;
+    private float hoverThreshold = 2.0f;
 
-    public GameObject window;
-    [SerializeField] private GameObject hoveringKeyObj_P1;
-    [SerializeField] private GameObject hoveringKeyObj_P2;
+    [SerializeField] private GameObject assignedKey;
+    private HoveringManager manager;
 
-    private GameObject hoveringKeyObj;
-
-    public bool isEnd = false;
-    private float timer = 0f;
-
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        networkBehaviour = GetComponent<NetworkBehaviour>();
+        //if (!IsOwner) return;
+
+        // 자동 할당
+        if (OwnerClientId == 0)
+        {
+            assignedKey = GameObject.Find("HoveringHandKey_P1");
+        }
+        else
+        {
+            Debug.Log("클라이언트 키 할당");
+            assignedKey = GameObject.Find("HoveringHandKey_P2");
+        }
+
+        manager = FindObjectOfType<HoveringManager>();
     }
 
     private void Update()
     {
-        if(networkBehaviour != null)
+        if (assignedKey == null || leftHand == null || rightHand == null)
         {
-            // 플레이어1일 때
-            if(networkBehaviour.OwnerClientId == 0)
-            {
-                // p1의 호버링 키 오브젝트를 가져온다
-                hoveringKeyObj = hoveringKeyObj_P1;
-            }
-            else
-            {
-                hoveringKeyObj = hoveringKeyObj_P2;
-            }
+            return;
+        }
 
-            if(leftHand != null && rightHand != null)
+        float distL = Vector3.Distance(leftHand.position, assignedKey.transform.position);
+        float distR = Vector3.Distance(rightHand.position, assignedKey.transform.position);
+
+        if (distL < 0.2f || distR < 0.2f)
+        {
+            hoverTimer += Time.deltaTime;
+
+            Debug.Log($"Hovering: {OwnerClientId}"); // 디버그 로그 추가
+
+            if (hoverTimer >= hoverThreshold)
             {
-                if(!IsOwner)
-                {
-                    return;
-                }
-                // 키 오브젝트와 손의 사이 위치 계산
-                float distance_L = Vector3.Distance(leftHand.transform.position, hoveringKeyObj.transform.position);
-                float distance_R = Vector3.Distance(rightHand.transform.position, hoveringKeyObj.transform.position);
-
-                if (distance_L < 0.2f || distance_R < 0.2f)
-                {
-                    timer += Time.deltaTime;
-
-                    if(timer > 2.0f)
-                    {
-                        window.SetActive(false);
-                        isEnd = true;
-                        timer = 0f;
-                        // 엔딩씬 불러오기
-                        Debug.Log("엔딩!");
-                    }
-                }
+                manager.ReportHoverComplete(OwnerClientId);
             }
+        }
+        else
+        {
+            hoverTimer = 0f;
         }
     }
 }

@@ -7,7 +7,7 @@ public class PlayerSetting : NetworkBehaviour
 {
     //[SerializeField] private float spawnRange = 5f;
     [SerializeField] private SkinnedMeshRenderer meshRenderer;
-    [SerializeField] private SkinnedMeshRenderer meshRenderer_p2;
+    //[SerializeField] private SkinnedMeshRenderer meshRenderer_p2;
     //private GameObject player2Obj;
     [SerializeField] private GameObject leftHandModelPrefab;
     [SerializeField] private GameObject rightHandModelPrefab;
@@ -70,9 +70,14 @@ public class PlayerSetting : NetworkBehaviour
 
     private void AttachHandModels()
     {
-        // 경로 찾기
-        Transform leftModelParent = transform.parent.Find("Left Controller/[Left Controller] Model Parent");
-        Transform rightModelParent = transform.parent.Find("Right Controller/[Right Controller] Model Parent");
+        // Player_with_model 루트 오브젝트 찾기
+        Transform root = transform;
+
+        while (root.parent != null)
+            root = root.parent;
+
+        Transform leftModelParent = root.Find("Camera Offset/Left Controller/[Left Controller] Model Parent");
+        Transform rightModelParent = root.Find("Camera Offset/Right Controller/[Right Controller] Model Parent");
 
         if (leftModelParent != null && rightModelParent != null)
         {
@@ -84,4 +89,5 @@ public class PlayerSetting : NetworkBehaviour
             Debug.LogWarning("손 모델 부착 대상 트랜스폼을 찾을 수 없습니다!");
         }
     }
+
 }

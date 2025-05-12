@@ -21,6 +21,7 @@ TagManager:
   - Door_P1
   - Door_P2
   - Jar
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -35,8 +36,8 @@ TagManager:
   - hands
   - keyObjects
   - wall
-  - 
-  - 
+  - floor
+  - otherObjects
   - 
   - 
   - 
