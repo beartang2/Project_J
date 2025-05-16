@@ -8,42 +8,68 @@ public class MakeChessman : CheckHandTransform
     private List<GameObject> jarObjects = new List<GameObject>();
     [SerializeField] private GameObject chessman1; // Jar_HeadKey1과 합쳐질 경우 생성
     [SerializeField] private GameObject chessman2; // Jar_HeadKey2와 합쳐질 경우 생성
+    private MergeObjects mergedSc;
+    private GameObject[] mergedKeys;    // 몸통 키 (병합)
+    private GameObject[] jarKeys;       // 헤드 키 (항아리)
+
+    private int mergedKeyCount = 0; // 병합된 키 개수
+    private int isMade = 0; // 체스말 생성 여부
+
+    private void Awake()
+    {
+        mergedSc = gameObject.GetComponent<MergeObjects>();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
+    }
 
     private void Update()
     {
-        GameObject[] mergedKeys = GameObject.FindGameObjectsWithTag("merged_key");
-        GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
-
-        jarObjects.Clear(); // 리스트 초기화
-
-        // jarObjects 리스트에 Jar_HeadKey1 또는 Jar_HeadKey2 추가
-        foreach (GameObject jar in jarKeys)
+        if (mergedKeyCount < 2 && mergedSc.isMerged)
         {
-            if (jar.name.Contains("Jar_FirstHeadKey") || jar.name.Contains("Jar_SecondHeadKey_Two"))
+            mergedKeys = GameObject.FindGameObjectsWithTag("merged_key");
+            Debug.Log("병합된 키 개수: " + mergedKeys.Length);
+            mergedKeyCount++;
+        }
+
+        if (mergedKeys != null && mergedKeys.Length > 0)
+        {
+            foreach (GameObject jar in jarKeys)
             {
-                jarObjects.Add(jar);
+                if (jar.name.Contains("Jar_FirstHeadKey") || jar.name.Contains("Jar_SecondHeadKey_Two"))
+                {
+                    Debug.Log("Jar_HeadKey1 또는 Jar_HeadKey2 발견");
+                    jarObjects.Add(jar);
+                }
             }
         }
 
-        if (jarObjects.Count > 0 && mergedKeys.Length > 0)
+        // 체스말 병합 조건
+        if (isMade < 2 && jarObjects.Count > 0 && mergedKeys.Length > 0)
         {
             foreach (GameObject jar in jarObjects)
             {
                 foreach (GameObject merged in mergedKeys)
                 {
-                    // 어떤 chessman을 생성할지 결정해서 병합
                     if (jar.name.Contains("Jar_SecondHeadKey_Two"))
                     {
                         CheckDistanceNCreate(jar, merged, chessman2);
+                        Debug.Log("Jar_SecondHeadKey_Two 병합");
+                        isMade++;
                     }
                     else if (jar.name.Contains("Jar_FirstHeadKey"))
                     {
                         CheckDistanceNCreate(jar, merged, chessman1);
+                        Debug.Log("Jar_FirstHeadKey 병합");
+                        isMade++;
                     }
                 }
             }
         }
     }
+
 
     public override void RequestSpawnMergedObject(Vector3 spawnPos)
     {

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class MergeObjects : CheckHandTransform
+public class MergeObjects : CheckHandTransform, IResettable
 {
     private List<GameObject> keyObjectsA = new List<GameObject>(); // A키 오브젝트 리스트
     private List<GameObject> keyObjectsB = new List<GameObject>(); // B키 오브젝트 리스트
@@ -14,11 +14,11 @@ public class MergeObjects : CheckHandTransform
     public GameObject mergedPrefab; // 병합될 새로운 프리팹
 
     private Vector3 betweenObjectPos;
-    private bool isMerged = false; // 병합 완료 플래그
+    public bool isMerged = false; // 병합 완료 플래그
 
     private void Update()
     {
-        if (IsOwner && xr_input.isLPressed && xr_input.isRPressed)
+        if (xr_input.isLPressed && xr_input.isRPressed)
         {
             MergeObject();
         }
@@ -28,6 +28,7 @@ public class MergeObjects : CheckHandTransform
     {
         FindObjects();
     }
+
     public void FindObjects()
     {
         // 씬에서 모든 A/B 키 오브젝트 찾기
@@ -67,11 +68,15 @@ public class MergeObjects : CheckHandTransform
 
     public override void RequestSpawnMergedObject(Vector3 spawnPos)
     {
-        if (IsOwner)
-        {
-            Debug.Log($"[Client] 병합 요청: {spawnPos}");
-            RequestSpawnMergedObjectServerRpc(spawnPos);
-        }
+        Debug.Log($"[Client] 병합 요청: {spawnPos}");
+        RequestSpawnMergedObjectServerRpc(spawnPos);
+    }
+
+    public void ResetTrigger()
+    {
+        isMerged = false; // 병합 완료 플래그 초기화
+
+        Debug.Log("[MergeObjects] 트리거 상태 초기화 완료");
     }
 
     [ServerRpc(RequireOwnership = false)]

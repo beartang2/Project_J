@@ -15,10 +15,11 @@ public class XRControllerInput : NetworkBehaviour
     public bool isLPressed = false;
     public bool isRPressed = false;
 
+
     private void Awake()
     {
-        //left = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-        //right = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        //InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        //InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
     }
 
     private void Update()
@@ -28,10 +29,11 @@ public class XRControllerInput : NetworkBehaviour
             return;
         }
 
+        
+
         left.inputDevice.TryGetFeatureValue(CommonUsages.grip, out float leftTriggerValue);
         right.inputDevice.TryGetFeatureValue(CommonUsages.grip, out float rightTriggerValue);
 
-        
         if (leftTriggerValue > 0.3f)
         {
             isLPressed = true;
@@ -51,5 +53,7 @@ public class XRControllerInput : NetworkBehaviour
         {
             isRPressed = false;
         }
+
+        
     }
 }

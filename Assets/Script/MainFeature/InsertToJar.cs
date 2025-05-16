@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class InsertToJar : MonoBehaviour
+public class InsertToJar : MonoBehaviour, IResettable
 {
     private GameObject unknownObj;
     private List<GameObject> objects1;
@@ -31,11 +31,15 @@ public class InsertToJar : MonoBehaviour
         {
             objects1.Add(obj);
             cnt1++;
+            // 오브젝트 효과음
+            // 오브젝트 이펙트
         }
         else if (name.Contains("Jar_Key_C"))
         {
             objects2.Add(obj);
             cnt2++;
+            // 오브젝트 효과음
+            // 오브젝트 이펙트
         }
 
         if (cnt1 == 2 && !is1Init)
@@ -43,13 +47,46 @@ public class InsertToJar : MonoBehaviour
             is1Init = true;
             var newObj = Instantiate(resultObj1, transform.position, Quaternion.identity);
             newObj.GetComponent<NetworkObject>().Spawn();
+            // 연금술 성공 효과음
+            // 연금술 성공 이펙트
         }
         else if (cnt2 == 2 && !is2Init)
         {
             is2Init = true;
             var newObj = Instantiate(resultObj2, transform.position, Quaternion.identity);
             newObj.GetComponent<NetworkObject>().Spawn();
+            // 연금술 성공 효과음
+            // 연금술 성공 이펙트
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // 다른 오브젝트가 들어왔을때
+        if(other.name.Contains("Extra"))
+        {
+            DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
+            gameObject.SetActive(false); // 서버에서도 비활성화
+            // 트리거 초기화
+            ResetTrigger();
+            // 연금술 실패 효과음
+            // 연금술 실패 이펙트
+        }
+    }
+
+    public void ResetTrigger()
+    {
+        cnt1 = 0;
+        cnt2 = 0;
+        is1Init = false;
+        is2Init = false;
+
+        Debug.Log("[InsertToJar] 트리거 상태 초기화 완료");
+    }
+
+    [ClientRpc]
+    private void DisableSelfClientRpc()
+    {
+        gameObject.SetActive(false);
+    }
 }

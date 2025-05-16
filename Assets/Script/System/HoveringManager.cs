@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoveringManager : MonoBehaviour
+public class HoveringManager : MonoBehaviour, IResettable
 {
     private bool p1Complete = false;
     private bool p2Complete = false;
@@ -27,5 +27,13 @@ public class HoveringManager : MonoBehaviour
             Debug.Log("두 플레이어 모두 키에 손을 댐! 문이 열립니다.");
             window.SetActive(false);
         }
+    }
+
+    public void ResetTrigger()
+    {
+        p1Complete = false;
+        p2Complete = false;
+        window.SetActive(true);
+        Debug.Log("HoveringManager 리셋됨");
     }
 }

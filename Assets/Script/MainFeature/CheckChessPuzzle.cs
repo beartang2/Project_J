@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckChessPuzzle : MonoBehaviour
+public class CheckChessPuzzle : MonoBehaviour, IResettable
 {
     [SerializeField] private GameObject chessman1;
     [SerializeField] private GameObject chessman2;
@@ -26,5 +26,12 @@ public class CheckChessPuzzle : MonoBehaviour
             tele.canPort = true;
             Debug.Log("chess canPort = true");
         }
+    }
+
+    // IResettable 인터페이스 구현
+    public void ResetTrigger()
+    {
+        doOnce = false;
+        Debug.Log("체스 퍼즐 초기화됨");
     }
 }

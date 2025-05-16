@@ -862,6 +862,7 @@ GameObject:
   - component: {fileID: 8640345526504556333}
   - component: {fileID: 3618003177677043560}
   - component: {fileID: 7954553929654535502}
+  - component: {fileID: 9023659405604820483}
   m_Layer: 6
   m_Name: Player_with_model
   m_TagString: Player
@@ -1135,8 +1136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyPos: {fileID: 1932251796858538963, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
-  p1StartPos: {fileID: 0}
-  p2StartPos: {fileID: 0}
+  p1StartPos: {fileID: 6324973202407380683, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
+  p2StartPos: {fileID: 6982176360914738849, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
   pMoved: 0
 --- !u!114 &4592497311186899263
 MonoBehaviour:
@@ -1154,6 +1155,7 @@ MonoBehaviour:
   leftHand: {fileID: 1477363239467338466}
   rightHand: {fileID: 744813774454059405}
   mergedPrefab: {fileID: 7801718774964907514, guid: 6daa08e17cf7972488b1619e762fd947, type: 3}
+  isMerged: 0
 --- !u!114 &8640345526504556333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,7 +1202,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 262509963634412322}
-  timerLimit: 40
+  timerLimit: 7200
+--- !u!114 &9023659405604820483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702102821179079575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98965556504f5f94db0cd6d50090eecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftController: {fileID: 6774168930021597219}
+  masterSlider: {fileID: 0}
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  settingPanel: {fileID: 0}
+  audioClip: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: f2217250980b39a4ba56d78385411540, type: 2}
+  playerCamera: {fileID: 7882820722884039467}
+  spawnDistance: 1.5
 --- !u!1 &4175891885631522803
 GameObject:
   m_ObjectHideFlags: 0

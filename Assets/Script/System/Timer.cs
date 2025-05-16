@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Netcode; // 추가
 using UnityEngine;
 
@@ -5,6 +6,7 @@ public class Timer : NetworkBehaviour // 반드시 NetworkBehaviour 상속
 {
     [SerializeField] private Transform lobbyPosition;
     [SerializeField] private Net_PlayerSpawner playerSpawner;
+    [SerializeField] private TMP_Text startButtonText;
 
     private bool isRunning = false;
 
@@ -49,6 +51,13 @@ public class Timer : NetworkBehaviour // 반드시 NetworkBehaviour 상속
         playerSpawner.pMoved = false;
     }
 
+    public void SetRetryText()
+    {
+        if (startButtonText != null)
+            startButtonText.text = "Retry";
+    }
+
+
     [ClientRpc]
     void NotifyPlayersResetTimerClientRpc()
     {
@@ -57,6 +66,7 @@ public class Timer : NetworkBehaviour // 반드시 NetworkBehaviour 상속
             if (ui.IsOwner)
             {
                 ui.ResetTimer();
+                SetRetryText();
                 ui.transform.root.position = lobbyPosition.position;
                 Debug.Log("클라이언트 타이머 종료 및 로비 이동");
             }

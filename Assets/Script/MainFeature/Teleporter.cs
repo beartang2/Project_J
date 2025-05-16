@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ResettingManager;
 
-public class Teleporter : MonoBehaviour
+public class Teleporter : MonoBehaviour, IResettable
 {
     // A -> B, B -> A
     private GameObject objects;
@@ -19,41 +20,49 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 플레이어 포탈이고 충돌체가 플레이어라면
-        if (isPlayerPortal && other.CompareTag("Player"))
-        {
-            // 이동 가능한 상태라면
-            if(canPort)
-            {
-                Vector3 newPos = arrivePosObj.transform.position;
-                newPos.y += yOffset; // Y축 오프셋 추가
-                                     // 도착지점으로 이동
-                other.gameObject.transform.position = newPos;
-
-                SetAllTeleportersFalse();
-            }
-        }
-        if(!isTeleported && other.gameObject.tag.Contains("keyObject"))
+        if (isPlayerPortal && other.CompareTag("Player") && canPort)
         {
             Vector3 newPos = arrivePosObj.transform.position;
-            newPos.y += yOffset; // Y축 오프셋 추가
-            // 도착지점으로 이동
-            other.gameObject.transform.position = newPos;
+            newPos.y += yOffset;
+            other.transform.position = newPos;
 
-            // 전체 Teleporter의 canPort를 false로 설정
-            SetAllTeleportersFalse();
+            // 전체 트리거 리셋
+            ResettingManager.Instance.ResetAllTriggers();
+
+            // 일정 시간 후 다시 포탈을 활성화
+            StartCoroutine(ReactivateTeleportersAfterDelay(4f)); // 3~5초 조절 가능
+        }
+
+        if (!isTeleported && other.CompareTag("keyObjects"))
+        {
+            Vector3 newPos = arrivePosObj.transform.position;
+            newPos.y += yOffset;
+            other.transform.position = newPos;
+
+            // 전체 트리거 리셋
+            ResettingManager.Instance.ResetAllTriggers();
         }
     }
 
-    // 모든 Teleporter의 canPort를 false로 변경하는 함수
-    public void SetAllTeleportersFalse()
+    // Teleporter의 canPort를 false로 변경하는 함수
+    public void ResetTrigger()
     {
-        Teleporter[] teleporters = FindObjectsOfType<Teleporter>(); // 모든 Teleporter 찾기
+        canPort = false;
+        isTeleported = false;
+        Debug.Log("Teleporter 리셋됨");
+    }
 
+    IEnumerator ReactivateTeleportersAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Teleporter[] teleporters = FindObjectsOfType<Teleporter>();
         foreach (Teleporter tele in teleporters)
         {
-            tele.canPort = false;
+            tele.canPort = true;
         }
+
+        Debug.Log("포탈 재활성화 완료");
     }
 
     // 콜라이더에 들어온지 2초가 되고 Exit하지 않으면, A->B, B->A 로 좌표 이동
