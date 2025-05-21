@@ -50,7 +50,10 @@ public class SpawnManager : NetworkBehaviour
         {
             var obj = Instantiate(jarKeyPrefabs[i], jarKeySpawnPoints[i].position, Quaternion.identity);
             var netObj = obj.GetComponent<NetworkObject>();
-            netObj.Spawn(true);
+            if(netObj != null)
+            {
+                netObj.Spawn(true);
+            }
             jarKeySpawned.Add(netObj);
 
             Debug.Log($"[JarKey] ½ºÆùµÊ: {obj.name}");
@@ -64,7 +67,10 @@ public class SpawnManager : NetworkBehaviour
         {
             var obj = Instantiate(prefabs[i], spawnPoints[i].position, Quaternion.identity);
             var netObj = obj.GetComponent<NetworkObject>();
-            netObj.Spawn(true);
+            if (netObj != null)
+            {
+                netObj.Spawn(true);
+            }
             spawnedObjects.Add(netObj);
 
             Debug.Log($"[Key] ½ºÆùµÊ: {obj.name}");

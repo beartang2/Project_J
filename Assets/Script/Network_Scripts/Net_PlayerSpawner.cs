@@ -86,7 +86,6 @@ public class Net_PlayerSpawner : NetworkBehaviour
         }
     }
 
-
     /*
     // 서버가 버튼을 누르면 실행될 함수
     public void PlayerMove()

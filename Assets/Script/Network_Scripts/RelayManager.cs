@@ -7,6 +7,7 @@ using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class RelayManager : MonoBehaviour
 {
@@ -23,6 +24,33 @@ public class RelayManager : MonoBehaviour
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             Debug.Log("[Relay] Anonymous SignIn 성공");
+        }
+    }
+
+    private void Start()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        }
+    }
+
+    private void OnClientDisconnected(ulong clientId)
+    {
+        // 호스트가 나가면 클라이언트는 로비 씬으로 이동
+        if (!NetworkManager.Singleton.IsHost && clientId == NetworkManager.ServerClientId)
+        {
+            Debug.Log("[RelayManager] 서버 연결 끊김 감지, 로비로 이동");
+            SceneManager.LoadScene("Lobby");  // 실제 로비 씬 이름으로 변경
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // 메모리 누수 방지용 콜백 해제
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
         }
     }
 
