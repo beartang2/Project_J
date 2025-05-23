@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2113414751
+  GlobalObjectIdHash: 310608408
   InScenePlacedSourceGlobalObjectIdHash: 3828296800
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1171,8 +1171,8 @@ MonoBehaviour:
   xr_input: {fileID: 6774168930021597219}
   leftHand: {fileID: 1477363239467338466}
   rightHand: {fileID: 744813774454059405}
-  chessman1: {fileID: 6579089462133454320, guid: 3666cc95a5c5917469f77114af705497, type: 3}
-  chessman2: {fileID: 6579089462133454320, guid: 75a9a066ae6c9fc428f95b87796618f3, type: 3}
+  chessman1: {fileID: 1440565887691221185, guid: 88396bd757c185645a82b77ba71c8800, type: 3}
+  chessman2: {fileID: 2012894336167986029, guid: 3a446633063c2f24d8ece917f861407f, type: 3}
 --- !u!114 &3618003177677043560
 MonoBehaviour:
   m_ObjectHideFlags: 0

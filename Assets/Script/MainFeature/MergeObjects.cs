@@ -37,9 +37,9 @@ public class MergeObjects : CheckHandTransform, IResettable
         foreach (GameObject obj in allKeyObjects)
         {
             Debug.Log(obj);
-            if (obj.name.Contains("Merge_Key_A")) // A 오브젝트 찾기 (이름으로 구분)
+            if (obj.name.Contains("Merge_Key_Ear")) // A 오브젝트 찾기 (이름으로 구분)
                 keyObjectsA.Add(obj);
-            else if (obj.name.Contains("Merge_Key_B")) // B 오브젝트 찾기
+            else if (obj.name.Contains("Merge_Key_Area")) // B 오브젝트 찾기
                 keyObjectsB.Add(obj);
         }
     }

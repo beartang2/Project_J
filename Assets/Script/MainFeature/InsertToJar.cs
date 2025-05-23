@@ -27,14 +27,14 @@ public class InsertToJar : MonoBehaviour, IResettable
         NetworkObject netObj = NetworkManager.Singleton.SpawnManager.SpawnedObjects[netId];
         GameObject obj = netObj.gameObject;
 
-        if (name.Contains("Jar_Key_A"))
+        if (name.Contains("Jar_Knight"))
         {
             objects1.Add(obj);
             cnt1++;
             // 오브젝트 효과음
             // 오브젝트 이펙트
         }
-        else if (name.Contains("Jar_Key_C"))
+        else if (name.Contains("Jar_Rook"))
         {
             objects2.Add(obj);
             cnt2++;
