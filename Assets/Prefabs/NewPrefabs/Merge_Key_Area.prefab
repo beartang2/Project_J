@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7193912969071315207}
   - component: {fileID: 6513707002862000942}
   - component: {fileID: -4906583894762163097}
-  - component: {fileID: 9075063576972375646}
+  - component: {fileID: 28159416244188475}
   m_Layer: 11
   m_Name: Merge_Key_Area
   m_TagString: keyObjects
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 736025020
+  GlobalObjectIdHash: 294880500
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -332,8 +332,8 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!64 &9075063576972375646
-MeshCollider:
+--- !u!65 &28159416244188475
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -350,7 +350,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2796044891674524554, guid: 52f2ed9c0a7b8af49a87020fb9573ef0, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.07287894, y: 0.08151187, z: 0.12328023}
+  m_Center: {x: -0.00040947646, y: -0.00041060895, z: -0.061640114}

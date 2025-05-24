@@ -9,11 +9,12 @@ public class Net_DisconnectHandler : MonoBehaviour
     public Transform playerTransform; // 이동할 플레이어
     public Transform disconnectTr; // 이동할 위치
 
-    public string sceneToLoadOnDisconnect = "Marge0331"; // 이동할 씬 이름
+    public string sceneToLoadOnDisconnect = "Merge0522"; // 이동할 씬 이름
 
     private void OnEnable()
     {
-        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
     }
 
     private void OnDisable()
