@@ -17,9 +17,21 @@ public class Teleporter : MonoBehaviour, IResettable
 
     // 도착지점 포지션
     [SerializeField] private GameObject arrivePosObj;
+    [SerializeField] private GameObject arrivePosObj2;
 
     private void OnTriggerEnter(Collider other)
     {
+        // 만약 이름이 Player1인 오브젝트가 teleporter에 들어오고, arrivePosObj2가 null이 아니면
+        if (arrivePosObj2 != null && other.name.Contains("Player1"))
+        {
+            Vector3 newPos = arrivePosObj2.transform.position;
+            newPos.y += yOffset;
+            other.transform.position = newPos;
+
+            // 전체 트리거 리셋
+            ResettingManager.Instance.ResetAllTriggers();
+        }
+
         if (isPlayerPortal && other.CompareTag("Player") && canPort)
         {
             Vector3 newPos = arrivePosObj.transform.position;

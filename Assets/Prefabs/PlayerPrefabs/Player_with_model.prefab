@@ -1135,9 +1135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a143596084a37d640b782ea503eb31e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyPos: {fileID: 1932251796858538963, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
-  p1StartPos: {fileID: 6324973202407380683, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
-  p2StartPos: {fileID: 6982176360914738849, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
+  lobbyPos: {fileID: 0}
+  p1StartPos: {fileID: 0}
+  p2StartPos: {fileID: 0}
   pMoved: 0
 --- !u!114 &4592497311186899263
 MonoBehaviour:
@@ -1215,7 +1215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98965556504f5f94db0cd6d50090eecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {fileID: 1281113501762103411, guid: 355e2a07e302faf48b78858cad6690b4, type: 3}
+  startPos: {fileID: 0}
   leftController: {fileID: 6774168930021597219}
   masterSlider: {fileID: 9179128273494601826, guid: 7881838936b95534d8dca2b53df451a2, type: 3}
   bgmSlider: {fileID: 1723429520398304537, guid: 9b01a20737693eb43b4176f4aa4a4777, type: 3}
