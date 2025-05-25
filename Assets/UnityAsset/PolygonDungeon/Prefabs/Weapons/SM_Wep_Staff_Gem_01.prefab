@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 414092}
   - component: {fileID: 3360966}
   - component: {fileID: 2361258}
-  - component: {fileID: 64471284449634680}
+  - component: {fileID: 2381298773162628233}
   m_Layer: 0
   m_Name: SM_Wep_Staff_Gem_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64471284449634680
-MeshCollider:
+--- !u!65 &2381298773162628233
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43793104729830202, guid: c86e9fcb670a5804ea5417d46ef76c61, type: 2}
+  serializedVersion: 3
+  m_Size: {x: 0.3534508, y: 1.9439775, z: 0.18314955}
+  m_Center: {x: 0.0067254603, y: 0.30743736, z: -0.014090747}
