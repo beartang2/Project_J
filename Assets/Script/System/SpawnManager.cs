@@ -48,7 +48,7 @@ public class SpawnManager : NetworkBehaviour
     {
         for (int i = 0; i < jarKeyPrefabs.Length && i < jarKeySpawnPoints.Length; i++)
         {
-            var obj = Instantiate(jarKeyPrefabs[i], jarKeySpawnPoints[i].position, Quaternion.identity);
+            var obj = Instantiate(jarKeyPrefabs[i], jarKeySpawnPoints[i].position, jarKeySpawnPoints[i].rotation);
             var netObj = obj.GetComponent<NetworkObject>();
             if(netObj != null)
             {
@@ -65,7 +65,7 @@ public class SpawnManager : NetworkBehaviour
     {
         for (int i = 0; i < prefabs.Length && i < spawnPoints.Length; i++)
         {
-            var obj = Instantiate(prefabs[i], spawnPoints[i].position, Quaternion.identity);
+            var obj = Instantiate(prefabs[i], spawnPoints[i].position, spawnPoints[i].rotation);
             var netObj = obj.GetComponent<NetworkObject>();
             if (netObj != null)
             {

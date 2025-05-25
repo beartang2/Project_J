@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Management;
 
 public class Net_DisconnectHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Net_DisconnectHandler : MonoBehaviour
     public Transform disconnectTr; // 이동할 위치
 
     public string sceneToLoadOnDisconnect = "Merge0522"; // 이동할 씬 이름
+
 
     private void OnEnable()
     {
@@ -33,5 +35,12 @@ public class Net_DisconnectHandler : MonoBehaviour
             SceneManager.LoadScene(sceneToLoadOnDisconnect);
         }
     }
+    void ResetXR()
+    {
+        XRGeneralSettings.Instance.Manager.StopSubsystems();
+        XRGeneralSettings.Instance.Manager.DeinitializeLoader();
 
+        XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+        XRGeneralSettings.Instance.Manager.StartSubsystems();
+    }
 }
