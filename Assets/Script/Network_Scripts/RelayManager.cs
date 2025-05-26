@@ -41,7 +41,7 @@ public class RelayManager : MonoBehaviour
         if (!NetworkManager.Singleton.IsHost && clientId == NetworkManager.ServerClientId)
         {
             Debug.Log("[RelayManager] 서버 연결 끊김 감지, 로비로 이동");
-            SceneManager.LoadScene("Lobby");  // 실제 로비 씬 이름으로 변경
+            SceneManager.LoadScene("Merge0522");  // 실제 로비 씬 이름으로 변경
         }
     }
 

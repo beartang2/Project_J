@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1461141871162006542}
   - component: {fileID: 5389427533294401454}
   - component: {fileID: 3239726574143259739}
-  - component: {fileID: 1681248299922124456}
   - component: {fileID: 4435955007706421047}
   - component: {fileID: 7388186869494453681}
+  - component: {fileID: 216386740263126838}
   m_Layer: 11
   m_Name: Jar_Knight_Sword
   m_TagString: jar_keyObject
@@ -86,28 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1681248299922124456
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5335281475899760750}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43960247642864304, guid: 6039e5e605f06b047b3363ee05dd5b12, type: 2}
 --- !u!54 &4435955007706421047
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -311,3 +289,24 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!65 &216386740263126838
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335281475899760750}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.066, y: 1.5, z: 0.2}
+  m_Center: {x: 0, y: 0.61241746, z: 0.0000009536743}

@@ -20,7 +20,9 @@ public class InGameSetting : NetworkBehaviour
     public Slider masterSlider;
     public Slider bgmSlider;
     public Slider sfxSlider;
-    public GameObject settingPanel;
+    [SerializeField] private GameObject settingPanelPrefab; // 프리팹 연결
+    private Transform settingCanvas;       // 캔버스 부모 연결
+    private GameObject settingPanelInstance;                // 런타임 생성된 인스턴스
     //public Image soundWaveImg;
     //public List<Sprite> soundWaves;
     private AudioSource buttonAudioSc;
@@ -45,12 +47,21 @@ public class InGameSetting : NetworkBehaviour
     private void Start()
     {
         dcHandler = FindObjectOfType<Net_DisconnectHandler>();
-    
+        settingCanvas = GameObject.Find("SettingCanvas")?.transform; // 캔버스 찾기
+
+        // 프리팹 인스턴스 생성
+        if (settingPanelPrefab != null && settingCanvas != null)
+        {
+            settingPanelInstance = Instantiate(settingPanelPrefab, settingCanvas);
+            settingPanelInstance.SetActive(false); // 처음엔 비활성화
+        }
+
         // 네트워크가 활성화되었는지 확인
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)
         {
             isMultiplayerActive = true;
         }
+
         // 슬라이더 초기값 설정 (AudioMixer에서 현재 값을 불러와 반영)
         float volume;
         if (audioMixer.GetFloat("Master", out volume)) masterSlider.value = Mathf.Pow(10, volume / 20);
@@ -134,6 +145,7 @@ public class InGameSetting : NetworkBehaviour
             // 버튼을 눌렀을 때 (눌림 순간만 감지)
             if (isPressed && !wasXPressed)
             {
+                Debug.Log("X 버튼 눌림, 메뉴 토글");
                 ToggleSettingsMenu();
             }
 
@@ -157,25 +169,29 @@ public class InGameSetting : NetworkBehaviour
 
     void ToggleSettingsMenu()
     {
+        Debug.Log("ToggleSettingsMenu called");
         isMenuActive = !isMenuActive;
 
         if (isMenuActive)
         {
             // 카메라 앞 spawnDistance만큼 위치
             Vector3 forwardPos = playerCamera.position + playerCamera.forward * spawnDistance;
+            settingPanelInstance.transform.position = forwardPos;
 
-            settingPanel.transform.position = forwardPos;
+            Debug.Log($"Setting panel position: {forwardPos}");
+
+            //settingPanelPrefab.transform.position = forwardPos;
 
             // 카메라를 바라보도록 회전 (수평만)
             Vector3 lookDir = playerCamera.position - forwardPos;
             lookDir.y = 0;
-            settingPanel.transform.rotation = Quaternion.LookRotation(-lookDir);
+            settingPanelInstance.transform.rotation = Quaternion.LookRotation(-lookDir);
 
-            settingPanel.SetActive(true);
+            settingPanelInstance.SetActive(true);
         }
         else
         {
-            settingPanel.SetActive(false);
+            settingPanelInstance.SetActive(false);
         }
     }
 
@@ -186,7 +202,7 @@ public class InGameSetting : NetworkBehaviour
             buttonAudioSc.PlayOneShot(audioClip);
         }
         print("Save");
-        settingPanel.SetActive(false);
+        settingPanelPrefab.SetActive(false);
     }
 
     public void Exit()

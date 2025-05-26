@@ -5,7 +5,10 @@ public class CheckHoveringPlayer : CheckHandTransform
     private float hoverTimer = 0f;
     private float hoverThreshold = 2.0f;
 
-    [SerializeField] private GameObject assignedKey;
+    public GameObject hoveringKeyPrefab_1P; // 서버 플레이어용
+    public GameObject hoveringKeyPrefab_2P; // 클라이언트 플레이어용
+
+    private GameObject assignedKey;
     private HoveringManager manager;
 
     public override void OnNetworkSpawn()
@@ -15,12 +18,12 @@ public class CheckHoveringPlayer : CheckHandTransform
         // 자동 할당
         if (OwnerClientId == 0)
         {
-            assignedKey = GameObject.Find("HoveringHandKey_P1");
+            assignedKey = hoveringKeyPrefab_1P;
         }
         else
         {
             Debug.Log("클라이언트 키 할당");
-            assignedKey = GameObject.Find("HoveringHandKey_P2");
+            assignedKey = hoveringKeyPrefab_2P;
         }
 
         manager = FindObjectOfType<HoveringManager>();
