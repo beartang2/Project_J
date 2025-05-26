@@ -43,8 +43,8 @@ TagManager:
   - 1PHead
   - 2PHead
   - 
-  - 
-  - 
+  - StencilMask
+  - StencilTarget
   - 
   - 
   - 
