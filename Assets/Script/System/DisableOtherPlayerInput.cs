@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisableOtherPlayerInput : NetworkBehaviour
 {
+    [SerializeField] private GameObject playerHead; // 플레이어 머리 오브젝트
     private void CheckAndDisableIfNotOwner()
     {
         if (IsSpawned && !IsOwner)
@@ -18,6 +19,8 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         CheckAndDisableIfNotOwner();
+        SetupCameraCullingMask();
+        UpdateHeadLayer();
     }
 
     private void Start()
@@ -81,6 +84,49 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         foreach (var turn in turnProviders)
         {
             turn.enabled = false;
+        }
+    }
+
+    private void SetupCameraCullingMask()
+    {
+        if (!IsOwner) return;
+
+        Camera cam = GetComponentInChildren<Camera>();
+        if (cam == null) return;
+
+        int layer1PHead = LayerMask.NameToLayer("1PHead");
+        int layer2PHead = LayerMask.NameToLayer("2PHead");
+
+        if (OwnerClientId == 0)
+        {
+            // 클라이언트 0은 1PHead는 보이고, 2PHead는 숨김
+            cam.cullingMask |= (1 << layer2PHead);
+            cam.cullingMask &= ~(1 << layer1PHead);
+        }
+        else if (OwnerClientId == 1)
+        {
+            // 클라이언트 1은 2PHead는 보이고, 1PHead는 숨김
+            cam.cullingMask |= (1 << layer1PHead);
+            cam.cullingMask &= ~(1 << layer2PHead);
+        }
+    }
+
+    private void UpdateHeadLayer()
+    {
+        if (playerHead != null)
+        {
+            if (OwnerClientId == 1)
+            {
+                playerHead.layer = LayerMask.NameToLayer("2PHead");
+            }
+            else
+            {
+                playerHead.layer = LayerMask.NameToLayer("1PHead");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Player head object is not assigned.");
         }
     }
 }

@@ -1188,8 +1188,8 @@ MonoBehaviour:
   xr_input: {fileID: 6774168930021597219}
   leftHand: {fileID: 1477363239467338466}
   rightHand: {fileID: 744813774454059405}
-  hoveringKeyPrefab_1P: {fileID: 0}
-  hoveringKeyPrefab_2P: {fileID: 0}
+  hoveringKeyPrefab_1P: {fileID: 2798780940719094267, guid: 4453942641444b945aa758992ad8d54a, type: 3}
+  hoveringKeyPrefab_2P: {fileID: 7812907276721945701, guid: 3e553baf88c9366448866ec21f26d14e, type: 3}
 --- !u!114 &7954553929654535502
 MonoBehaviour:
   m_ObjectHideFlags: 0
