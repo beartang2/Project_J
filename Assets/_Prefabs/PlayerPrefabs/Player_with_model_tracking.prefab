@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 46074261
+  GlobalObjectIdHash: 3817107012
   InScenePlacedSourceGlobalObjectIdHash: 1710019356
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   masterSlider: {fileID: 9179128273494601826, guid: 7881838936b95534d8dca2b53df451a2, type: 3}
   bgmSlider: {fileID: 1723429520398304537, guid: 9b01a20737693eb43b4176f4aa4a4777, type: 3}
   sfxSlider: {fileID: 614501870015197269, guid: a6648c3523ad8f049a8acba575f7a8d8, type: 3}
-  settingPanel: {fileID: 7206769464098887627, guid: 428c9bb3822b5484e81ff0abbfab334a, type: 3}
+  settingPanelPrefab: {fileID: 7206769464098887627, guid: 428c9bb3822b5484e81ff0abbfab334a, type: 3}
   audioClip: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: f2217250980b39a4ba56d78385411540, type: 2}
   playerCamera: {fileID: 5322117555873309016}
@@ -2157,7 +2157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379153179927878782}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.005087226, y: 0.26683873, z: 0.13864884, w: 0.9537021}
+  m_LocalRotation: {x: -0.005087226, y: 0.26683876, z: 0.13864884, w: 0.95370215}
   m_LocalPosition: {x: 4.6449714e-10, y: 0.0042153136, z: -9.621726e-10}
   m_LocalScale: {x: 1, y: 0.999999, z: 0.999999}
   m_ConstrainProportionsScale: 0
@@ -2578,7 +2578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 501349106143260230}
   - component: {fileID: 5822567594624585931}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
