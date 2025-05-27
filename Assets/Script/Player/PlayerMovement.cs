@@ -20,7 +20,6 @@ public class PlayerMovement : NetworkBehaviour
     private bool isGrounded = true; // 땅에 닿아있는지 확인하는 변수
 
     public float groundCheckDistance = 0.1f; // Ray 길이
-    public LayerMask groundLayer; // 땅 레이어
 
     private void Start()
     {

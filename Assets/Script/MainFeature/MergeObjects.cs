@@ -26,7 +26,16 @@ public class MergeObjects : CheckHandTransform, IResettable
 
     public override void OnNetworkSpawn()
     {
-        FindObjects();
+        // FindObjects(); // 즉시 실행하지 않고 지연 실행
+        StartCoroutine(DelayedFindObjects());
+    }
+
+    private IEnumerator DelayedFindObjects()
+    {
+        // 약간의 여유 시간 대기 (스폰 완료 대기)
+        yield return new WaitForSeconds(0.2f);
+
+        FindObjects(); // 이제 오브젝트 탐색
     }
 
     public void FindObjects()
@@ -38,9 +47,13 @@ public class MergeObjects : CheckHandTransform, IResettable
         {
             Debug.Log(obj);
             if (obj.name.Contains("Merge_Key_Ear")) // A 오브젝트 찾기 (이름으로 구분)
+            {
                 keyObjectsA.Add(obj);
+            }
             else if (obj.name.Contains("Merge_Key_Area")) // B 오브젝트 찾기
+            {
                 keyObjectsB.Add(obj);
+            }
         }
     }
 

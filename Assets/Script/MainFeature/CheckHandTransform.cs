@@ -23,7 +23,7 @@ public class CheckHandTransform : NetworkBehaviour
 
         //Debug.Log($"거리: {distance}, 손 거리: {handDis}"); // 디버그 로그 추가
 
-        if (distance < 0.15f && handDis < 0.15f && xr_input.isLPressed && xr_input.isRPressed)
+        if (distance < 1.5f && handDis < 0.15f && xr_input.isLPressed && xr_input.isRPressed)
         {
             Debug.Log("충분히 가까움");
 

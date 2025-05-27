@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5869973285427174920}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: bonePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,12 +42,14 @@ GameObject:
   - component: {fileID: 592404210934408052}
   - component: {fileID: 8933291138767247842}
   - component: {fileID: 291493695509491534}
+  - component: {fileID: 3439649859852037521}
   - component: {fileID: 1131989675070777409}
   - component: {fileID: 8100883837559369266}
   - component: {fileID: 3669888208029854493}
-  m_Layer: 0
+  - component: {fileID: -6520612103336029}
+  m_Layer: 14
   m_Name: Bone
-  m_TagString: Untagged
+  m_TagString: commonObjects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +120,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3439649859852037521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710576941375724628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 448287205
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!54 &1131989675070777409
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -342,3 +365,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.031489864, y: 0.4304607, z: 0.03478404}
   m_Center: {x: -0.001992207, y: 0.009771138, z: -0.0011380715}
+--- !u!114 &-6520612103336029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710576941375724628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc583ac12467e614da42778bd73fb859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

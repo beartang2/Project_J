@@ -45,7 +45,7 @@ public class Teleporter : MonoBehaviour, IResettable
             StartCoroutine(ReactivateTeleportersAfterDelay(4f)); // 3~5초 조절 가능
         }
 
-        if (!isTeleported && other.CompareTag("keyObjects"))
+        if (!isTeleported && (other.CompareTag("keyObjects")|| other.CompareTag("commonObjects")))
         {
             Vector3 newPos = arrivePosObj.transform.position;
             newPos.y += yOffset;
