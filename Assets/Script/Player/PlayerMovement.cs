@@ -19,10 +19,14 @@ public class PlayerMovement : NetworkBehaviour
 
     private bool isGrounded = true; // 땅에 닿아있는지 확인하는 변수
 
+    public float groundCheckDistance = 0.1f; // Ray 길이
+    public LayerMask groundLayer; // 땅 레이어
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
+
     private void Update()
     {
         if (!rightHandDevice.isValid)
@@ -31,6 +35,8 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         GetKey();
+
+        CheckIfGrounded();
 
         if (rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed) && isPressed && isGrounded)
         {
@@ -47,19 +53,15 @@ public class PlayerMovement : NetworkBehaviour
         rb.MovePosition(transform.position + moveVec3 * moveSpeed * Time.fixedDeltaTime);
     }
 
-    //  키 입력
     void GetKey()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
     }
 
-    // 이동 구현
     void Movement()
     {
-        //플레이어 이동
         moveVec3 = new Vector3(horizontal, 0, vertical).normalized;
-
         transform.Translate(moveVec3 * moveSpeed * Time.deltaTime);
     }
 
@@ -71,12 +73,9 @@ public class PlayerMovement : NetworkBehaviour
             rightHandDevice = rightHandDevices[0];
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void CheckIfGrounded()
     {
-        // 바닥에 닿으면 점프 가능
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        // Ray를 아래로 쏴서 Ground 레이어와 충돌 검사
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f);
     }
 }

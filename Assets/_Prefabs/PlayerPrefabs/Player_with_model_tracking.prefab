@@ -1558,6 +1558,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.5
   jumpForce: 5
+  groundCheckDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &6774168930021597219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2026,8 +2030,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2578,7 +2582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 501349106143260230}
   - component: {fileID: 5822567594624585931}
-  m_Layer: 19
+  m_Layer: 16
   m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7050259014857801046}
   - component: {fileID: 8238863916991268939}
   - component: {fileID: 1760805884801834825}
-  - component: {fileID: -8879275418941859952}
+  - component: {fileID: 1844867771895539497}
   - component: {fileID: 8854770980095391202}
   m_Layer: 10
   m_Name: Right Controller
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_LiveConeCastDebugVisuals: 0
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 19831
   m_RaycastTriggerInteraction: 1
   m_RaycastSnapVolumeInteraction: 1
   m_HitClosestOnly: 0
@@ -476,7 +476,7 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_SortAtRoot: 0
---- !u!114 &-8879275418941859952
+--- !u!114 &1844867771895539497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2623587064
+  GlobalObjectIdHash: 4091931181
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

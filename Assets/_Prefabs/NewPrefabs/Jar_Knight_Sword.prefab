@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 5389427533294401454}
   - component: {fileID: 3239726574143259739}
   - component: {fileID: 4435955007706421047}
+  - component: {fileID: 3955643525118324614}
   - component: {fileID: 7388186869494453681}
   - component: {fileID: 216386740263126838}
-  m_Layer: 11
+  - component: {fileID: 4449483887570096873}
+  m_Layer: 14
   m_Name: Jar_Knight_Sword
   m_TagString: jar_keyObject
   m_Icon: {fileID: 0}
@@ -113,6 +115,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3955643525118324614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335281475899760750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3429022083
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7388186869494453681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,3 +333,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.066, y: 1.5, z: 0.2}
   m_Center: {x: 0, y: 0.61241746, z: 0.0000009536743}
+--- !u!114 &4449483887570096873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335281475899760750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc583ac12467e614da42778bd73fb859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
