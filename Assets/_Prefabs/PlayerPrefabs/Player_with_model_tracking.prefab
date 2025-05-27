@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 615412707567127140}
   - component: {fileID: 8739102881261212847}
   - component: {fileID: 1652804777278871139}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Left Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_LiveConeCastDebugVisuals: 0
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 3447
+    m_Bits: 23927
   m_RaycastTriggerInteraction: 1
   m_RaycastSnapVolumeInteraction: 1
   m_HitClosestOnly: 0
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 1107584343131265274}
   - component: {fileID: 6442460368967266240}
   - component: {fileID: 1406560125776463929}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_LiveConeCastDebugVisuals: 0
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 3447
+    m_Bits: 23927
   m_RaycastTriggerInteraction: 1
   m_RaycastSnapVolumeInteraction: 1
   m_HitClosestOnly: 0
@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3817107012
+  GlobalObjectIdHash: 46074261
   InScenePlacedSourceGlobalObjectIdHash: 1710019356
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2343,7 +2343,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

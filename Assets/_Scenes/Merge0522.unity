@@ -10221,22 +10221,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 166785483294099978, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 724350248082847507, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812811068621998636, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_RaycastMask.m_Bits
-      value: 19831
-      objectReference: {fileID: 0}
-    - target: {fileID: 1996409017475616023, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2983325427501631590, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.56
@@ -10281,25 +10265,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_with_model_tracking
       objectReference: {fileID: 0}
-    - target: {fileID: 3899389469217614417, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9537021
-      objectReference: {fileID: 0}
-    - target: {fileID: 3899389469217614417, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.26683873
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259288014388488516, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 12288
-      objectReference: {fileID: 0}
     - target: {fileID: 6728298924848675020, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 46074261
-      objectReference: {fileID: 0}
-    - target: {fileID: 9190679617132881882, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_RaycastMask.m_Bits
-      value: 19831
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

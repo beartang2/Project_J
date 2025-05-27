@@ -87,6 +87,12 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         {
             turn.enabled = false;
         }
+
+        TrackedPoseDriver trackDriver = GetComponentInChildren<TrackedPoseDriver>();
+        if (trackDriver != null)
+        {
+            trackDriver.enabled = false;
+        }
     }
 
     private void SetupCameraCullingMask()
