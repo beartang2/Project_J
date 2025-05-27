@@ -39,18 +39,12 @@ TagManager:
   - floor
   - otherObjects
   - jarFloor
-  - 
+  - headObj
   - 1PHead
   - 2PHead
-<<<<<<< HEAD
   - 
   - StencilMask
   - StencilTarget
-=======
-  - headObj
-  - 
-  - 
->>>>>>> 2238e0a41926eacb350ad8c86b51ad374f54aea8
   - 
   - 
   - 
