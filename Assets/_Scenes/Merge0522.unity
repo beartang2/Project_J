@@ -1723,7 +1723,7 @@ GameObject:
   - component: {fileID: 83802759}
   m_Layer: 0
   m_Name: Collider_D
-  m_TagString: Untagged
+  m_TagString: Teleporter_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28391,7 +28391,7 @@ GameObject:
   - component: {fileID: 1258042967}
   m_Layer: 0
   m_Name: Collider_C
-  m_TagString: Untagged
+  m_TagString: Teleporter_B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
