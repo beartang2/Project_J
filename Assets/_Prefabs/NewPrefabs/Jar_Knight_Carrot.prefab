@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1233273647847793685}
-  m_Layer: 14
+  m_Layer: 11
   m_Name: carrotPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,8 @@ GameObject:
   - component: {fileID: 2904306516355196077}
   - component: {fileID: -1717707276806243854}
   - component: {fileID: -7972949738581431435}
-  m_Layer: 14
+  - component: {fileID: 5530906165396879213}
+  m_Layer: 11
   m_Name: Jar_Knight_Carrot
   m_TagString: jar_keyObject
   m_Icon: {fileID: 0}
@@ -129,7 +130,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9116601733369671731}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -145,7 +146,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &6265457175610270711
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2524496063
+  GlobalObjectIdHash: 3940659208
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -364,7 +365,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.037260063, y: 0.03365198, z: 0.19746363}
+  m_Size: {x: 0.04, y: 0.05, z: 0.19746363}
   m_Center: {x: -0.0027373284, y: -0.0026472155, z: 0.010645613}
 --- !u!114 &-1717707276806243854
 MonoBehaviour:
@@ -409,3 +410,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &5530906165396879213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9116601733369671731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684ac700c4fb8c5459ec6c9ec5d7155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

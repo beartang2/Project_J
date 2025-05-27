@@ -88,10 +88,11 @@ public class DisableOtherPlayerInput : NetworkBehaviour
             turn.enabled = false;
         }
 
-        TrackedPoseDriver trackDriver = GetComponentInChildren<TrackedPoseDriver>();
-        if (trackDriver != null)
+        // TrackedPoseDriver 전부 비활성화
+        var trackedPoseDrivers = GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>();
+        foreach (var driver in trackedPoseDrivers)
         {
-            trackDriver.enabled = false;
+            driver.enabled = false;
         }
     }
 

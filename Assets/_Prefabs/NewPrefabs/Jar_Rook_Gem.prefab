@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 8329843806172294918}
   - component: {fileID: -6842507875820846643}
   - component: {fileID: 3846921835342857965}
+  - component: {fileID: 9155166527933897727}
   m_Layer: 11
   m_Name: Jar_Rook_Gem
   m_TagString: jar_keyObject
@@ -409,3 +410,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &9155166527933897727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5700384841910206687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684ac700c4fb8c5459ec6c9ec5d7155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
