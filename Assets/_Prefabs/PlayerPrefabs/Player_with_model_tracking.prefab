@@ -1544,6 +1544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHead: {fileID: 8484865812409028221}
+  playerHeadObj: {fileID: 7932324991619424069}
 --- !u!114 &4259288014388488516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,9 +1560,6 @@ MonoBehaviour:
   moveSpeed: 3.5
   jumpForce: 5
   groundCheckDistance: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &6774168930021597219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,6 +1781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 7198225429997089269}
+  isRunning: 0
   timerLimit: 7200
 --- !u!114 &9023659405604820483
 MonoBehaviour:
@@ -2283,7 +2282,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 392567
+    m_Bits: 3538295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2582,7 +2581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 501349106143260230}
   - component: {fileID: 5822567594624585931}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

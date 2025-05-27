@@ -38,8 +38,8 @@ public class SpawnManager : NetworkBehaviour
     public void SpawnAll()
     {
         DespawnAll();
-        SpawnObjects(doorKeyPrefabs, doorKeySpawnPoints);
         SpawnObjects(mergeKeyPrefabs, mergeKeySpawnPoints);
+        SpawnObjects(doorKeyPrefabs, doorKeySpawnPoints);
         SpawnJarKeys(); // jar 따로 관리
     }
 

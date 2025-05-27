@@ -30,7 +30,7 @@ public class OpeningDoor : MonoBehaviour
                     {
                         key.SetActive(false);
 
-                        if(gameObject.tag.Contains("P1"))
+                        if(gameObject.name.Contains("1P"))
                         {
                             SetTeleporterCanPortByTag("Teleporter_A", true); // P1¿ë
                         }

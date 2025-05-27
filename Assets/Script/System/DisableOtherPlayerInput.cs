@@ -6,7 +6,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisableOtherPlayerInput : NetworkBehaviour
 {
-    [SerializeField] private GameObject playerHead; // 플레이어 머리 오브젝트
+    [SerializeField] private GameObject playerHead; // 플레이어 머리
+    [SerializeField] private GameObject playerHeadObj; // 플레이어 머리 오브젝트
+
     private void CheckAndDisableIfNotOwner()
     {
         if (IsSpawned && !IsOwner)
@@ -118,10 +120,13 @@ public class DisableOtherPlayerInput : NetworkBehaviour
             if (OwnerClientId == 1)
             {
                 playerHead.layer = LayerMask.NameToLayer("2PHead");
+                playerHeadObj.layer = LayerMask.NameToLayer("2PHead");
+                playerHeadObj.name = "Moon";
             }
             else
             {
                 playerHead.layer = LayerMask.NameToLayer("1PHead");
+                playerHeadObj.layer = LayerMask.NameToLayer("1PHead");
             }
         }
         else
