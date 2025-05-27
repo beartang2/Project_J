@@ -9,8 +9,8 @@ public class MakeChessman : CheckHandTransform
     [SerializeField] private GameObject chessman1; // Jar_HeadKey1과 합쳐질 경우 생성
     [SerializeField] private GameObject chessman2; // Jar_HeadKey2와 합쳐질 경우 생성
     private MergeObjects mergedSc;
-    private GameObject[] mergedKeys;    // 몸통 키 (병합)
-    private GameObject[] jarKeys;       // 헤드 키 (항아리)
+    [SerializeField] private GameObject[] mergedKeys;    // 몸통 키 (병합)
+    [SerializeField] private GameObject[] jarKeys;       // 헤드 키 (항아리)
 
     private int mergedKeyCount = 0; // 병합된 키 개수
     private int isMade = 0; // 체스말 생성 여부
@@ -22,6 +22,14 @@ public class MakeChessman : CheckHandTransform
 
     public override void OnNetworkSpawn()
     {
+        StartCoroutine(DelayedFindObjects());
+    }
+
+    private IEnumerator DelayedFindObjects()
+    {
+        // 약간의 여유 시간 대기 (스폰 완료 대기)
+        yield return new WaitForSeconds(0.2f);
+
         jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
     }
 
@@ -34,8 +42,10 @@ public class MakeChessman : CheckHandTransform
             mergedKeyCount++;
         }
 
-        if (mergedKeys != null && mergedKeys.Length > 0)
+        if (mergedKeys != null && mergedKeyCount > 0)
         {
+            jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
+
             foreach (GameObject jar in jarKeys)
             {
                 if (jar.name.Contains("Jar_FirstHeadKey") || jar.name.Contains("Jar_SecondHeadKey_Two"))
