@@ -7053,6 +7053,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 357478072314647334, guid: a8acfdda1f8f6064bbf4e2fe34b27e67, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 357478072314647335, guid: a8acfdda1f8f6064bbf4e2fe34b27e67, type: 3}
       propertyPath: m_Name
       value: Stool_round
@@ -7184,7 +7188,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -10265,6 +10269,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_with_model_tracking
       objectReference: {fileID: 0}
+    - target: {fileID: 3899389469217614417, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9537021
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899389469217614417, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.26683873
+      objectReference: {fileID: 0}
     - target: {fileID: 6728298924848675020, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 46074261
@@ -10818,7 +10830,7 @@ Transform:
   m_GameObject: {fileID: 535999808}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.087, y: 0.89966375, z: -0.001428604}
+  m_LocalPosition: {x: -0.003, y: 0.862, z: -0.001428604}
   m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29588,7 +29600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1320211911}
   - component: {fileID: 1320211912}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29604,7 +29616,7 @@ Transform:
   m_GameObject: {fileID: 1320211910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.018428572, y: 0.9025209, z: 0.042857032}
+  m_LocalPosition: {x: -0.018428572, y: 0.929, z: 0.042857032}
   m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30748,7 +30760,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1822439370}
         m_TargetAssemblyTypeName: SpawnManager, Assembly-CSharp
         m_MethodName: ResetJarKeys
         m_Mode: 1
@@ -35156,7 +35168,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -49106,7 +49118,7 @@ Transform:
   m_GameObject: {fileID: 2334647758486405275}
   serializedVersion: 2
   m_LocalRotation: {x: -0.023895366, y: 0.45066154, z: -0.012068588, w: -0.89229345}
-  m_LocalPosition: {x: 3.7580786, y: 2.0216281, z: -10.763944}
+  m_LocalPosition: {x: 3.755, y: 2.102, z: -10.761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
