@@ -7165,7 +7165,6 @@ GameObject:
   m_Component:
   - component: {fileID: 362484740}
   - component: {fileID: 362484739}
-  - component: {fileID: 362484737}
   m_Layer: 0
   m_Name: Teleporter_D
   m_TagString: Untagged
@@ -7173,27 +7172,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &362484737
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362484736}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &362484739
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7211,7 +7189,7 @@ Transform:
   m_GameObject: {fileID: 362484736}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.40750837, w: 0.9132015}
-  m_LocalPosition: {x: 10.55, y: 1.8, z: -4.96}
+  m_LocalPosition: {x: 10.23, y: 1.44, z: -4.94}
   m_LocalScale: {x: 1.3447, y: 0.26894, z: 1.3447}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26809,7 +26787,7 @@ Transform:
   m_GameObject: {fileID: 1146385425}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.716, y: 0.772, z: 6.017}
+  m_LocalPosition: {x: 8.49, y: 0.772, z: 6.017}
   m_LocalScale: {x: 1, y: 0.19999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28405,7 +28383,7 @@ Transform:
   m_GameObject: {fileID: 1258042965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0.132, y: 0.7, z: 0.064}
   m_LocalScale: {x: 0.95, y: 0.4, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35145,7 +35123,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1581534883}
   - component: {fileID: 1581534882}
-  - component: {fileID: 1581534880}
   m_Layer: 0
   m_Name: Teleporter_C
   m_TagString: Untagged
@@ -35153,27 +35130,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1581534880
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581534879}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1581534882
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -35191,7 +35147,7 @@ Transform:
   m_GameObject: {fileID: 1581534879}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2417151, y: 0.06746611, z: 0.33681852, w: 0.90751064}
-  m_LocalPosition: {x: 10.55, y: 1.82, z: 5.08}
+  m_LocalPosition: {x: 10.23, y: 1.4600002, z: 5.1}
   m_LocalScale: {x: 1.3889, y: 0.27778003, z: 1.3889}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46627,7 +46583,7 @@ Transform:
   m_GameObject: {fileID: 2074009877}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.713, y: 0.687, z: -5.73}
+  m_LocalPosition: {x: 8.52, y: 0.687, z: -5.73}
   m_LocalScale: {x: 1, y: 0.19999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
