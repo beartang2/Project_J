@@ -10646,10 +10646,13 @@ PrefabInstance:
       value: 0.26683873
       objectReference: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 4259288014388488516, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
       propertyPath: jumpForce
       value: 3
       objectReference: {fileID: 0}
+=======
+>>>>>>> 1268b063cb7706a8cbc90848c42b6fe25c710619
 =======
 >>>>>>> 1268b063cb7706a8cbc90848c42b6fe25c710619
     - target: {fileID: 6728298924848675020, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
@@ -11370,7 +11373,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.087, y: 0.456, z: -0.001428604}
+=======
+  m_LocalPosition: {x: -0.003, y: 0.862, z: -0.001428604}
+>>>>>>> 1268b063cb7706a8cbc90848c42b6fe25c710619
 =======
   m_LocalPosition: {x: -0.003, y: 0.862, z: -0.001428604}
 >>>>>>> 1268b063cb7706a8cbc90848c42b6fe25c710619
