@@ -1,77 +1,71 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class MergeObjects : CheckHandTransform, IResettable
 {
-    private List<GameObject> keyObjectsA = new List<GameObject>(); // A키 오브젝트 리스트
-    private List<GameObject> keyObjectsB = new List<GameObject>(); // B키 오브젝트 리스트
-    private GameObject[] allKeyObjects;
-    public GameObject mergedPrefab; // 병합될 새로운 프리팹
+    [Header("병합 대상 프리팹")]
+    public GameObject mergedPrefab;
+    [SerializeField] private float resetDelay = 1f;
 
-    private Vector3 betweenObjectPos;
-    public bool isMerged = false; // 병합 완료 플래그
+    private List<GameObject> keyObjectsA = new();
+    private List<GameObject> keyObjectsB = new();
+    private GameObject[] allKeyObjects;
+
+    [SerializeField] private bool isMerged = false;
+    public static event Action<GameObject> OnMergeCompleted;
 
     private void Update()
     {
         if (xr_input.isLPressed && xr_input.isRPressed)
         {
-            MergeObject();
+            TryMergeObjects();
         }
     }
 
     public override void OnNetworkSpawn()
     {
-        // FindObjects(); // 즉시 실행하지 않고 지연 실행
         StartCoroutine(DelayedFindObjects());
     }
 
     private IEnumerator DelayedFindObjects()
     {
-        // 약간의 여유 시간 대기 (스폰 완료 대기)
         yield return new WaitForSeconds(0.2f);
-
-        FindObjects(); // 이제 오브젝트 탐색
+        FindObjects();
     }
 
-    public void FindObjects()
+    private void FindObjects()
     {
-        // 씬에서 모든 A/B 키 오브젝트 찾기
         allKeyObjects = GameObject.FindGameObjectsWithTag("keyObjects");
 
         foreach (GameObject obj in allKeyObjects)
         {
-            Debug.Log(obj);
-            if (obj.name.Contains("Merge_Key_Ear")) // A 오브젝트 찾기 (이름으로 구분)
-            {
+            if (obj.name.Contains("Merge_Key_Ear"))
                 keyObjectsA.Add(obj);
-            }
-            else if (obj.name.Contains("Merge_Key_Area")) // B 오브젝트 찾기
-            {
+            else if (obj.name.Contains("Merge_Key_Area"))
                 keyObjectsB.Add(obj);
-            }
         }
     }
 
-    private void MergeObject()
+    private void TryMergeObjects()
     {
-        if (isMerged) return; // 병합이 이미 되었으면 더 이상 시도 안 함
+        if (isMerged) return;
 
-        // 오브젝트 쌍 찾기
         foreach (GameObject objA in keyObjectsA)
         {
             foreach (GameObject objB in keyObjectsB)
             {
-                // 두 오브젝트가 존재하고 활성화 상태인지 확인
                 if (objA.activeSelf && objB.activeSelf)
                 {
                     if (CheckDistanceNCreate(objA, objB, mergedPrefab))
                     {
-                        isMerged = true; // 병합 완료
+                        Debug.Log("[MergeObjects] 병합 성공: " + mergedPrefab.name);
+                        isMerged = true;
+                        OnMergeCompleted?.Invoke(mergedPrefab); // 병합 완료 이벤트
+
+                        Invoke(nameof(ResetTrigger), resetDelay); // 일정 시간 후 병합 가능하게
                         return;
                     }
                 }
@@ -79,17 +73,15 @@ public class MergeObjects : CheckHandTransform, IResettable
         }
     }
 
-    public override void RequestSpawnMergedObject(Vector3 spawnPos)
-    {
-        Debug.Log($"[Client] 병합 요청: {spawnPos}");
-        RequestSpawnMergedObjectServerRpc(spawnPos);
-    }
-
     public void ResetTrigger()
     {
-        isMerged = false; // 병합 완료 플래그 초기화
+        isMerged = false;
+        Debug.Log("[MergeObjects] 병합 플래그 초기화 완료");
+    }
 
-        Debug.Log("[MergeObjects] 트리거 상태 초기화 완료");
+    public override void RequestSpawnMergedObject(Vector3 spawnPos)
+    {
+        RequestSpawnMergedObjectServerRpc(spawnPos);
     }
 
     [ServerRpc(RequireOwnership = false)]

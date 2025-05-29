@@ -1,119 +1,86 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 
 public class MakeChessman : CheckHandTransform
 {
-    private List<GameObject> jarObjects = new List<GameObject>();
-    [SerializeField] private GameObject chessman1; // Jar_HeadKey1과 합쳐질 경우 생성
-    [SerializeField] private GameObject chessman2; // Jar_HeadKey2와 합쳐질 경우 생성
-    private MergeObjects mergedSc;
-    [SerializeField] private GameObject[] mergedKeys;    // 몸통 키 (병합)
-    [SerializeField] private GameObject[] jarKeys;       // 헤드 키 (항아리)
+    [SerializeField] private GameObject chessman1; // Jar_FirstHeadKey
+    [SerializeField] private GameObject chessman2; // Jar_SecondHeadKey
 
-    private int mergedKeyCount = 0; // 병합된 키 개수
-    private int isMade = 0; // 체스말 생성 여부
+    private bool[] spawnedChessman = new bool[2]; // 각 체스말 생성 여부
 
-    private void Awake()
+    private void OnEnable()
     {
-        mergedSc = gameObject.GetComponent<MergeObjects>();
+        MergeObjects.OnMergeCompleted += TryMakeChessman;
     }
 
-    public override void OnNetworkSpawn()
+    private void OnDisable()
     {
-        StartCoroutine(DelayedFindObjects());
+        MergeObjects.OnMergeCompleted -= TryMakeChessman;
     }
 
-    private IEnumerator DelayedFindObjects()
+    private void TryMakeChessman(GameObject mergedPrefab)
     {
-        // 약간의 여유 시간 대기 (스폰 완료 대기)
-        yield return new WaitForSeconds(0.2f);
+        GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
+        GameObject[] mergedKeys = GameObject.FindGameObjectsWithTag("merged_key");
 
-        jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
-    }
-
-    private void Update()
-    {
-        if (mergedKeyCount < 2 && mergedSc.isMerged)
+        foreach (GameObject jar in jarKeys)
         {
-            mergedKeys = GameObject.FindGameObjectsWithTag("merged_key");
-            Debug.Log("병합된 키 개수: " + mergedKeys.Length);
-            mergedKeyCount++;
-        }
-
-        if (mergedKeys != null && mergedKeyCount > 0)
-        {
-            jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
-
-            foreach (GameObject jar in jarKeys)
+            for (int i = 0; i < mergedKeys.Length; i++)
             {
-                if (jar.name.Contains("Jar_FirstHeadKey") || jar.name.Contains("Jar_SecondHeadKey_Two"))
-                {
-                    Debug.Log("Jar_HeadKey1 또는 Jar_HeadKey2 발견");
-                    jarObjects.Add(jar);
-                }
-            }
-        }
+                GameObject merged = mergedKeys[i];
 
-        // 체스말 병합 조건
-        if (isMade < 2 && jarObjects.Count > 0 && mergedKeys.Length > 0)
-        {
-            foreach (GameObject jar in jarObjects)
-            {
-                foreach (GameObject merged in mergedKeys)
+                if (!merged.activeSelf || !jar.activeSelf)
+                    continue;
+
+                if (jar.name.Contains("KnightHead") && !spawnedChessman[0])
                 {
-                    if (jar.name.Contains("Jar_SecondHeadKey_Two"))
+                    if (CheckDistanceNCreate(jar, merged, chessman1))
                     {
-                        CheckDistanceNCreate(jar, merged, chessman2);
-                        Debug.Log("Jar_SecondHeadKey_Two 병합");
-                        isMade++;
-                    }
-                    else if (jar.name.Contains("Jar_FirstHeadKey"))
-                    {
-                        CheckDistanceNCreate(jar, merged, chessman1);
-                        Debug.Log("Jar_FirstHeadKey 병합");
-                        isMade++;
+                        spawnedChessman[0] = true;
+                        RequestSpawnMergedObject(merged.transform.position); // 명확하게 호출
                     }
                 }
+                else if (jar.name.Contains("RookHead") && !spawnedChessman[1])
+                {
+                    if (CheckDistanceNCreate(jar, merged, chessman2))
+                    {
+                        spawnedChessman[1] = true;
+                        RequestSpawnMergedObject(merged.transform.position); // 명확하게 호출
+                    }
+                }
+
+                if (spawnedChessman[0] && spawnedChessman[1])
+                    return;
             }
         }
     }
-
 
     public override void RequestSpawnMergedObject(Vector3 spawnPos)
     {
-        Debug.Log("클라이언트에서 서버에게 생성 요청");
         RequestSpawnMergedObjectServerRpc(spawnPos);
     }
 
     [ServerRpc]
-    void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos)
+    private void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos)
     {
-        GameObject objToSpawn = null;
-
-        // 서버에서도 jarObjects를 확인해야 하므로 구조를 바꾸거나
-        // 아래처럼 임시로 jar 찾기
         GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
 
         foreach (GameObject jar in jarKeys)
         {
-            if (jar.name.Contains("Jar_FirstHead"))
-            {
-                objToSpawn = chessman1;
-            }
-            else if (jar.name.Contains("Jar_SecondHead"))
-            {
-                objToSpawn = chessman2;
-            }
+            GameObject chessman = null;
 
-            if (objToSpawn != null)
+            if (jar.name.Contains("KnightHead"))
+                chessman = chessman1;
+            else if (jar.name.Contains("RookHead"))
+                chessman = chessman2;
+
+            if (chessman != null)
             {
-                GameObject spawned = Instantiate(objToSpawn, spawnPos, Quaternion.identity);
+                GameObject spawned = Instantiate(chessman, spawnPos, Quaternion.identity);
                 spawned.GetComponent<NetworkObject>().Spawn();
                 break;
             }
         }
     }
-
 }

@@ -118,13 +118,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92f373001b560d4abdb747bd4b2840a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 5149349093050634323}
-  meshRenderer_p2: {fileID: 0}
-  leftHandModelPrefab: {fileID: 4421274793052156908, guid: aea3e4aa50254344aa51df2a83b8bdca, type: 3}
-  rightHandModelPrefab: {fileID: 1630848532566000597, guid: 3f92507206310e74b93f693439b22604, type: 3}
-  colors:
-  - {r: 1, g: 0.9215687, b: 0.44705886, a: 1}
-  - {r: 0.49411768, g: 0.85098046, b: 1, a: 1}
+  bodyRenderer: {fileID: 0}
+  headRenderer: {fileID: 0}
+  objRenderer: {fileID: 0}
+  bodyMeshes: []
+  headMeshes: []
+  objMeshes: []
+  bodyMaterials: []
+  headMaterials: []
+  objMaterials: []
 --- !u!1 &5037478397096879114
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +174,7 @@ GameObject:
   - component: {fileID: 5548932583242667406}
   - component: {fileID: 847246618276486882}
   - component: {fileID: 3774565549624977721}
+  - component: {fileID: 71362949439047760}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -272,6 +275,50 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
+--- !u!114 &71362949439047760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5365404697037741013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &6267176523962426349
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +585,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad509cc5ff3d654eb9f7e0d6f2851ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHead: {fileID: 0}
+  playerHeadObj: {fileID: 0}
 --- !u!114 &845921181850066190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +602,7 @@ MonoBehaviour:
   lobbyPos: {fileID: 1932251796858538963, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
   p1StartPos: {fileID: 6324973202407380683, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
   p2StartPos: {fileID: 6982176360914738849, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
+  pMoved: 0
 --- !u!114 &3174442706209729294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +616,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  jumpForce: 5
+  groundCheckDistance: 0.1
+  jumpCooldown: 0.1
 --- !u!114 &5398642289907976236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,10 +808,8 @@ MonoBehaviour:
   xr_input: {fileID: 5398642289907976236}
   leftHand: {fileID: 6946081627580824776}
   rightHand: {fileID: 5423035248304403365}
-  window: {fileID: 0}
-  hoveringKeyObj_P1: {fileID: 0}
-  hoveringKeyObj_P2: {fileID: 0}
-  isEnd: 0
+  hoveringKeyPrefab_1P: {fileID: 0}
+  hoveringKeyPrefab_2P: {fileID: 0}
 --- !u!1001 &69401776259328588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -767,6 +818,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3335388068350922359}
     m_Modifications:
+    - target: {fileID: -3529733323592747621, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3865000918
+      objectReference: {fileID: 0}
     - target: {fileID: 2824692350373736814, guid: da46e9e65f2bbde43ad96f9ceef2718b, type: 3}
       propertyPath: m_RaycastMask.m_Bits
       value: 3447
@@ -859,6 +914,10 @@ PrefabInstance:
     - target: {fileID: 1305575221390338013, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844867771895539497, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3865000918
       objectReference: {fileID: 0}
     - target: {fileID: 1852697038151127277, guid: 090413e98a929c34788b9c507fa71a0e, type: 3}
       propertyPath: m_RaycastMask.m_Bits

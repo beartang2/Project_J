@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 310608408
+  GlobalObjectIdHash: 3828296800
   InScenePlacedSourceGlobalObjectIdHash: 3828296800
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -968,6 +968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad509cc5ff3d654eb9f7e0d6f2851ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHead: {fileID: 0}
+  playerHeadObj: {fileID: 0}
 --- !u!114 &4259288014388488516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,6 +984,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.5
   jumpForce: 5
+  groundCheckDistance: 0.1
+  jumpCooldown: 0.1
 --- !u!114 &6774168930021597219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,6 +1177,8 @@ MonoBehaviour:
   rightHand: {fileID: 744813774454059405}
   chessman1: {fileID: 1440565887691221185, guid: 88396bd757c185645a82b77ba71c8800, type: 3}
   chessman2: {fileID: 2012894336167986029, guid: 3a446633063c2f24d8ece917f861407f, type: 3}
+  mergedKeys: []
+  jarKeys: []
 --- !u!114 &3618003177677043560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,6 +1209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 262509963634412322}
+  isRunning: 0
   timerLimit: 7200
 --- !u!114 &9023659405604820483
 MonoBehaviour:
@@ -1221,7 +1228,7 @@ MonoBehaviour:
   masterSlider: {fileID: 9179128273494601826, guid: 7881838936b95534d8dca2b53df451a2, type: 3}
   bgmSlider: {fileID: 1723429520398304537, guid: 9b01a20737693eb43b4176f4aa4a4777, type: 3}
   sfxSlider: {fileID: 614501870015197269, guid: a6648c3523ad8f049a8acba575f7a8d8, type: 3}
-  settingPanel: {fileID: 7206769464098887627, guid: 428c9bb3822b5484e81ff0abbfab334a, type: 3}
+  settingPanelPrefab: {fileID: 0}
   audioClip: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: f2217250980b39a4ba56d78385411540, type: 2}
   playerCamera: {fileID: 7882820722884039467}
@@ -1403,17 +1410,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92f373001b560d4abdb747bd4b2840a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 4168497841025839663}
-  leftHandModelPrefab: {fileID: 4421274793052156908, guid: aea3e4aa50254344aa51df2a83b8bdca, type: 3}
-  rightHandModelPrefab: {fileID: 1630848532566000597, guid: 3f92507206310e74b93f693439b22604, type: 3}
-  otherPlayerMesh:
-  - {fileID: 6096348091744531223, guid: d400a8ee47a9d1a4181be7657070c5ae, type: 3}
-  - {fileID: -2008734681974723355, guid: 42278f82e14e837499105923af94e7d4, type: 3}
-  colors:
-  - {fileID: 2100000, guid: dc004399036ebaa44a1ca2eccb08d114, type: 2}
-  - {fileID: 2100000, guid: 1dcfd85e6c4883a4c9f4bd9c2582127f, type: 2}
-  - {fileID: 2100000, guid: df0b45c179d0d1e4a8de5e727aed54a1, type: 2}
-  - {fileID: 2100000, guid: ac8c937a904f5034a8aa24a080af2e49, type: 2}
+  bodyRenderer: {fileID: 0}
+  headRenderer: {fileID: 0}
+  objRenderer: {fileID: 0}
+  bodyMeshes: []
+  headMeshes: []
+  objMeshes: []
+  bodyMaterials: []
+  headMaterials: []
+  objMaterials: []
 --- !u!1 &5847456936640095573
 GameObject:
   m_ObjectHideFlags: 0

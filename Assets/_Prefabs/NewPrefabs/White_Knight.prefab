@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -227925427350460062}
   - component: {fileID: -6457408345840986595}
   - component: {fileID: 4083734095939381375}
+  - component: {fileID: -8033228846953415732}
   m_Layer: 11
   m_Name: White_Knight
   m_TagString: chessKey1
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 474276301
+  GlobalObjectIdHash: 973744919
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -378,6 +379,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.81, y: 2.1491523, z: 0.79075754}
   m_Center: {x: 0.0163633, y: 0.9023445, z: -0.039963014}
+--- !u!114 &-8033228846953415732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440565887691221185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d724ce3cc6160949b8a539494804ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mergeType: 4
 --- !u!1 &8661963302583642725
 GameObject:
   m_ObjectHideFlags: 0

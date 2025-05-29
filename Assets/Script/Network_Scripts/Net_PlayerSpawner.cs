@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.EventSystems;
 
 public class Net_PlayerSpawner : NetworkBehaviour
 {
@@ -10,6 +11,11 @@ public class Net_PlayerSpawner : NetworkBehaviour
     [SerializeField] private Transform p2StartPos;  // P2 À§Ä¡
 
     public bool pMoved = false;
+
+    void Start()
+    {
+        EventSystem.current?.SetSelectedGameObject(null);
+    }
 
     public override void OnNetworkSpawn()
     {

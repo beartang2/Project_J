@@ -1558,8 +1558,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3.5
-  jumpForce: 5
+  jumpForce: 9
   groundCheckDistance: 0.1
+  jumpCooldown: 1
 --- !u!114 &6774168930021597219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1668,7 +1669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_System: {fileID: 5427531420717463771}
-  m_TurnAmount: 45
+  m_TurnAmount: 30
   m_DebounceTime: 0.3
   m_EnableTurnLeftRight: 1
   m_EnableTurnAround: 1
@@ -1732,8 +1733,7 @@ MonoBehaviour:
   xr_input: {fileID: 6774168930021597219}
   leftHand: {fileID: 2701467239307045224}
   rightHand: {fileID: 8013801540636949738}
-  mergedPrefab: {fileID: 7801718774964907514, guid: 6daa08e17cf7972488b1619e762fd947, type: 3}
-  isMerged: 0
+  mergedPrefab: {fileID: 4485688561100454100, guid: 51f76ea2f9aeb6240a245af9a12c5e5b, type: 3}
 --- !u!114 &8640345526504556333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,7 +2160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379153179927878782}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.005087226, y: 0.26683876, z: 0.13864884, w: 0.95370215}
+  m_LocalRotation: {x: -0.005087226, y: 0.26683873, z: 0.13864884, w: 0.9537021}
   m_LocalPosition: {x: 4.6449714e-10, y: 0.0042153136, z: -9.621726e-10}
   m_LocalScale: {x: 1, y: 0.999999, z: 0.999999}
   m_ConstrainProportionsScale: 0
@@ -2220,6 +2220,7 @@ GameObject:
   - component: {fileID: 3160421214633168475}
   - component: {fileID: 1144307072866792937}
   - component: {fileID: 1996409017475616023}
+  - component: {fileID: 1768959975596861650}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2364,6 +2365,37 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1768959975596861650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266329452573492053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405ed07ae7c26a141bac0d303d0a347a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &7126579221158682723
 GameObject:
   m_ObjectHideFlags: 0

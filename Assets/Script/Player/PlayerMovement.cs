@@ -17,9 +17,11 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 moveVec3;
     private InputDevice rightHandDevice;
 
-    private bool isGrounded = true; // 땅에 닿아있는지 확인하는 변수
+    private bool isGrounded = true; // 바닥 체크
+    private bool isJumping = false; // 중복 점프 방지용
 
     public float groundCheckDistance = 0.1f; // Ray 길이
+    public float jumpCooldown = 0.1f; // 점프 쿨타임 (중복 방지)
 
     private void Start()
     {
@@ -37,10 +39,10 @@ public class PlayerMovement : NetworkBehaviour
 
         CheckIfGrounded();
 
-        if (rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed) && isPressed && isGrounded)
+        if (rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed)
+            && isPressed && isGrounded && !isJumping)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            Jump();
         }
     }
 
@@ -48,8 +50,13 @@ public class PlayerMovement : NetworkBehaviour
     {
         Movement();
 
+        /*
         Vector3 moveVec3 = new Vector3(horizontal, 0, vertical).normalized;
-        rb.MovePosition(transform.position + moveVec3 * moveSpeed * Time.fixedDeltaTime);
+
+        Vector3 targetPosition = rb.position + moveVec3 * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(targetPosition);
+        Vector3 moveVec3 = new Vector3(horizontal, 0, vertical).normalized;
+        rb.MovePosition(transform.position + moveVec3 * moveSpeed * Time.fixedDeltaTime);*/
     }
 
     void GetKey()
@@ -74,7 +81,22 @@ public class PlayerMovement : NetworkBehaviour
 
     void CheckIfGrounded()
     {
-        // Ray를 아래로 쏴서 Ground 레이어와 충돌 검사
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f);
+        Vector3 offset = new Vector3(0, 0.005f, 0);
+        isGrounded = Physics.Raycast(transform.position + offset, Vector3.down, groundCheckDistance + 0.05f);
+        Debug.DrawRay(transform.position + offset, Vector3.down * (groundCheckDistance + 0.05f), isGrounded ? Color.green : Color.red);
+    }
+
+    void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        StartCoroutine(JumpCooldownCoroutine());
+    }
+
+    IEnumerator JumpCooldownCoroutine()
+    {
+        isJumping = true;
+        isGrounded = false; // 강제로 false 설정해서 다음 프레임도 못 뛰게
+        yield return new WaitForSeconds(jumpCooldown);
+        isJumping = false;
     }
 }

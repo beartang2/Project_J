@@ -36,7 +36,10 @@ public class CheckHandTransform : NetworkBehaviour
                 GameObject spawned = Instantiate(newObj, spawnPos, Quaternion.identity);
                 spawned.GetComponent<NetworkObject>().Spawn();
 
-                DisableMergedObjectsClientRpc(obj, obj2); // 비활성화는 클라이언트에도 적용해야 함
+                DisableMergedObjectsClientRpc(
+                    obj.GetComponent<NetworkObject>(),
+                    obj2.GetComponent<NetworkObject>()
+                ); // 비활성화는 클라이언트에도 적용해야 함
 
                 SetTeleporterCanPortByTag("Teleporter_A", true); // P1용
             }
@@ -45,7 +48,10 @@ public class CheckHandTransform : NetworkBehaviour
                 Debug.Log("오브젝트 스폰 요청!");
                 RequestSpawnMergedObject(spawnPos);
 
-                DisableMergedObjectsClientRpc(obj, obj2); // 클라이언트에서도 비활성화
+                DisableMergedObjectsClientRpc(
+                    obj.GetComponent<NetworkObject>(),
+                    obj2.GetComponent<NetworkObject>()
+                ); // 클라이언트에서도 비활성화
 
                 SetTeleporterCanPortByTag("Teleporter_B", true); // P2용
             }
