@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -28,37 +29,47 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        CheckAndDisableIfNotMine();
-        SetupCameraCullingMask();
-        UpdateHeadLayer();
+        AllPlayerConnectedManager.Instance.RegisterPlayer(NetworkObject);
+        
+        /*
         // 나중에 접속한 다른 클라이언트를 위해 콜백 등록
         if (IsServer)
         {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
-        /*        if(!IsOwner)
-                {
-                    // 2P 카메라를 찾기
-                    player2 = GameObject.FindGameObjectWithTag("Player");
-                    if (player2 != null)
-                    {
-                        p2_camera = player2.GetComponentInChildren<Camera>();
-                        if (p2_camera != null)
-                        {
-                            DisableXRForOtherPlayer();
-                        }
-                        else
-                        {
-                            Debug.LogWarning("2P 카메라를 찾을 수 없습니다.");
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Player2 오브젝트를 찾을 수 없습니다.");
-                    }
-                }*/
-    }
 
+        if(!IsOwner)
+        {
+            // 2P 카메라를 찾기
+            player2 = GameObject.FindGameObjectWithTag("Player");
+            if (player2 != null)
+            {
+                p2_camera = player2.GetComponentInChildren<Camera>();
+                if (p2_camera != null)
+                {
+                    DisableXRForOtherPlayer();
+                }
+                else
+                {
+                    Debug.LogWarning("2P 카메라를 찾을 수 없습니다.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Player2 오브젝트를 찾을 수 없습니다.");
+            }
+        }*/
+    }
+    public void InitializeAfterBothConnected()
+    {
+        CheckAndDisableIfNotMine();
+        SetupCameraCullingMask();
+        UpdateHeadLayer();
+        if (IsClient && !IsOwner)
+        {
+            StartCoroutine(DelayedDisableXR());
+        }
+    }
     private void DisableXRForOtherPlayer()
     {
 
@@ -172,23 +183,30 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         }
     }
 
-    private void OnClientConnected(ulong clientId)
+    private IEnumerator DelayedDisableXR()
     {
-        // 새로 접속한 클라이언트에게 이 오브젝트가 "상대방 오브젝트"라면 XR 끄라고 지시
-        if (clientId != OwnerClientId)
-        {
-            DisableXRForTargetClientRpc(clientId);
-        }
+        yield return new WaitForSeconds(0.5f); // 네트워크 오브젝트 완전 스폰 대기
+        DisableXRForOtherPlayer();
     }
 
-    [ClientRpc]
-    private void DisableXRForTargetClientRpc(ulong targetClientId)
-    {
-        if (NetworkManager.Singleton.LocalClientId == targetClientId)
+    /*
+        private void OnClientConnected(ulong clientId)
         {
-            Debug.Log($"[Client {targetClientId}] 늦게 접속한 클라이언트용 XR 비활성화 실행");
-            DisableXRForOtherPlayer();
+            // 새로 접속한 클라이언트에게 이 오브젝트가 "상대방 오브젝트"라면 XR 끄라고 지시
+            if (clientId != OwnerClientId)
+            {
+                DisableXRForTargetClientRpc(clientId);
+            }
         }
-    }
+
+        [ClientRpc]
+        private void DisableXRForTargetClientRpc(ulong targetClientId)
+        {
+            if (NetworkManager.Singleton.LocalClientId == targetClientId)
+            {
+                Debug.Log($"[Client {targetClientId}] 늦게 접속한 클라이언트용 XR 비활성화 실행");
+                DisableXRForOtherPlayer();
+            }
+        }*/
 
 }

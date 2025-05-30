@@ -9,7 +9,7 @@ public class CheckHandTransform : NetworkBehaviour
     public Transform leftHand;
     public Transform rightHand;
 
-    public virtual void RequestSpawnMergedObject(Vector3 spawnPos)
+    public virtual void RequestSpawnMergedObject(Vector3 spawnPos, NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
     {
         // 자식 클래스에서 override해서 RPC 호출
         Debug.LogWarning("RequestSpawnMergedObject는 자식 클래스에서 오버라이드되어야 합니다.");
@@ -21,7 +21,7 @@ public class CheckHandTransform : NetworkBehaviour
         Vector3 spawnPos = GetSpawnPosition(obj, obj2);
         float handDis = Vector3.Distance(leftHand.position, rightHand.position);
 
-        //Debug.Log($"거리: {distance}, 손 거리: {handDis}"); // 디버그 로그 추가
+        Debug.Log($"거리: {distance}, 손 거리: {handDis}"); // 디버그 로그 추가
 
         if (distance < 1.5f && handDis < 0.15f && xr_input.isLPressed && xr_input.isRPressed)
         {
@@ -45,13 +45,13 @@ public class CheckHandTransform : NetworkBehaviour
             }
             else
             {
-                Debug.Log("오브젝트 스폰 요청!");
-                RequestSpawnMergedObject(spawnPos);
-
-                DisableMergedObjectsClientRpc(
-                    obj.GetComponent<NetworkObject>(),
-                    obj2.GetComponent<NetworkObject>()
-                ); // 클라이언트에서도 비활성화
+                var obj1Net = obj.GetComponent<NetworkObject>();
+                var obj2Net = obj2.GetComponent<NetworkObject>();
+                RequestSpawnMergedObject(
+                    spawnPos,
+                    new NetworkObjectReference(obj1Net),
+                    new NetworkObjectReference(obj2Net)
+                );
 
                 SetTeleporterCanPortByTag("Teleporter_B", true); // P2용
             }
@@ -82,7 +82,7 @@ public class CheckHandTransform : NetworkBehaviour
     }
 
     [ClientRpc]
-    void DisableMergedObjectsClientRpc(NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
+    public void DisableMergedObjectsClientRpc(NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
     {
         if (obj1Ref.TryGet(out NetworkObject obj1))
             obj1.gameObject.SetActive(false);

@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 46074261
+  GlobalObjectIdHash: 1710019356
   InScenePlacedSourceGlobalObjectIdHash: 1710019356
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1734,6 +1734,8 @@ MonoBehaviour:
   leftHand: {fileID: 2701467239307045224}
   rightHand: {fileID: 8013801540636949738}
   mergedPrefab: {fileID: 4485688561100454100, guid: 51f76ea2f9aeb6240a245af9a12c5e5b, type: 3}
+  resetDelay: 1
+  isMerged: 0
 --- !u!114 &8640345526504556333
 MonoBehaviour:
   m_ObjectHideFlags: 0

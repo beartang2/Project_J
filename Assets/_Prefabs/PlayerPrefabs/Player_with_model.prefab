@@ -1159,6 +1159,7 @@ MonoBehaviour:
   leftHand: {fileID: 1477363239467338466}
   rightHand: {fileID: 744813774454059405}
   mergedPrefab: {fileID: 7801718774964907514, guid: 6daa08e17cf7972488b1619e762fd947, type: 3}
+  resetDelay: 1
   isMerged: 0
 --- !u!114 &8640345526504556333
 MonoBehaviour:
@@ -1177,8 +1178,6 @@ MonoBehaviour:
   rightHand: {fileID: 744813774454059405}
   chessman1: {fileID: 1440565887691221185, guid: 88396bd757c185645a82b77ba71c8800, type: 3}
   chessman2: {fileID: 2012894336167986029, guid: 3a446633063c2f24d8ece917f861407f, type: 3}
-  mergedKeys: []
-  jarKeys: []
 --- !u!114 &3618003177677043560
 MonoBehaviour:
   m_ObjectHideFlags: 0

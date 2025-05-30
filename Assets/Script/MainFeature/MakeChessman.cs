@@ -38,7 +38,7 @@ public class MakeChessman : CheckHandTransform
                     if (CheckDistanceNCreate(jar, merged, chessman1))
                     {
                         spawnedChessman[0] = true;
-                        RequestSpawnMergedObject(merged.transform.position); // 명확하게 호출
+                        SendSpawnRequest(jar, merged);
                     }
                 }
                 else if (jar.name.Contains("RookHead") && !spawnedChessman[1])
@@ -46,7 +46,7 @@ public class MakeChessman : CheckHandTransform
                     if (CheckDistanceNCreate(jar, merged, chessman2))
                     {
                         spawnedChessman[1] = true;
-                        RequestSpawnMergedObject(merged.transform.position); // 명확하게 호출
+                        SendSpawnRequest(jar, merged);
                     }
                 }
 
@@ -56,31 +56,58 @@ public class MakeChessman : CheckHandTransform
         }
     }
 
-    public override void RequestSpawnMergedObject(Vector3 spawnPos)
+    public override void RequestSpawnMergedObject(Vector3 spawnPos, NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
     {
-        RequestSpawnMergedObjectServerRpc(spawnPos);
+        RequestSpawnMergedObjectServerRpc(spawnPos, obj1Ref, obj2Ref);
     }
 
     [ServerRpc]
-    private void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos)
+    private void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos, NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
     {
+        obj1Ref.TryGet(out NetworkObject obj1);
+        obj2Ref.TryGet(out NetworkObject obj2);
+
         GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
+
+        GameObject chessman = null;
 
         foreach (GameObject jar in jarKeys)
         {
-            GameObject chessman = null;
-
             if (jar.name.Contains("KnightHead"))
-                chessman = chessman1;
-            else if (jar.name.Contains("RookHead"))
-                chessman = chessman2;
-
-            if (chessman != null)
             {
-                GameObject spawned = Instantiate(chessman, spawnPos, Quaternion.identity);
-                spawned.GetComponent<NetworkObject>().Spawn();
+                chessman = chessman1;
                 break;
             }
+            else if (jar.name.Contains("RookHead"))
+            {
+                chessman = chessman2;
+                break;
+            }
+        }
+
+        if (chessman != null)
+        {
+            GameObject spawned = Instantiate(chessman, spawnPos, Quaternion.identity);
+            spawned.GetComponent<NetworkObject>().Spawn();
+        }
+
+        // 재료 제거는 반드시 마지막에 호출
+        DisableMergedObjectsClientRpc(obj1Ref, obj2Ref);
+    }
+
+    private void SendSpawnRequest(GameObject jar, GameObject merged)
+    {
+        if (jar.TryGetComponent<NetworkObject>(out var jarNet) &&
+            merged.TryGetComponent<NetworkObject>(out var mergedNet))
+        {
+            var jarRef = new NetworkObjectReference(jarNet);
+            var mergedRef = new NetworkObjectReference(mergedNet);
+
+            RequestSpawnMergedObject(merged.transform.position, jarRef, mergedRef);
+        }
+        else
+        {
+            Debug.LogWarning("jar 또는 merged 오브젝트에 NetworkObject가 없습니다.");
         }
     }
 }

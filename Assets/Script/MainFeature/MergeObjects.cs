@@ -79,25 +79,36 @@ public class MergeObjects : CheckHandTransform, IResettable
         Debug.Log("[MergeObjects] 병합 플래그 초기화 완료");
     }
 
-    public override void RequestSpawnMergedObject(Vector3 spawnPos)
+    public override void RequestSpawnMergedObject(Vector3 spawnPos, NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
     {
-        RequestSpawnMergedObjectServerRpc(spawnPos);
+        RequestSpawnMergedObjectServerRpc(spawnPos, obj1Ref, obj2Ref);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos, ServerRpcParams rpcParams = default)
-    {
-        Debug.Log($"[Server] 병합 실행: {spawnPos}");
 
+    [ServerRpc]
+    private void RequestSpawnMergedObjectServerRpc(Vector3 spawnPos, NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
+    {
         GameObject newObject = Instantiate(mergedPrefab, spawnPos, Quaternion.identity);
-        
-        var netObj = newObject.GetComponent<NetworkObject>();
+        NetworkObject netObj = newObject.GetComponent<NetworkObject>();
         if (netObj != null)
         {
-            netObj.Spawn(); // 소유권 부여하지 않음
+            netObj.Spawn();
+            NotifyMergeCompletedClientRpc(netObj);
         }
 
         newObject.tag = "merged_key";
         newObject.name = mergedPrefab.name;
+
+        DisableMergedObjectsClientRpc(obj1Ref, obj2Ref);
+    }
+
+    [ClientRpc]
+    private void NotifyMergeCompletedClientRpc(NetworkObjectReference netObjRef)
+    {
+        if (netObjRef.TryGet(out var netObj))
+        {
+            Debug.Log($"[Client] 병합 오브젝트 도착: {netObj.name}");
+            // 병합된 오브젝트의 머지 타입 등을 처리하거나 상태 적용 가능
+        }
     }
 }

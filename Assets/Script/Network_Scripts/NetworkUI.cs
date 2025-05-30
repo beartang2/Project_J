@@ -31,7 +31,7 @@ public class NetworkUI : MonoBehaviour
     {
         if (isClicked)
         {
-            JoinCodeDisplay.text = RelayManager.JoinCode;
+            JoinCodeDisplay.text = "Join Code\r\n" + RelayManager.JoinCode;
             isClicked = false;
         }
     }
