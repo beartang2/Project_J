@@ -20,9 +20,12 @@ public class ResettingManager : MonoBehaviour
 
     public void ResetAllTriggers()
     {
-        var allResettable = FindObjectsOfType<MonoBehaviour>(true); // 비활성 포함
+        var allResettable = FindObjectsOfType<MonoBehaviour>(true);
+
         foreach (var comp in allResettable)
         {
+            if (!comp.gameObject.activeSelf) continue;
+
             if (comp is IResettable resettable)
             {
                 resettable.ResetTrigger();

@@ -105,18 +105,26 @@ public class InGameSetting : NetworkBehaviour
             }
         }
 
-        if (leftHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed))
+        ulong localId = NetworkManager.Singleton.LocalClientId;
+
+        foreach (var player in FindObjectsOfType<DisableOtherPlayerInput>())
         {
-            if (isPressed && !wasXPressed)
+            if (player.OwnerClientId == localId)
             {
-                Debug.Log("X 버튼 눌림, 메뉴 토글");
-                ToggleSettingsMenu();
+                if (leftHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed))
+                {
+                    if (isPressed && !wasXPressed)
+                    {
+                        Debug.Log("X 버튼 눌림, 메뉴 토글");
+                        ToggleSettingsMenu();
+                    }
+                    wasXPressed = isPressed;
+                }
+                else
+                {
+                    wasXPressed = false;
+                }
             }
-            wasXPressed = isPressed;
-        }
-        else
-        {
-            wasXPressed = false;
         }
     }
 

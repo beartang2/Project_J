@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -12,8 +13,8 @@ public class InsertToJar : MonoBehaviour, IResettable
     [SerializeField] private GameObject resultObj2;     // 두 번째 머리
     private bool is1Init = false;
     private bool is2Init = false;
-    private int cnt1 = 0;
-    private int cnt2 = 0;
+    public int cnt1 = 0;
+    public int cnt2 = 0;
 
     private void Start()
     {
@@ -65,7 +66,7 @@ public class InsertToJar : MonoBehaviour, IResettable
             DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
             gameObject.SetActive(false); // 서버에서도 비활성화
             // 트리거 초기화
-            ResetTrigger();
+            //ResetTrigger();
             // 연금술 실패 효과음
             // 연금술 실패 이펙트
         }
@@ -85,5 +86,10 @@ public class InsertToJar : MonoBehaviour, IResettable
     private void DisableSelfClientRpc()
     {
         gameObject.SetActive(false);
+        
+        if (gameObject.GetComponent<NetworkObject>() != null)
+        {
+            //gameObject.GetComponent<NetworkObject>().Despawn(true);
+        }
     }
 }

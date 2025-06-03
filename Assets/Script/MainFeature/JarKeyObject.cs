@@ -23,18 +23,29 @@ public class JarKeyObject : NetworkBehaviour, IResettable
 
             DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
             gameObject.SetActive(false); // 서버에서도 비활성화
+
+            if (gameObject.GetComponent<NetworkObject>() != null)
+            { 
+                //gameObject.GetComponent<NetworkObject>().Despawn(true);
+            }
         }
     }
 
     public void ResetTrigger()
     {
         hasInserted = false; // 초기화
-        gameObject.SetActive(true); // 다시 활성화
+        //gameObject.SetActive(true); // 다시 활성화
+
     }
 
     [ClientRpc]
     private void DisableSelfClientRpc()
     {
         gameObject.SetActive(false);
+
+        if (gameObject.GetComponent<NetworkObject>() != null)
+        {
+            //gameObject.GetComponent<NetworkObject>().Despawn(true);
+        }
     }
 }

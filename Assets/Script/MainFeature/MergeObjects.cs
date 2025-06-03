@@ -14,7 +14,7 @@ public class MergeObjects : CheckHandTransform, IResettable
     private List<GameObject> keyObjectsB = new();
     private GameObject[] allKeyObjects;
 
-    [SerializeField] private bool isMerged = false;
+    public bool isMerged = false;
     public static event Action<GameObject> OnMergeCompleted;
 
     private void Update()
@@ -65,6 +65,9 @@ public class MergeObjects : CheckHandTransform, IResettable
                         isMerged = true;
                         OnMergeCompleted?.Invoke(mergedPrefab); // 병합 완료 이벤트
 
+                        objA.SetActive(false);
+                        objB.SetActive(false);
+
                         Invoke(nameof(ResetTrigger), resetDelay); // 일정 시간 후 병합 가능하게
                         return;
                     }
@@ -73,10 +76,12 @@ public class MergeObjects : CheckHandTransform, IResettable
         }
     }
 
+
+
     public void ResetTrigger()
     {
         isMerged = false;
-        Debug.Log("[MergeObjects] 병합 플래그 초기화 완료");
+        //Debug.Log("[MergeObjects] 병합 플래그 초기화 완료");
     }
 
     public override void RequestSpawnMergedObject(Vector3 spawnPos, NetworkObjectReference obj1Ref, NetworkObjectReference obj2Ref)
@@ -93,22 +98,11 @@ public class MergeObjects : CheckHandTransform, IResettable
         if (netObj != null)
         {
             netObj.Spawn();
-            NotifyMergeCompletedClientRpc(netObj);
         }
 
         newObject.tag = "merged_key";
         newObject.name = mergedPrefab.name;
 
         DisableMergedObjectsClientRpc(obj1Ref, obj2Ref);
-    }
-
-    [ClientRpc]
-    private void NotifyMergeCompletedClientRpc(NetworkObjectReference netObjRef)
-    {
-        if (netObjRef.TryGet(out var netObj))
-        {
-            Debug.Log($"[Client] 병합 오브젝트 도착: {netObj.name}");
-            // 병합된 오브젝트의 머지 타입 등을 처리하거나 상태 적용 가능
-        }
     }
 }

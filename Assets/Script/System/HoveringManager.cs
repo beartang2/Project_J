@@ -33,7 +33,7 @@ public class HoveringManager : MonoBehaviour, IResettable
     {
         p1Complete = false;
         p2Complete = false;
-        window.SetActive(true);
+        
         Debug.Log("HoveringManager ¸®¼ÂµÊ");
     }
 }

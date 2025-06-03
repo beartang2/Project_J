@@ -18,10 +18,18 @@ public class AllPlayerConnectedManager : MonoBehaviour
         connectedPlayers.Add(player);
         if (connectedPlayers.Count == 2)
         {
-            foreach (var p in connectedPlayers)
-            {
-                p.GetComponent<DisableOtherPlayerInput>().InitializeAfterBothConnected();
-            }
+            StartCoroutine(DelayedInitialize());
+        }
+    }
+
+    private IEnumerator DelayedInitialize()
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        foreach (var p in connectedPlayers)
+        {
+            Debug.Log($"[AllPlayerConnectedManager] Player {p.OwnerClientId} ¿¬°áµÊ");
+            p.GetComponent<DisableOtherPlayerInput>().InitializeAfterBothConnected();
         }
     }
 }

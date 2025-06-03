@@ -28,8 +28,7 @@ public class Teleporter : MonoBehaviour, IResettable
             newPos.y += yOffset;
             other.transform.position = newPos;
 
-            // 전체 트리거 리셋
-            ResettingManager.Instance.ResetAllTriggers();
+            ResetTrigger();
         }
 
         if (isPlayerPortal && other.CompareTag("Player") && canPort)
@@ -38,21 +37,17 @@ public class Teleporter : MonoBehaviour, IResettable
             newPos.y += yOffset;
             other.transform.position = newPos;
 
-            // 전체 트리거 리셋
-            ResettingManager.Instance.ResetAllTriggers();
+            ResetTrigger();
 
             // 일정 시간 후 다시 포탈을 활성화
             StartCoroutine(ReactivateTeleportersAfterDelay(4f)); // 3~5초 조절 가능
         }
 
-        if (!isTeleported && (other.tag.Contains("keyObject")|| other.tag.Contains("commonObject")))
+        if (!isTeleported && (other.tag.Contains("key")|| other.tag.Contains("Object")))
         {
             Vector3 newPos = arrivePosObj.transform.position;
             newPos.y += yOffset;
             other.transform.position = newPos;
-
-            // 전체 트리거 리셋
-            ResettingManager.Instance.ResetAllTriggers();
         }
     }
 

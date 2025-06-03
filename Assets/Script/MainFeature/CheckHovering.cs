@@ -3,7 +3,7 @@ using UnityEngine;
 public class CheckHoveringPlayer : CheckHandTransform
 {
     private float hoverTimer = 0f;
-    private float hoverThreshold = 2.0f;
+    private float hoverThreshold = 4.0f;
 
     public GameObject hoveringKeyPrefab_1P; // 서버 플레이어용
     public GameObject hoveringKeyPrefab_2P; // 클라이언트 플레이어용
@@ -39,7 +39,7 @@ public class CheckHoveringPlayer : CheckHandTransform
         float distL = Vector3.Distance(leftHand.position, assignedKey.transform.position);
         float distR = Vector3.Distance(rightHand.position, assignedKey.transform.position);
 
-        if (distL < 0.2f || distR < 0.2f)
+        if (distL < 0.1f || distR < 0.1f)
         {
             hoverTimer += Time.deltaTime;
 

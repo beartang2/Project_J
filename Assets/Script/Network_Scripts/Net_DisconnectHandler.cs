@@ -12,6 +12,10 @@ public class Net_DisconnectHandler : MonoBehaviour
 
     public string sceneToLoadOnDisconnect = "Merge0522"; // 이동할 씬 이름
 
+    private void Awake()
+    {
+        ResetXR();
+    }
 
     private void OnEnable()
     {

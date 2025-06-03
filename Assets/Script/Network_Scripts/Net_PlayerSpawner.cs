@@ -28,16 +28,18 @@ public class Net_PlayerSpawner : NetworkBehaviour
         {
             // 서버 플레이어는 로비 위치
             gameObject.transform.position = lobbyPos.position;
+            gameObject.transform.rotation = lobbyPos.rotation;
             gameObject.name = "Player" + OwnerClientId;
-            Debug.Log("플레이어" + OwnerClientId + " 위치: " + transform.position);
+            //Debug.Log("플레이어" + OwnerClientId + " 위치: " + transform.position);
         }
         else if (OwnerClientId > 0)
         {
             // 클라이언트 플레이어는 P2 위치 + 오프셋
             Vector3 offset = new Vector3(1.5f, 0f, 0f);
             gameObject.transform.position = lobbyPos.position + offset;
+            gameObject.transform.rotation = lobbyPos.rotation;
             gameObject.name = "Player" + OwnerClientId;
-            Debug.Log("플레이어" + OwnerClientId + " 위치: " + transform.position);
+            //Debug.Log("플레이어" + OwnerClientId + " 위치: " + transform.position);
         }
     }
 
@@ -47,6 +49,9 @@ public class Net_PlayerSpawner : NetworkBehaviour
     {
         if (!IsServer) return;
 
+        // 전체 트리거 리셋
+        ResettingManager.Instance.ResetAllTriggers();
+
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players)
         {
@@ -54,12 +59,12 @@ public class Net_PlayerSpawner : NetworkBehaviour
             if (netObj.OwnerClientId == 0)
             {
                 player.transform.position = p1StartPos.position;
-                Debug.Log("[Server] 서버 플레이어 위치 이동: " + p1StartPos.position);
+                player.transform.rotation = p1StartPos.rotation;
             }
             else if (netObj.OwnerClientId == 1)
             {
                 // 클라이언트에게 강제로 이동 요청
-                MoveClientPlayerClientRpc(p2StartPos.position);
+                MoveClientPlayerClientRpc(p2StartPos.position, p2StartPos.rotation.eulerAngles);
             }
         }
 
@@ -67,11 +72,9 @@ public class Net_PlayerSpawner : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void MoveClientPlayerClientRpc(Vector3 newPosition)
+    private void MoveClientPlayerClientRpc(Vector3 newPosition, Vector3 newRotationEuler)
     {
-        if(IsServer) return; // 서버는 이 코드를 실행하지 않음
-
-        Debug.Log("[Client] 클라이언트 플레이어 위치 이동 요청: " + newPosition);
+        if (IsServer) return;
 
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players)
@@ -80,9 +83,8 @@ public class Net_PlayerSpawner : NetworkBehaviour
             if (netObj != null && netObj.OwnerClientId == 1)
             {
                 player.transform.position = newPosition;
-                Debug.Log("[Client] 클라이언트 본인 위치 이동: " + newPosition);
+                player.transform.rotation = Quaternion.Euler(newRotationEuler);
 
-                // 타이머 시작도 여기서!
                 var timer = player.GetComponent<PlayerTimerUI>();
                 if (timer != null)
                     timer.StartTimer();
@@ -91,6 +93,7 @@ public class Net_PlayerSpawner : NetworkBehaviour
             }
         }
     }
+
 
     /*
     // 서버가 버튼을 누르면 실행될 함수

@@ -1455,7 +1455,7 @@ Transform:
   m_GameObject: {fileID: 3702102821179079575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.63, y: 0, z: -0.595}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1710019356
+  GlobalObjectIdHash: 46074261
   InScenePlacedSourceGlobalObjectIdHash: 1710019356
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1558,9 +1558,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3.5
-  jumpForce: 9
+  jumpForce: 7
   groundCheckDistance: 0.1
-  jumpCooldown: 1
+  jumpCooldown: 0.8
 --- !u!114 &6774168930021597219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1715,8 +1715,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyPos: {fileID: 6518356283948107163, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
-  p1StartPos: {fileID: 1971804202697039350, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
-  p2StartPos: {fileID: 7982204358198876965, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
+  p1StartPos: {fileID: 1716414424084512773, guid: 9b9526ef9c2a17f43ba6bcd6afca43fc, type: 3}
+  p2StartPos: {fileID: 1822450174700016522, guid: 93d883744a767ff41b4c73ff79ad36e7, type: 3}
   pMoved: 0
 --- !u!114 &4592497311186899263
 MonoBehaviour:
@@ -2162,7 +2162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379153179927878782}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.005087226, y: 0.26683873, z: 0.13864884, w: 0.9537021}
+  m_LocalRotation: {x: -0.005087226, y: 0.26683876, z: 0.13864884, w: 0.95370215}
   m_LocalPosition: {x: 4.6449714e-10, y: 0.0042153136, z: -9.621726e-10}
   m_LocalScale: {x: 1, y: 0.999999, z: 0.999999}
   m_ConstrainProportionsScale: 0
@@ -2380,15 +2380,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
+  SyncPositionX: 0
+  SyncPositionY: 0
+  SyncPositionZ: 0
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01

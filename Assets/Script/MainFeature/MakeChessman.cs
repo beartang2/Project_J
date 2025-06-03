@@ -8,35 +8,34 @@ public class MakeChessman : CheckHandTransform
     [SerializeField] private GameObject chessman2; // Jar_SecondHeadKey
 
     private bool[] spawnedChessman = new bool[2]; // 각 체스말 생성 여부
+    private List<GameObject> jarKeys = new();
+    private List<GameObject> mergedKeys = new();
 
-    private void OnEnable()
+    private void LateUpdate()
     {
-        MergeObjects.OnMergeCompleted += TryMakeChessman;
-    }
-
-    private void OnDisable()
-    {
-        MergeObjects.OnMergeCompleted -= TryMakeChessman;
-    }
-
-    private void TryMakeChessman(GameObject mergedPrefab)
-    {
-        GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
-        GameObject[] mergedKeys = GameObject.FindGameObjectsWithTag("merged_key");
-
-        foreach (GameObject jar in jarKeys)
+        if (xr_input.isLPressed && xr_input.isRPressed)
         {
-            for (int i = 0; i < mergedKeys.Length; i++)
+            TryMakeChessman();
+        }
+    }
+
+    private void TryMakeChessman()
+    {
+        //Debug.Log("체스말 생성 시도");
+
+        jarKeys = new List<GameObject>(GameObject.FindGameObjectsWithTag("jar_keyObject"));
+        mergedKeys = new List<GameObject>(GameObject.FindGameObjectsWithTag("merged_key"));
+        //Debug.Log($"jarKeys: {jarKeys.Count}, mergedKeys: {mergedKeys.Count}");
+        foreach (GameObject jar in new List<GameObject>(jarKeys)) // 복사본 순회 (삭제 안전)
+        {
+            foreach (GameObject merged in new List<GameObject>(mergedKeys))
             {
-                GameObject merged = mergedKeys[i];
-
-                if (!merged.activeSelf || !jar.activeSelf)
-                    continue;
-
+                //Debug.Log($"검사 중: jar={jar.name}, merged={merged.name}");
                 if (jar.name.Contains("KnightHead") && !spawnedChessman[0])
                 {
                     if (CheckDistanceNCreate(jar, merged, chessman1))
                     {
+                        Debug.Log("Knight 생성됨");
                         spawnedChessman[0] = true;
                         SendSpawnRequest(jar, merged);
                     }
@@ -45,6 +44,7 @@ public class MakeChessman : CheckHandTransform
                 {
                     if (CheckDistanceNCreate(jar, merged, chessman2))
                     {
+                        Debug.Log("Rook 생성됨");
                         spawnedChessman[1] = true;
                         SendSpawnRequest(jar, merged);
                     }
@@ -67,8 +67,6 @@ public class MakeChessman : CheckHandTransform
         obj1Ref.TryGet(out NetworkObject obj1);
         obj2Ref.TryGet(out NetworkObject obj2);
 
-        GameObject[] jarKeys = GameObject.FindGameObjectsWithTag("jar_keyObject");
-
         GameObject chessman = null;
 
         foreach (GameObject jar in jarKeys)
@@ -90,9 +88,6 @@ public class MakeChessman : CheckHandTransform
             GameObject spawned = Instantiate(chessman, spawnPos, Quaternion.identity);
             spawned.GetComponent<NetworkObject>().Spawn();
         }
-
-        // 재료 제거는 반드시 마지막에 호출
-        DisableMergedObjectsClientRpc(obj1Ref, obj2Ref);
     }
 
     private void SendSpawnRequest(GameObject jar, GameObject merged)

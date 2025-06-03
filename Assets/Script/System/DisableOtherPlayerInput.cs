@@ -15,14 +15,15 @@ public class DisableOtherPlayerInput : NetworkBehaviour
 
     private void CheckAndDisableIfNotMine()
     {
-        // 내 로컬 클라이언트 ID
         ulong localId = NetworkManager.Singleton.LocalClientId;
 
-        // 상대방 오브젝트라면 XR 비활성화
-        if (OwnerClientId != localId)
+        foreach (var player in FindObjectsOfType<DisableOtherPlayerInput>())
         {
-            Debug.Log($"[Client {localId}] 상대 오브젝트 감지 → XR 비활성화 시도 (Owner: {OwnerClientId})");
-            DisableXRForOtherPlayer();
+            if (player.OwnerClientId != localId)
+            {
+                Debug.Log($"[Host Or Client {localId}] {player.OwnerClientId} 플레이어의 XR 비활성화 실행");
+                player.DisableXRForOtherPlayer();
+            }
         }
     }
 
@@ -65,19 +66,21 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         CheckAndDisableIfNotMine();
         SetupCameraCullingMask();
         UpdateHeadLayer();
-        if (IsClient && !IsOwner)
-        {
-            StartCoroutine(DelayedDisableXR());
-        }
     }
+
     private void DisableXRForOtherPlayer()
     {
+        Debug.Log($"[DisableXR] XR 비활성화 시도 - {gameObject.name}");
 
         // 카메라 루트 비활성화
-        Camera camera = GetComponentInChildren<Camera>();
+        Camera camera = gameObject.GetComponentInChildren<Camera>();
         if (camera != null)
         {
             camera.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("[DisableXR] xrCamera가 null입니다");
         }
 
         // AudioListener도 같이 비활성화
@@ -101,7 +104,7 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         }
 
         // XR Controller 비활성화 (좌우 손 각각 찾아서 비활성화)
-        var deviceControllers = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRController>();
+        var deviceControllers = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRController>();
         foreach (var controller in deviceControllers)
         {
             controller.enableInputActions = false; // 이게 없어도 무방하지만 있으면 안전
@@ -109,28 +112,28 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         }
 
         // XR Ray Interactors 비활성화 (선택/터치 등 Ray 기반 인터랙션 방지)
-        var rayInteractors = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRRayInteractor>();
+        var rayInteractors = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRRayInteractor>();
         foreach (var ray in rayInteractors)
         {
             ray.enabled = false;
         }
 
         // XR Direct Interactors 비활성화 (손으로 직접 집는 상호작용 방지)
-        var directInteractors = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRDirectInteractor>();
+        var directInteractors = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRDirectInteractor>();
         foreach (var direct in directInteractors)
         {
             direct.enabled = false;
         }
 
         // Locomotion 시스템 비활성화 (이동 관련)
-        var moveProviders = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.LocomotionProvider>();
+        var moveProviders = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.LocomotionProvider>();
         foreach (var provider in moveProviders)
         {
             provider.enabled = false;
         }
 
         // Turn Provider (스냅 회전, 연속 회전 등) 비활성화
-        var turnProviders = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.SnapTurnProviderBase>();
+        var turnProviders = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.SnapTurnProviderBase>();
         foreach (var turn in turnProviders)
         {
             turn.enabled = false;
@@ -141,7 +144,7 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        Camera cam = GetComponentInChildren<Camera>();
+        Camera cam = gameObject.GetComponentInChildren<Camera>();
         if (cam == null) return;
 
         int layer1PHead = LayerMask.NameToLayer("1PHead");
