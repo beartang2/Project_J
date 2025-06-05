@@ -63,7 +63,7 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     }
     public void InitializeAfterBothConnected()
     {
-        CheckAndDisableIfNotMine();
+        StartCoroutine(DelayedDisableXR());
         SetupCameraCullingMask();
         UpdateHeadLayer();
     }
@@ -73,38 +73,27 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         Debug.Log($"[DisableXR] XR 비활성화 시도 - {gameObject.name}");
 
         // 카메라 루트 비활성화
-        Camera camera = gameObject.GetComponentInChildren<Camera>();
+        Camera camera = GetComponentInChildren<Camera>();
         if (camera != null)
         {
             camera.enabled = false;
         }
-        else
-        {
-            Debug.LogWarning("[DisableXR] xrCamera가 null입니다");
-        }
 
         // AudioListener도 같이 비활성화
-        AudioListener audioListener = camera.GetComponent<AudioListener>();
+        AudioListener audioListener = GetComponentInChildren<AudioListener>();
         if (audioListener != null)
         {
             audioListener.enabled = false;
         }
 
-        // TrackedPoseDriver 비활성화
-        TrackedPoseDriver trackedPoseDriver = camera.GetComponent<UnityEngine.InputSystem.XR.TrackedPoseDriver>();
-        if (trackedPoseDriver != null)
-        {
-            trackedPoseDriver.enabled = false;
-        }
-
-        PlayerMovement playerMovement = gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
         if (playerMovement != null)
         {
             playerMovement.enabled = false;
         }
 
         // XR Controller 비활성화 (좌우 손 각각 찾아서 비활성화)
-        var deviceControllers = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRController>();
+        var deviceControllers = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRController>();
         foreach (var controller in deviceControllers)
         {
             controller.enableInputActions = false; // 이게 없어도 무방하지만 있으면 안전
@@ -119,21 +108,21 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         }
 
         // XR Direct Interactors 비활성화 (손으로 직접 집는 상호작용 방지)
-        var directInteractors = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRDirectInteractor>();
+        var directInteractors = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.XRDirectInteractor>();
         foreach (var direct in directInteractors)
         {
             direct.enabled = false;
         }
 
         // Locomotion 시스템 비활성화 (이동 관련)
-        var moveProviders = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.LocomotionProvider>();
+        var moveProviders = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.LocomotionProvider>();
         foreach (var provider in moveProviders)
         {
             provider.enabled = false;
         }
 
         // Turn Provider (스냅 회전, 연속 회전 등) 비활성화
-        var turnProviders = gameObject.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.SnapTurnProviderBase>();
+        var turnProviders = GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.SnapTurnProviderBase>();
         foreach (var turn in turnProviders)
         {
             turn.enabled = false;
@@ -142,8 +131,6 @@ public class DisableOtherPlayerInput : NetworkBehaviour
 
     private void SetupCameraCullingMask()
     {
-        if (!IsOwner) return;
-
         Camera cam = gameObject.GetComponentInChildren<Camera>();
         if (cam == null) return;
 
@@ -189,8 +176,15 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     private IEnumerator DelayedDisableXR()
     {
         yield return new WaitForSeconds(0.5f); // 네트워크 오브젝트 완전 스폰 대기
-        DisableXRForOtherPlayer();
+        CheckAndDisableIfNotMine();
     }
+/*
+    [ClientRpc]
+    private void DisableOtherPlayersXRClientRpc()
+    {
+        CheckAndDisableIfNotMine();
+    }*/
+
 
     /*
         private void OnClientConnected(ulong clientId)

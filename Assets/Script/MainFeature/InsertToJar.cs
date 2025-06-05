@@ -15,6 +15,7 @@ public class InsertToJar : MonoBehaviour, IResettable
     private bool is2Init = false;
     public int cnt1 = 0;
     public int cnt2 = 0;
+    [SerializeField] private SpawnManager spawnManager; // 스폰 매니저
 
     private void Start()
     {
@@ -67,6 +68,7 @@ public class InsertToJar : MonoBehaviour, IResettable
             gameObject.SetActive(false); // 서버에서도 비활성화
             // 트리거 초기화
             //ResetTrigger();
+            spawnManager.ResetJarKeys();
             // 연금술 실패 효과음
             // 연금술 실패 이펙트
         }
