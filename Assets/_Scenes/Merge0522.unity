@@ -11466,18 +11466,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_with_model_tracking
       objectReference: {fileID: 0}
-    - target: {fileID: 3702102821179079575, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3899389469217614417, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.95370215
-      objectReference: {fileID: 0}
-    - target: {fileID: 3899389469217614417, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.26683876
-      objectReference: {fileID: 0}
     - target: {fileID: 6728298924848675020, guid: 02aa5432e72bd64438ed829ca663cc3c, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 46074261

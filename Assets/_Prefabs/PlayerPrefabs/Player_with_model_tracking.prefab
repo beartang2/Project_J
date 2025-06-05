@@ -1416,8 +1416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyPos: {fileID: 6518356283948107163, guid: 64ee84a425de5694f9523b602f615b87, type: 3}
-  p1StartPos: {fileID: 1716414424084512773, guid: 9b9526ef9c2a17f43ba6bcd6afca43fc, type: 3}
-  p2StartPos: {fileID: 1822450174700016522, guid: 93d883744a767ff41b4c73ff79ad36e7, type: 3}
+  p1StartPos: {fileID: 1971804202697039350, guid: e5ec496d59348a9429af72f5313c3a59, type: 3}
+  p2StartPos: {fileID: 7982204358198876965, guid: 9101a20b539f8a946a1660f9f8aa2c90, type: 3}
   pMoved: 0
 --- !u!114 &4592497311186899263
 MonoBehaviour:
