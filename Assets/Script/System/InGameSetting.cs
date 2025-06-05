@@ -14,7 +14,7 @@ public class InGameSetting : NetworkBehaviour
     public static InGameSetting Instance;
 
     [SerializeField] private Transform startPos;
-    private Net_DisconnectHandler dcHandler;
+    //private Net_DisconnectHandler dcHandler;
 
     public XRControllerInput leftController;
     public Slider masterSlider;
@@ -43,7 +43,7 @@ public class InGameSetting : NetworkBehaviour
 
     private void Start()
     {
-        dcHandler = FindObjectOfType<Net_DisconnectHandler>();
+        //dcHandler = FindObjectOfType<Net_DisconnectHandler>();
         settingCanvas = GameObject.Find("SettingCanvas")?.transform;
 
         Transform existingPanel = settingCanvas.Find(settingPanelPrefab.name);
@@ -147,17 +147,17 @@ public class InGameSetting : NetworkBehaviour
         if (isMenuActive)
         {
             Vector3 forwardPos = playerCamera.position + playerCamera.forward * spawnDistance;
-            settingPanelInstance.transform.position = forwardPos;
+            settingPanelPrefab.transform.position = forwardPos;
 
             Vector3 lookDir = playerCamera.position - forwardPos;
             lookDir.y = 0;
-            settingPanelInstance.transform.rotation = Quaternion.LookRotation(-lookDir);
+            settingPanelPrefab.transform.rotation = Quaternion.LookRotation(-lookDir);
 
-            settingPanelInstance.SetActive(true);
+            settingPanelPrefab.SetActive(true);
         }
         else
         {
-            settingPanelInstance.SetActive(false);
+            settingPanelPrefab.SetActive(false);
         }
     }
 
@@ -178,10 +178,10 @@ public class InGameSetting : NetworkBehaviour
             buttonAudioSc.PlayOneShot(audioClip);
         }
 
-        if (dcHandler != null)
+        /*if (dcHandler != null)
         {
             dcHandler.playerTransform = this.transform;
-        }
+        }*/
 
         NetworkManager.Singleton.Shutdown();
 
