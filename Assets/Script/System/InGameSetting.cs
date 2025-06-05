@@ -46,11 +46,16 @@ public class InGameSetting : NetworkBehaviour
         dcHandler = FindObjectOfType<Net_DisconnectHandler>();
         settingCanvas = GameObject.Find("SettingCanvas")?.transform;
 
-        // 무조건 생성 (멀티/싱글 모두 가능하게)
-        if (settingPanelPrefab != null && settingCanvas != null)
+        Transform existingPanel = settingCanvas.Find(settingPanelPrefab.name);
+        if (existingPanel == null)
         {
             settingPanelInstance = Instantiate(settingPanelPrefab, settingCanvas);
+            settingPanelInstance.name = settingPanelPrefab.name; // 이름 통일
             settingPanelInstance.SetActive(false);
+        }
+        else
+        {
+            settingPanelInstance = existingPanel.gameObject;
         }
 
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)

@@ -15,7 +15,9 @@ public class AllPlayerConnectedManager : MonoBehaviour
 
     public void RegisterPlayer(NetworkObject player)
     {
+        Debug.Log($"[AllPlayerConnectedManager] Player {player.OwnerClientId} 연결됨");
         connectedPlayers.Add(player);
+        Debug.Log($"[AllPlayerConnectedManager] 현재 연결된 플레이어 수: {connectedPlayers.Count}");
         if (connectedPlayers.Count == 2)
         {
             StartCoroutine(DelayedInitialize());
@@ -28,7 +30,6 @@ public class AllPlayerConnectedManager : MonoBehaviour
 
         foreach (var p in connectedPlayers)
         {
-            Debug.Log($"[AllPlayerConnectedManager] Player {p.OwnerClientId} 연결됨");
             p.GetComponent<DisableOtherPlayerInput>().InitializeAfterBothConnected();
         }
     }

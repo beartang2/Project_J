@@ -23724,6 +23724,7 @@ MonoBehaviour:
   resultObj2: {fileID: 2247833872140412977, guid: 8dd263b6d4f14324abbada0899a03283, type: 3}
   cnt1: 0
   cnt2: 0
+  spawnManager: {fileID: 0}
 --- !u!65 &900766267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73824,6 +73825,7 @@ SceneRoots:
   - {fileID: 1112393397}
   - {fileID: 538110273}
   - {fileID: 8741493114368441862}
+  - {fileID: 2422575373624478254}
   - {fileID: 2525797081288863548}
   - {fileID: 5233247708221220893}
   - {fileID: 239634898}
@@ -73838,7 +73840,6 @@ SceneRoots:
   - {fileID: 2144380578}
   - {fileID: 854275403}
   - {fileID: 381659558}
-  - {fileID: 2422575373624478254}
   - {fileID: 202228718}
   - {fileID: 1680653685}
   - {fileID: 1564796435}
