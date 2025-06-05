@@ -5,6 +5,7 @@ using UnityEngine;
 public class DisableCage : MonoBehaviour, IResettable
 {
     [SerializeField] private BoxCollider cageCol;
+    [SerializeField] private Animator openCageAnim;
 
     public bool isOpen = false;
 
@@ -15,6 +16,7 @@ public class DisableCage : MonoBehaviour, IResettable
         {
             cageCol.enabled = false;
             isOpen = true;
+            openCageAnim.SetTrigger("openTrigger");
             Debug.Log("Cage Collider Disabled");
         }
         else

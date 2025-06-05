@@ -1469,8 +1469,8 @@ MonoBehaviour:
   xr_input: {fileID: 6774168930021597219}
   leftHand: {fileID: 2701467239307045224}
   rightHand: {fileID: 8013801540636949738}
-  hoveringKeyPrefab_1P: {fileID: 2798780940719094267, guid: 4453942641444b945aa758992ad8d54a, type: 3}
-  hoveringKeyPrefab_2P: {fileID: 7812907276721945701, guid: 3e553baf88c9366448866ec21f26d14e, type: 3}
+  hoveringKeyPrefab_1P: {fileID: 7812907276721945701, guid: 3e553baf88c9366448866ec21f26d14e, type: 3}
+  hoveringKeyPrefab_2P: {fileID: 2798780940719094267, guid: 4453942641444b945aa758992ad8d54a, type: 3}
 --- !u!114 &7954553929654535502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2265,6 +2265,14 @@ PrefabInstance:
     - target: {fileID: 5163444336771819792, guid: f82496905de34c54aa8e0d1a943d6605, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.0000000015593831
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163444336771819792, guid: f82496905de34c54aa8e0d1a943d6605, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9537021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163444336771819792, guid: f82496905de34c54aa8e0d1a943d6605, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.26683873
       objectReference: {fileID: 0}
     - target: {fileID: 5621646321942670689, guid: f82496905de34c54aa8e0d1a943d6605, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform

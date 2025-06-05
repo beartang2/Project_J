@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Shader_Map_0524.unity
     guid: a9a2c9d132c3cc44faba5c1b4b4e9d20
+  - enabled: 1
+    path: Assets/_Scenes/Ending.unity
+    guid: e675e7aed07143b49a6cd0af5b58a60c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 21948209d96c2794184025310295416d, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: d39760dbcc23c96489c704295dd2d145, type: 2}

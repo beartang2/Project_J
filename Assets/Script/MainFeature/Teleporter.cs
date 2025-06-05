@@ -30,8 +30,7 @@ public class Teleporter : MonoBehaviour, IResettable
 
             ResetTrigger();
         }
-
-        if (isPlayerPortal && other.CompareTag("Player") && canPort)
+        else if (isPlayerPortal && other.CompareTag("Player") && canPort)
         {
             Vector3 newPos = arrivePosObj.transform.position;
             newPos.y += yOffset;
