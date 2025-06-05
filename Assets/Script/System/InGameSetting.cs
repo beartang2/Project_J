@@ -46,7 +46,7 @@ public class InGameSetting : NetworkBehaviour
         //dcHandler = FindObjectOfType<Net_DisconnectHandler>();
         settingCanvas = GameObject.Find("SettingCanvas")?.transform;
 
-        Transform existingPanel = settingCanvas.Find(settingPanelPrefab.name);
+        /*Transform existingPanel = settingCanvas.Find(settingPanelPrefab.name);
         if (existingPanel == null)
         {
             settingPanelInstance = Instantiate(settingPanelPrefab, settingCanvas);
@@ -56,7 +56,7 @@ public class InGameSetting : NetworkBehaviour
         else
         {
             settingPanelInstance = existingPanel.gameObject;
-        }
+        }*/
 
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)
         {
@@ -168,7 +168,7 @@ public class InGameSetting : NetworkBehaviour
             buttonAudioSc.PlayOneShot(audioClip);
         }
         print("Save");
-        settingPanelPrefab.SetActive(false);
+        ToggleSettingsMenu();
     }
 
     public void Exit()

@@ -64,8 +64,8 @@ public class InsertToJar : MonoBehaviour, IResettable
         // 다른 오브젝트가 들어왔을때
         if (other.name.Contains("Extra"))
         {
-            DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
-            gameObject.SetActive(false); // 서버에서도 비활성화
+            //DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
+            //gameObject.SetActive(false); // 서버에서도 비활성화
             // 트리거 초기화
             //ResetTrigger();
             spawnManager.ResetJarKeys();
