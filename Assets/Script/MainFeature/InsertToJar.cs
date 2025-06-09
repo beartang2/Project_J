@@ -16,6 +16,9 @@ public class InsertToJar : MonoBehaviour, IResettable
     public int cnt1 = 0;
     public int cnt2 = 0;
     [SerializeField] private SpawnManager spawnManager; // 스폰 매니저
+    // 효과음
+    [SerializeField] private AudioSource audioSource; // 연금술 성공 효과음
+    public AudioClip successClip; // 연금술 성공 효과음 클립
 
     private void Start()
     {
@@ -47,6 +50,11 @@ public class InsertToJar : MonoBehaviour, IResettable
             var newObj = Instantiate(resultObj1, transform.position, Quaternion.identity);
             newObj.GetComponent<NetworkObject>().Spawn();
             // 연금술 성공 효과음
+            if (audioSource != null && successClip != null)
+            {
+                audioSource.clip = successClip;
+                audioSource.Play();
+            }
             // 연금술 성공 이펙트
         }
         else if (cnt2 == 2 && !is2Init)
@@ -55,6 +63,11 @@ public class InsertToJar : MonoBehaviour, IResettable
             var newObj = Instantiate(resultObj2, transform.position, Quaternion.identity);
             newObj.GetComponent<NetworkObject>().Spawn();
             // 연금술 성공 효과음
+            if (audioSource != null && successClip != null)
+            {
+                audioSource.clip = successClip;
+                audioSource.Play();
+            }
             // 연금술 성공 이펙트
         }
     }

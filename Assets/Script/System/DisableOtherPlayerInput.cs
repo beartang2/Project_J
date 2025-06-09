@@ -2,8 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SpatialTracking;
 
 public class DisableOtherPlayerInput : NetworkBehaviour
 {
@@ -12,6 +11,8 @@ public class DisableOtherPlayerInput : NetworkBehaviour
     // 카메라 오브젝트
     private Camera p2_camera; // 2p 카메라
     private GameObject player2;     // 2p 오브젝트
+    private GameObject settingCanvas; // 설정창 UI 루트 오브젝트
+    [SerializeField] private GameObject vrCameraRoot; // VR 카메라 루트 오브젝트
 
     private void CheckAndDisableIfNotMine()
     {
@@ -21,7 +22,7 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         {
             if (player.OwnerClientId != localId)
             {
-                Debug.Log($"[Host Or Client {localId}] {player.OwnerClientId} 플레이어의 XR 비활성화 실행");
+                Debug.Log($"[Local {localId}] 상대방 {player.OwnerClientId} XR 비활성화 실행");
                 player.DisableXRForOtherPlayer();
             }
         }
@@ -70,17 +71,36 @@ public class DisableOtherPlayerInput : NetworkBehaviour
 
     private void DisableXRForOtherPlayer()
     {
-        Debug.Log($"[DisableXR] XR 비활성화 시도 - {gameObject.name}");
+        XROrigin xrOrigin = gameObject.GetComponent<XROrigin>();
+        if (xrOrigin != null)
+        {
+            //xrOrigin.enabled = false; // XROrigin 비활성화
+            Destroy(xrOrigin); // XROrigin 제거
+        }
+        else
+        {
+            Debug.LogWarning("XROrigin 컴포넌트를 찾을 수 없습니다. VR 카메라 루트에 추가되어 있지 않은 것 같습니다.");
+        }
 
-        // 카메라 루트 비활성화
-        Camera camera = GetComponentInChildren<Camera>();
+        TrackedPoseDriver trackedPoseDriver = vrCameraRoot.GetComponent<TrackedPoseDriver>();
+        if (trackedPoseDriver != null)
+        {
+            //trackedPoseDriver.enabled = false;
+            Destroy(trackedPoseDriver); // TrackedPoseDriver 제거
+        }
+        else
+        {
+            Debug.LogWarning("TrackedPoseDriver 컴포넌트를 찾을 수 없습니다. VR 카메라 루트에 추가되어 있지 않은 것 같습니다.");
+        }
+
+        Camera camera = vrCameraRoot.GetComponent<Camera>();
         if (camera != null)
         {
             camera.enabled = false;
         }
 
         // AudioListener도 같이 비활성화
-        AudioListener audioListener = GetComponentInChildren<AudioListener>();
+        AudioListener audioListener = vrCameraRoot.GetComponent<AudioListener>();
         if (audioListener != null)
         {
             audioListener.enabled = false;
@@ -126,6 +146,14 @@ public class DisableOtherPlayerInput : NetworkBehaviour
         foreach (var turn in turnProviders)
         {
             turn.enabled = false;
+        }
+
+        Transform canvasTransform = transform.Find("SettingCanvas");
+        if (canvasTransform != null)
+        {
+            settingCanvas = canvasTransform.gameObject;
+            settingCanvas.SetActive(false);
+            Debug.Log("SettingCanvas 비활성화 완료");
         }
     }
 

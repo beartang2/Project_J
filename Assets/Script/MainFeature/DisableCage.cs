@@ -6,16 +6,17 @@ public class DisableCage : MonoBehaviour, IResettable
 {
     [SerializeField] private BoxCollider cageCol;
     [SerializeField] private Animator openCageAnim;
-
+    [SerializeField] private ParticleSystem openCageParticle;
     public bool isOpen = false;
 
     // 버튼 ui를 눌렀을 때, 박스 콜라이더 비활성화
     public void DisableCageCollider()
     {
-        if (cageCol != null)
+        if (!isOpen && cageCol != null)
         {
             cageCol.enabled = false;
             isOpen = true;
+            openCageParticle.Play();
             openCageAnim.SetTrigger("openTrigger");
             Debug.Log("Cage Collider Disabled");
         }

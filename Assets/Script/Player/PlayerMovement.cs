@@ -23,6 +23,12 @@ public class PlayerMovement : NetworkBehaviour
     public float groundCheckDistance = 0.1f; // Ray 길이
     public float jumpCooldown = 0.1f; // 점프 쿨타임 (중복 방지)
 
+    public AudioSource jumpSource;
+    public AudioClip jumpSound;   // 점프 사운드 (추가 가능)
+
+    private bool ignoreGroundCheck = false;
+    private float ignoreGroundTime = 0.05f;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,8 +45,8 @@ public class PlayerMovement : NetworkBehaviour
 
         CheckIfGrounded();
 
-        if (rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed)
-            && isPressed && isGrounded && !isJumping)
+        if (!isJumping && isGrounded && rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed)
+            && isPressed)
         {
             Jump();
         }
@@ -81,16 +87,38 @@ public class PlayerMovement : NetworkBehaviour
 
     void CheckIfGrounded()
     {
-        Vector3 offset = new Vector3(0, 0.005f, 0);
-        isGrounded = Physics.Raycast(transform.position + offset, Vector3.down, groundCheckDistance + 0.05f);
+        if (ignoreGroundCheck)
+            return;
+
+        Vector3 offset = new Vector3(0, 0.001f, 0);
+        isGrounded = Physics.Raycast(transform.position + offset, Vector3.down, groundCheckDistance + 0.07f);
         Debug.DrawRay(transform.position + offset, Vector3.down * (groundCheckDistance + 0.05f), isGrounded ? Color.green : Color.red);
     }
 
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        ignoreGroundCheck = true;
+        Invoke(nameof(ResetGroundCheck), ignoreGroundTime);
+
         StartCoroutine(JumpCooldownCoroutine());
+        // 점프 효과음 실행
+        if (jumpSource != null)
+        {
+            jumpSource.clip = jumpSound; // 점프 사운드 설정
+            jumpSource.time = 0.3f; // 사운드 시작 지점
+            jumpSource.pitch = 1.7f;
+            //audioSource.Play();
+            jumpSource.PlayOneShot(jumpSound, 0.8f); // 점프 사운드 재생
+        }
     }
+
+    void ResetGroundCheck()
+    {
+        ignoreGroundCheck = false;
+    }
+
 
     IEnumerator JumpCooldownCoroutine()
     {

@@ -23,6 +23,8 @@ TagManager:
   - Jar
   - Ground
   - Missile
+  - settingPanel
+  - sliderUI
   layers:
   - Default
   - TransparentFX

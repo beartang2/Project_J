@@ -22,6 +22,9 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject jarObj; // 항아리
     private InsertToJar jarSc; // 항아리 스크립트
 
+    [SerializeField] private GameObject[] collisionSound; // 충돌 사운드 스크립트
+    private List<CollisionSound> collisionAudioSources = new List<CollisionSound>();
+
     private void Awake()
     {
         jarSc = jarObj.GetComponent<InsertToJar>();
@@ -32,6 +35,19 @@ public class SpawnManager : NetworkBehaviour
         if (!IsServer) return;
 
         SpawnAll();
+        foreach (var sound in collisionSound)
+        {
+            var audioSource = sound.GetComponent<CollisionSound>();
+            if (audioSource != null)
+            {
+                collisionAudioSources.Add(audioSource);
+            }
+        }
+
+        foreach(var source in collisionAudioSources)
+        {
+            StartCoroutine(source.muteDuringSpawn());
+        }
     }
 
     // 전체 스폰
