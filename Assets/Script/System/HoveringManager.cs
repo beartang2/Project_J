@@ -13,7 +13,7 @@ public class HoveringManager : MonoBehaviour, IResettable
     // 카메라 오브젝트
     [SerializeField] private GameObject cameraObj;
 
-    //[SerializeField] private GameObject window;
+    [SerializeField] private BGM_Manager bgmManager;
 
     public void ReportHoverComplete(ulong clientId)
     {
@@ -31,9 +31,6 @@ public class HoveringManager : MonoBehaviour, IResettable
         if (p1Complete && p2Complete)
         {
             Debug.Log("두 플레이어 모두 키에 손을 댐! 문이 열립니다.");
-            //window.SetActive(false);
-            // 엔딩씬 호출
-            //SceneManager.LoadScene("Ending");
 
             // 플레이어 태그를 가진 오브젝트 찾기
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -55,6 +52,8 @@ public class HoveringManager : MonoBehaviour, IResettable
 
             // 엔딩 카메라 활성화
             cameraObj.SetActive(true);
+            bgmManager.audioSource.clip = bgmManager.endingClip;
+            bgmManager.audioSource.Play();
         }
     }
 

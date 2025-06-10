@@ -18,6 +18,21 @@ public class Teleporter : MonoBehaviour, IResettable
     // 도착지점 포지션
     [SerializeField] private GameObject arrivePosObj;
     [SerializeField] private GameObject arrivePosObj2;
+    public AudioSource teleporterSound;
+    private SpawnArea destinationArea;
+
+    private void Awake()
+    {
+        if (arrivePosObj != null && arrivePosObj.GetComponent<SpawnPoint>() != null)
+        {
+            destinationArea = arrivePosObj.GetComponent<SpawnPoint>().areaType;
+        }
+
+        if(arrivePosObj2 != null && arrivePosObj2.GetComponent<SpawnPoint>() != null)
+        {
+            destinationArea = arrivePosObj2.GetComponent<SpawnPoint>().areaType;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,6 +55,8 @@ public class Teleporter : MonoBehaviour, IResettable
 
             // 일정 시간 후 다시 포탈을 활성화
             StartCoroutine(ReactivateTeleportersAfterDelay(4f)); // 3~5초 조절 가능
+
+            BGM_Manager.Instance.PlayBGM(destinationArea);
         }
 
         if (!isTeleported && (other.tag.Contains("key")|| other.tag.Contains("Object")))
@@ -47,6 +64,8 @@ public class Teleporter : MonoBehaviour, IResettable
             Vector3 newPos = arrivePosObj.transform.position;
             newPos.y += yOffset;
             other.transform.position = newPos;
+
+            teleporterSound.Play();
         }
     }
 

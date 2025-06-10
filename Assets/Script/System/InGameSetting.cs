@@ -9,96 +9,45 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public enum EAudioMixerType { Master, BGM, SFX }
 
-public class InGameSetting : NetworkBehaviour
+public class InGameSetting : MonoBehaviour
 {
-    public static InGameSetting Instance;
-
-    [SerializeField] private Transform startPos;
+    //[SerializeField] private Transform startPos;
     //private Net_DisconnectHandler dcHandler;
 
     public XRControllerInput leftController;
     public Slider masterSlider;
     public Slider bgmSlider;
     public Slider sfxSlider;
-    [SerializeField] private GameObject settingPanelPrefab;
     private Transform settingCanvas;
     private GameObject settingPanelInstance;
 
-    private AudioSource buttonAudioSc;
-    [SerializeField] private AudioClip audioClip;
     [SerializeField] private AudioMixer audioMixer;
     public Transform playerCamera;
     public float spawnDistance = 1.5f;
 
-    private bool isMenuActive = false;
     private InputDevice leftHandDevice;
     private bool wasXPressed = false;
-    private bool isMultiplayerActive = false;
-
-    private void Awake()
-    {
-        Instance = this;
-        buttonAudioSc = GetComponent<AudioSource>();
-    }
 
     private void Start()
     {
-        //dcHandler = FindObjectOfType<Net_DisconnectHandler>();
-        settingCanvas = GameObject.Find("SettingCanvas")?.transform;
+        // 자기 Canvas 및 패널 찾기 (자식 기준)
+        settingCanvas = transform.Find("SettingCanvas");
+        settingPanelInstance = settingCanvas.Find("SettingPanel")?.gameObject;
+        settingPanelInstance?.SetActive(false);
 
-        /*Transform existingPanel = settingCanvas.Find(settingPanelPrefab.name);
-        if (existingPanel == null)
-        {
-            settingPanelInstance = Instantiate(settingPanelPrefab, settingCanvas);
-            settingPanelInstance.name = settingPanelPrefab.name; // 이름 통일
-            settingPanelInstance.SetActive(false);
-        }
-        else
-        {
-            settingPanelInstance = existingPanel.gameObject;
-        }*/
+        masterSlider = settingPanelInstance.transform.Find("MasterSlider")?.GetComponent<Slider>();
+        bgmSlider = settingPanelInstance.transform.Find("BGMSlider")?.GetComponent<Slider>();
+        sfxSlider = settingPanelInstance.transform.Find("SFXSlider")?.GetComponent<Slider>();
 
-        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)
-        {
-            isMultiplayerActive = true;
-        }
-
-        // 오디오 초기값 설정
-        float volume;
-        if (audioMixer.GetFloat("Master", out volume)) masterSlider.value = Mathf.Pow(10, volume / 20);
-        if (audioMixer.GetFloat("BGM", out volume)) bgmSlider.value = Mathf.Pow(10, volume / 20);
-        if (audioMixer.GetFloat("SFX", out volume)) sfxSlider.value = Mathf.Pow(10, volume / 20);
-
-        masterSlider.onValueChanged.AddListener(value => SetAudioVolume(EAudioMixerType.Master, value));
-        bgmSlider.onValueChanged.AddListener(value => SetAudioVolume(EAudioMixerType.BGM, value));
-        sfxSlider.onValueChanged.AddListener(value => SetAudioVolume(EAudioMixerType.SFX, value));
+        SetupSlider(masterSlider, EAudioMixerType.Master, "Master");
+        SetupSlider(bgmSlider, EAudioMixerType.BGM, "BGM");
+        SetupSlider(sfxSlider, EAudioMixerType.SFX, "SFX");
     }
 
-    public override void OnNetworkSpawn()
-    {
-        // 카메라 세팅
-        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)
-        {
-            foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
-            {
-                if (player.TryGetComponent<NetworkObject>(out var netObj) && netObj.IsLocalPlayer)
-                {
-                    Camera cam = player.GetComponentInChildren<Camera>();
-                    if (cam != null) playerCamera = cam.transform;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            playerCamera = Camera.main.transform;
-        }
-    }
 
     private void Update()
     {
         // 멀티플레이 중이면 오너만 입력 허용
-        if (isMultiplayerActive && !IsOwner) return;
 
         if (!leftHandDevice.isValid)
         {
@@ -133,6 +82,18 @@ public class InGameSetting : NetworkBehaviour
         }
     }
 
+    private void SetupSlider(Slider slider, EAudioMixerType type, string mixerName)
+    {
+        if (slider == null) return;
+
+        float volume = 0.7f;
+        if (audioMixer.GetFloat(mixerName, out volume))
+            slider.value = Mathf.Pow(10, volume / 20);
+
+        slider.onValueChanged.AddListener(value => SetAudioVolume(type, value));
+    }
+
+
     public void SetAudioVolume(EAudioMixerType audioMixerType, float volume)
     {
         float mixerVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
@@ -141,43 +102,25 @@ public class InGameSetting : NetworkBehaviour
 
     void ToggleSettingsMenu()
     {
-        Debug.Log("ToggleSettingsMenu called");
-        isMenuActive = !isMenuActive;
-
-        if (isMenuActive)
+        if (!settingPanelInstance.activeSelf)
         {
             Vector3 forwardPos = playerCamera.position + playerCamera.forward * spawnDistance;
-            settingPanelPrefab.transform.position = forwardPos;
+            settingPanelInstance.transform.position = forwardPos;
 
             Vector3 lookDir = playerCamera.position - forwardPos;
             lookDir.y = 0;
-            settingPanelPrefab.transform.rotation = Quaternion.LookRotation(-lookDir);
+            settingPanelInstance.transform.rotation = Quaternion.LookRotation(-lookDir);
 
-            settingPanelPrefab.SetActive(true);
+            settingPanelInstance.SetActive(true);
         }
         else
         {
-            settingPanelPrefab.SetActive(false);
+            settingPanelInstance.SetActive(false);
         }
-    }
-
-    public void SaveSettingData()
-    {
-        if (buttonAudioSc != null)
-        {
-            buttonAudioSc.PlayOneShot(audioClip);
-        }
-        print("Save");
-        ToggleSettingsMenu();
     }
 
     public void Exit()
     {
-        if (buttonAudioSc != null)
-        {
-            buttonAudioSc.PlayOneShot(audioClip);
-        }
-
         /*if (dcHandler != null)
         {
             dcHandler.playerTransform = this.transform;
