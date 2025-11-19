@@ -14,9 +14,12 @@ public class BGM_Manager : MonoBehaviour
     // PlayerMovement or PlayerInit.cs
     [SerializeField] private SpawnPoint[] spawnPoints; // 할당 필요
 
+    private Net_PlayerSpawner playerSpawner;
 
     private void Awake()
     {
+        playerSpawner = FindObjectOfType<Net_PlayerSpawner>();
+
         if (Instance == null)
         {
             Instance = this;
@@ -58,6 +61,9 @@ public class BGM_Manager : MonoBehaviour
     // 플레이어가 처음 시작할 때 BGM을 재생
     public void PlayBGM()
     {
-        PlayBGM(SpawnArea.Room1);
+        if (playerSpawner.pMoved)
+        {
+            PlayBGM(SpawnArea.Room1);
+        }
     }
 }

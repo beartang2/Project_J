@@ -8,14 +8,18 @@ public class PlayerTimerUI : NetworkBehaviour
     public float timerLimit = 7200f;
     private float timer = 0f;
 
+    private Net_PlayerSpawner playerSpawner;
+
     private void Awake()
     {
+        playerSpawner = gameObject.GetComponent<Net_PlayerSpawner>();
+
         isRunning = false;
     }
 
     public void StartTimer()
     {
-        if (isRunning) return; // 이미 실행 중이면 무시
+        if (playerSpawner.pMoved != true & isRunning) return; // 이미 실행 중이면 무시
 
         Debug.Log("타이머 시작!");
         isRunning = true;

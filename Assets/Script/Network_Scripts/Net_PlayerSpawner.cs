@@ -87,8 +87,10 @@ public class Net_PlayerSpawner : NetworkBehaviour
 
                 var timer = player.GetComponent<PlayerTimerUI>();
                 if (timer != null)
+                {
                     timer.StartTimer();
-
+                }
+                    
                 break;
             }
         }
