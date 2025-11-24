@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class HoveringManager : MonoBehaviour, IResettable
 {
-    private bool p1Complete = false;
-    private bool p2Complete = false;
+    public bool p1Complete = false;
+    public bool p2Complete = false;
     // 플레이어 이름을 가진 오브젝트
     private GameObject player1;
     private GameObject player2;

@@ -970,6 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHead: {fileID: 0}
   playerHeadObj: {fileID: 0}
+  vrCameraRoot: {fileID: 0}
 --- !u!114 &4259288014388488516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,6 +987,8 @@ MonoBehaviour:
   jumpForce: 5
   groundCheckDistance: 0.1
   jumpCooldown: 0.1
+  jumpSource: {fileID: 0}
+  jumpSound: {fileID: 0}
 --- !u!114 &6774168930021597219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,13 +1225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98965556504f5f94db0cd6d50090eecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {fileID: 0}
   leftController: {fileID: 6774168930021597219}
-  masterSlider: {fileID: 9179128273494601826, guid: 7881838936b95534d8dca2b53df451a2, type: 3}
-  bgmSlider: {fileID: 1723429520398304537, guid: 9b01a20737693eb43b4176f4aa4a4777, type: 3}
-  sfxSlider: {fileID: 614501870015197269, guid: a6648c3523ad8f049a8acba575f7a8d8, type: 3}
-  settingPanelPrefab: {fileID: 0}
-  audioClip: {fileID: 0}
+  masterSlider: {fileID: 0}
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: f2217250980b39a4ba56d78385411540, type: 2}
   playerCamera: {fileID: 7882820722884039467}
   spawnDistance: 1
