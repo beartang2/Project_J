@@ -1,50 +1,92 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class InsertToJar : MonoBehaviour
+public class InsertToJar : MonoBehaviour, IResettable
 {
     private GameObject unknownObj;
-    private List<GameObject> objects;
-    [SerializeField] private GameObject resultObj;
-    private bool isInit = false;
-    private int cnt = 0;
+    private List<GameObject> objects1;
+    private List<GameObject> objects2;
+    [SerializeField] private GameObject resultObj1;     // 첫 번째 머리
+    [SerializeField] private GameObject resultObj2;     // 두 번째 머리
+    private bool is1Init = false;
+    private bool is2Init = false;
+    private int cnt1 = 0;
+    private int cnt2 = 0;
 
     private void Start()
     {
-        isInit = false;
-        cnt = 0;
-        objects = new List<GameObject>();
+        objects1 = new List<GameObject>();
+        objects2 = new List<GameObject>();
     }
 
-    private void Update()
+    [ServerRpc(RequireOwnership = false)]
+    public void InsertKeyServerRpc(ulong netId, string name)
     {
-        
+        NetworkObject netObj = NetworkManager.Singleton.SpawnManager.SpawnedObjects[netId];
+        GameObject obj = netObj.gameObject;
+
+        if (name.Contains("Jar_Key_A"))
+        {
+            objects1.Add(obj);
+            cnt1++;
+            // 오브젝트 효과음
+            // 오브젝트 이펙트
+        }
+        else if (name.Contains("Jar_Key_C"))
+        {
+            objects2.Add(obj);
+            cnt2++;
+            // 오브젝트 효과음
+            // 오브젝트 이펙트
+        }
+
+        if (cnt1 == 2 && !is1Init)
+        {
+            is1Init = true;
+            var newObj = Instantiate(resultObj1, transform.position, Quaternion.identity);
+            newObj.GetComponent<NetworkObject>().Spawn();
+            // 연금술 성공 효과음
+            // 연금술 성공 이펙트
+        }
+        else if (cnt2 == 2 && !is2Init)
+        {
+            is2Init = true;
+            var newObj = Instantiate(resultObj2, transform.position, Quaternion.identity);
+            newObj.GetComponent<NetworkObject>().Spawn();
+            // 연금술 성공 효과음
+            // 연금술 성공 이펙트
+        }
     }
 
     private void OnTriggerEnter(Collider other)
-    {        
-        if(other.tag == "keyObjects")
+    {
+        // 다른 오브젝트가 들어왔을때
+        if(other.name.Contains("Extra"))
         {
-            Debug.Log("키 오브젝트 들어옴");
-            cnt++;
-
-            // 리스트에 담기
-            objects.Add(other.gameObject);
-
-            if(cnt == 2 && !isInit)
-            {
-                // 키 오브젝트 생성
-                Instantiate(resultObj, gameObject.transform.position, Quaternion.identity);
-                isInit = true;
-
-                Debug.Log(objects.Count);
-                for (int i = 0; i < cnt; i++)
-                {
-                    // 오브젝트 개수만큼 비활성화
-                    objects[i].gameObject.SetActive(false);
-                }
-            }
+            DisableSelfClientRpc(); // 클라이언트에도 비활성화 요청
+            gameObject.SetActive(false); // 서버에서도 비활성화
+            // 트리거 초기화
+            ResetTrigger();
+            // 연금술 실패 효과음
+            // 연금술 실패 이펙트
         }
+    }
+
+    public void ResetTrigger()
+    {
+        cnt1 = 0;
+        cnt2 = 0;
+        is1Init = false;
+        is2Init = false;
+
+        Debug.Log("[InsertToJar] 트리거 상태 초기화 완료");
+    }
+
+    [ClientRpc]
+    private void DisableSelfClientRpc()
+    {
+        gameObject.SetActive(false);
     }
 }

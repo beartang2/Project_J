@@ -1,30 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ResettingManager;
 
-public class Teleporter : MonoBehaviour
+public class Teleporter : MonoBehaviour, IResettable
 {
     // A -> B, B -> A
-    [SerializeField] private GameObject OtherTeleportObj;
     private GameObject objects;
     //private Queue<GameObject> teleportObjects;
     Collider boxCol;
     private bool isTeleported = false;
-    float delayTime = 0;
+    //float delayTime = 0;
     float yOffset = 0.5f;
+    public bool isPlayerPortal = false; // 플레이어 발판인가?
+    public bool canPort = false;        // 플레이어가 이동 가능한 상태인가?
 
     // 도착지점 포지션
     [SerializeField] private GameObject arrivePosObj;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!isTeleported && other.gameObject.tag == "keyObjects")
+        if (isPlayerPortal && other.CompareTag("Player") && canPort)
         {
             Vector3 newPos = arrivePosObj.transform.position;
-            newPos.y += yOffset; // Y축 오프셋 추가
-            // 도착지점으로 이동
-            other.gameObject.transform.position = newPos;
+            newPos.y += yOffset;
+            other.transform.position = newPos;
+
+            // 전체 트리거 리셋
+            ResettingManager.Instance.ResetAllTriggers();
+
+            // 일정 시간 후 다시 포탈을 활성화
+            StartCoroutine(ReactivateTeleportersAfterDelay(4f)); // 3~5초 조절 가능
         }
+
+        if (!isTeleported && other.CompareTag("keyObjects"))
+        {
+            Vector3 newPos = arrivePosObj.transform.position;
+            newPos.y += yOffset;
+            other.transform.position = newPos;
+
+            // 전체 트리거 리셋
+            ResettingManager.Instance.ResetAllTriggers();
+        }
+    }
+
+    // Teleporter의 canPort를 false로 변경하는 함수
+    public void ResetTrigger()
+    {
+        canPort = false;
+        isTeleported = false;
+        Debug.Log("Teleporter 리셋됨");
+    }
+
+    IEnumerator ReactivateTeleportersAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Teleporter[] teleporters = FindObjectsOfType<Teleporter>();
+        foreach (Teleporter tele in teleporters)
+        {
+            tele.canPort = true;
+        }
+
+        Debug.Log("포탈 재활성화 완료");
     }
 
     // 콜라이더에 들어온지 2초가 되고 Exit하지 않으면, A->B, B->A 로 좌표 이동

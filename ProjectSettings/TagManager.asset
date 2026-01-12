@@ -11,6 +11,17 @@ TagManager:
   - Teleporter_B
   - Wall
   - commonObjects
+  - Key
+  - Door
+  - jar_keyObject
+  - merged_key
+  - chessKey1
+  - chessKey2
+  - Chess
+  - Door_P1
+  - Door_P2
+  - Jar
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,16 +29,16 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - Button
   - 
   - hands
   - keyObjects
-  - 
-  - 
-  - 
-  - 
+  - wall
+  - floor
+  - otherObjects
+  - jarFloor
   - 
   - 
   - 
